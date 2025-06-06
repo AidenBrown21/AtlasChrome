@@ -6,3 +6,5 @@ vosk
 python-dotenv
 requests
 pydub
+pytesseract
+Pillow

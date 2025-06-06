@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from text_analysis import analyze_text
 from voice_analysis import transcribe_audio, analyze_audio
+from image_analysis import analyze_image
 
 app = Flask(__name__)
 CORS(app)
@@ -54,6 +55,20 @@ def analyze_audio_endpoint():
         result = analyze_audio(audio_file)
         return jsonify(result)
 
+    except Exception as e:
+        print(f"[ERROR] {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/image-analyze', methods=['POST'])
+def image_analyze():
+    try:
+        if 'image' not in request.files:
+            return jsonify({'error': 'No image file provided'}), 400
+        image_file = request.files['image']
+        if not image_file.filename:
+            return jsonify({'error': 'No image file selected'}), 400
+        text, analysis = analyze_image(image_file)
+        return jsonify({'text': text, 'analysis': analysis})
     except Exception as e:
         print(f"[ERROR] {e}")
         return jsonify({'error': str(e)}), 500
