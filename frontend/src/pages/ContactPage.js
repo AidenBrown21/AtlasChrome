@@ -16,11 +16,13 @@ function ContactPage() {
                                 <p>Click to go to Github Page</p>
                             </div>
                         </a>
-                        <p><strong>Rahul Menon</strong></p>
+                        <div className="contact-name-container">
+                            <p><strong>Rahul Menon</strong></p>
+                            <a href="https://www.linkedin.com/in/rahul-menon6/" target="_blank" rel="noopener noreferrer">
+                                <img src="/INlogo.jpg" alt="LinkedIn" className="linkedin-logo" />
+                            </a>
+                        </div>
                         <p>menon75@purdue.edu</p>
-                        <a href="https://www.linkedin.com/in/rahul-menon6/" target="_blank" rel="noopener noreferrer">
-                            <img src="/INlogo.jpg" alt="LinkedIn" className="linkedin-logo" />
-                        </a>
                     </div>
                     <div className="contact-column">
                         <a href="https://github.com/aidenbrown21" target="_blank" rel="noopener noreferrer" className="contact-photo-link">
@@ -29,11 +31,13 @@ function ContactPage() {
                                 <p>Click to go to Github Page</p>
                             </div>
                         </a>
-                        <p><strong>Aiden Brown</strong></p>
+                        <div className="contact-name-container">
+                            <p><strong>Aiden Brown</strong></p>
+                            <a href="https://www.linkedin.com/in/aidenbrown21/" target="_blank" rel="noopener noreferrer">
+                                <img src="/INlogo.jpg" alt="LinkedIn" className="linkedin-logo" />
+                            </a>
+                        </div>
                         <p>brow2423@purdue.edu</p>
-                        <a href="https://www.linkedin.com/in/aidenbrown21/" target="_blank" rel="noopener noreferrer">
-                            <img src="/INlogo.jpg" alt="LinkedIn" className="linkedin-logo" />
-                        </a>
                     </div>
                 </div>
             </div>
