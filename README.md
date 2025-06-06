@@ -24,13 +24,15 @@ The primary goal is to create a reliable tool that can help users identify and p
 - 🐍 Python 3.8+
 - 🧱 Node.js v24+
 - 🍃 MongoDB Database Access (described in `backend/config.py`)
+- 🖼️ tesseract
+- 🎵 ffmpeg
 
 ### 🛠️ Installation
 
 1. 📥 Clone the repository:
    ```bash
    git clone https://github.com/inthezone006/atlas
-   cd anti-scam-agent
+   cd atlas
    ```
 
 2. 🧪 (Optional) Feel free to create a virtual environment. Then, install the dependencies using the provided `requirements.txt`:
