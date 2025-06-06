@@ -1,6 +1,6 @@
-[<p align="center" width="100%"><img src="frontend/public/logo.jpg" alt="drawing" width="200"/>](https://github.com/inthezone006/antiscam-scanner) 
+[<p align="center" width="100%"><img src="frontend/public/logo.jpg" alt="drawing" width="200"/>](https://github.com/inthezone006/atlas) 
 
-# 🛡️ Anti-Scam Scanner
+# 🛡️ ATLAS Scam Protection
 This service, created as a project between two students, aims to develop a smart agent capable of detecting and verifying modern scams and fake news in various formats, including text, audio, and picture.
 
 ## 🎯 Project Goal
@@ -29,7 +29,7 @@ The primary goal is to create a reliable tool that can help users identify and p
 
 1. 📥 Clone the repository:
    ```bash
-   git clone https://github.com/inthezone006/antiscam-scanner
+   git clone https://github.com/inthezone006/atlas
    cd anti-scam-agent
    ```
 
