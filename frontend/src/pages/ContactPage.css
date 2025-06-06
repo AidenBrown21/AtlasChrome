@@ -36,3 +36,25 @@
     margin: 0.25rem 0;
     font-size: 1.1rem;
 }
+
+.linkedin-logo {
+    width: 60x; /* Adjust size as needed */
+    height: 30px;
+    margin-top: 0.75rem;
+    transition: transform 0.2s ease;
+}
+
+.linkedin-logo:hover {
+    transform: scale(1.0);
+}
+
+.github-logo {
+    width: 60x; /* Adjust size as needed */
+    height: 60px;
+    margin-top: 0.75rem;
+    transition: transform 0.2s ease;
+}
+
+.github-logo:hover {
+    transform: scale(1.0);
+}
