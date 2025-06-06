@@ -60,8 +60,7 @@ SCAM_KEYWORD_WEIGHTS = {
     "online dating": 3, "military base": 6, "deployment": 5
 }
 
-# The score threshold to classify a text as a potential scam.
-# This value can be tuned for sensitivity.
+
 SCAM_THRESHOLD = 10
 
 def analyze_text(text):
