@@ -7,6 +7,7 @@ from users import create_user, authenticate_user, get_user_by_username
 import os
 from datetime import timedelta
 
+
 app = Flask(__name__)
 CORS(app, origins=["http://localhost:3000"], supports_credentials=True)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev_secret_key')
