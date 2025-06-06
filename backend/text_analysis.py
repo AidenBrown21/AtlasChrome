@@ -19,41 +19,31 @@ def similarity_score(text):
     max_sim = similarities.max()
     return round(max_sim * 10, 2), SPAM_TEXTS[similarities.argmax()][:100]
 
-# A more sophisticated keyword analysis system with weighted scores.
-# Higher weights indicate a stronger likelihood of a scam.
 SCAM_KEYWORD_WEIGHTS = {
-    # High-Risk Keywords (strong indicators)
     "nigerian prince": 10, "inheritance": 8, "lottery": 8, "sweepstakes": 8,
     "guaranteed winner": 10, "claim your prize": 8, "free money": 9,
     "social security number": 10, "ssn": 10, "login credentials": 9,
 
-    # Urgency and Pressure Tactics
     "urgent": 5, "act now": 5, "limited time offer": 4, "expires soon": 4,
     "immediate action required": 6,
 
-    # Unusual Payment Methods
     "bitcoin": 9, "btc": 9, "crypto": 8, "gift card": 9, "wire transfer": 7,
     "bank transfer": 6, "untraceable": 7,
 
-    # Phishing and Information Requests
     "verify your account": 7, "update your information": 6,
     "confirm your password": 8, "password check": 7, "bank account": 6,
     "credit card": 7,
 
-    # Common Scam Scenarios
     "arrested": 6, "bail": 7, "in trouble": 5, "help me": 4, "send money": 8,
     "stranded": 6,
 
-    # Financial Schemes
     "investment opportunity": 6, "double your money": 8, "risk-free": 5,
-    "make money fast": 7, "work from home": 3, # Can be legit, lower weight
+    "make money fast": 7, "work from home": 3,
     
-    # Greetings and Lures
     "congratulations": 3, "you have been selected": 6, "winner": 5,
     "dear friend": 4
 }
 
-# TODO: Make it stop using the SCAM_KEYWORD
 # The score threshold to classify a text as a potential scam.
 # This value can be tuned for sensitivity.
 SCAM_THRESHOLD = 10
