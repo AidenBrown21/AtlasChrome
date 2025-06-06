@@ -63,12 +63,14 @@ html {
 }
 
 .action-button.primary {
-    background-color: #0b285e;
-    color: #EDEDED;
+    background-color: #FFFFFF;
+    color: #0b285e;
+    border-color: #d4d4d4;
 }
 
 .action-button.primary:hover {
-    background-color: #1a3f85;
+    background-color: #f7f7f7;
+    border-color: #b0b0b0;
 }
 
 .action-button.secondary {
