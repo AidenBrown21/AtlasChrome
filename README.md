@@ -8,7 +8,7 @@ The primary goal is to create a reliable tool that can help users identify and p
 
 ## Features
 
-- **User account management**: Allows for users to sign in and sign out of accounts on the website.
+- **User Account Management**: Allows for users to sign in and sign out of accounts on the website.
 - **Text Analysis**: Detect scams and fake news in articles, emails, and messages.
 - **Voice Analysis**: Analyze audio for signs of scams (e.g., voice phishing).
 - **Image Analysis**: Detect manipulated images and visual misinformation.
