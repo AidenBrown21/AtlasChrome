@@ -1,3 +1,0 @@
-MONGO_URI = ""
-DATABASE_NAME = "all-data"
-COLLECTION_NAME = "text"

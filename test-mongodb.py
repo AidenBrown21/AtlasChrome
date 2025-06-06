@@ -1,4 +1,4 @@
-import config
+from backend import config
 from flask import Flask
 from pymongo import MongoClient
 

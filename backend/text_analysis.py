@@ -1,11 +1,11 @@
 from pymongo import MongoClient
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from .. import config
+from config import MONGO_URI, DATABASE_NAME, COLLECTION_NAME
 
-client = MongoClient(config.MONGO_URI)
-db = client[config.DATABASE_NAME]
-collection = db[config.COLLECTION_NAME]
+client = MongoClient(MONGO_URI)
+db = client[DATABASE_NAME]
+collection = db[COLLECTION_NAME]
 
 SPAM_TEXTS = [doc['text'] for doc in collection.find({"label": "spam"})]
 
@@ -53,6 +53,7 @@ SCAM_KEYWORD_WEIGHTS = {
     "dear friend": 4
 }
 
+# TODO: Make it stop using the SCAM_KEYWORD
 # The score threshold to classify a text as a potential scam.
 # This value can be tuned for sensitivity.
 SCAM_THRESHOLD = 10
@@ -84,10 +85,10 @@ def analyze_text(text):
         explanation = "No major risk indicators found."
 
     return {
-        "is_scam": is_scam,
-        "score": similarity,
-        "keyword_score": total_score,
-        "matched_spam_snippet": matched_snippet,
-        "found_keywords": sorted(found_keywords, key=lambda k: SCAM_KEYWORD_WEIGHTS[k], reverse=True),
-        "explanation": explanation
+        "is_scam": bool(is_scam),
+        "score": float(similarity),
+        "keyword_score": int(total_score),
+        "matched_spam_snippet": str(matched_snippet),
+        "found_keywords": [str(k) for k in found_keywords],
+        "explanation": str(explanation)
     }
