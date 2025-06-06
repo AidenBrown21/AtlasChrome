@@ -1,4 +1,4 @@
-# 🛡️ Anti-Scam & Misinformation Detection Agent
+# 🛡️ ATLAS Scam Protection
 
 This project, created for the AINS 3.0 Hackathon, aims to develop a smart agent capable of detecting, verifying, and explaining scams and fake news in various formats, including text, voice, and images.
 
