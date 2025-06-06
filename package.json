@@ -1,0 +1,20 @@
+{
+  "name": "antiscam-scanner",
+  "version": "1.0.0",
+  "description": "This project aims to develop a smart agent capable of detecting, verifying, and explaining scams and fake news in various formats, including text, voice, and images.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inthezone006/antiscam-scanner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/inthezone006/antiscam-scanner/issues"
+  },
+  "homepage": "https://github.com/inthezone006/antiscam-scanner#readme"
+}
