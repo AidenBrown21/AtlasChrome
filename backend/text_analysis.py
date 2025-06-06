@@ -1,39 +1,21 @@
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import pickle
 
-# Common spam patterns and examples
-SPAM_PATTERNS = [
-    "Congratulations! You've won a prize",
-    "Your account has been suspended",
-    "Urgent: Your payment is required",
-    "You've inherited a large sum of money",
-    "Your package delivery is pending",
-    "Your account needs verification",
-    "Limited time offer - act now",
-    "You've been selected for a special offer",
-    "Your subscription will be charged",
-    "Your device has been infected",
-    "Your bank account needs updating",
-    "You've won a lottery",
-    "Your payment has failed",
-    "Your account will be closed",
-    "You've been chosen for a survey",
-    "Your refund is ready",
-    "Your account has been compromised",
-    "You've been selected for a reward",
-    "Your payment is overdue",
-    "Your account needs attention"
-]
+with open("vectorizer.pkl", "rb") as f:
+    VECTOR = pickle.load(f)
 
-VECTOR = TfidfVectorizer()
-SPAM_VECTORS = VECTOR.fit_transform(SPAM_PATTERNS)
+with open("spam_vectors.pkl", "rb") as f:
+    SPAM_VECTORS = pickle.load(f)
+
+with open("spam_patterns.pkl", "rb") as f:
+    SPAM_PATTERNS = pickle.load(f)
 
 def similarity_score(text):
-    """Return a similarity score from 0 to 10 against known spam patterns."""
     user_vec = VECTOR.transform([text])
     similarities = cosine_similarity(user_vec, SPAM_VECTORS)[0]
-    max_sim = similarities.max()
-    return round(max_sim * 10, 2), SPAM_PATTERNS[similarities.argmax()]
+    max_similarity = similarities.max()
+    best_match = SPAM_PATTERNS[similarities.argmax()]
+    return round(max_similarity * 10, 2), best_match
 
 SCAM_KEYWORD_WEIGHTS = {
     "nigerian prince": 10, "inheritance": 8, "lottery": 8, "sweepstakes": 8,
