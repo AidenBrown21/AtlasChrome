@@ -5,7 +5,7 @@ __pycache__/
 *.egg-info/
 venv/
 dist/
-.venv
+.venv/
 config.py
 
 # Node.js / React
