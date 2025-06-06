@@ -74,12 +74,12 @@ def analyze_text(text):
     similarity, matched_snippet = similarity_score(text)
 
     # Combine results
-    is_scam = is_scam_keywords or similarity >= 7.0  # you can adjust this threshold
+    is_scam = is_scam_keywords or similarity >= 4.0
 
     explanation = ""
     if is_scam_keywords:
         explanation += f"High-risk keywords detected (score: {total_score}). "
-    if similarity >= 7.0:
+    if similarity >= 4.0:
         explanation += f"Text is {similarity}/10 similar to known spam: '{matched_snippet}'"
     if not explanation:
         explanation = "No major risk indicators found."
