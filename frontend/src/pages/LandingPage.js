@@ -11,6 +11,26 @@ function LandingPage() {
                 <header className="landing-header">
                     <h1>ATLAS</h1>
                     <p>YOUR DIGITAL MAP TO ONLINE SAFETY</p>
+                    <div className="dynamic-text-container">
+                        <div className="animated-words">
+                            <div className="animated-word-group">
+                                <span className="static-text"><strong>PRESERVE</strong></span>
+                                <span><strong>WHAT'S REAL.</strong></span>
+                            </div>
+                            <div className="animated-word-group">
+                                <span className="static-text"><strong>PRESERVE</strong></span>
+                                <span><strong>THE FACTS.</strong></span>
+                            </div>
+                            <div className="animated-word-group">
+                                <span className="static-text"><strong>PRESERVE</strong></span>
+                                <span><strong>THE CERTAINTY.</strong></span>
+                            </div>
+                            <div className="animated-word-group">
+                                <span className="static-text"><strong>PRESERVE</strong></span>
+                                <span><strong>THE TRUTH.</strong></span>
+                            </div>
+                        </div>
+                    </div>
                 </header>
                 <main className="selection-container">
                     <div className="button-container">

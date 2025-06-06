@@ -17,7 +17,7 @@ html {
 }
 
 .landing-header {
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
 }
 
 .landing-header h1 {
@@ -54,8 +54,8 @@ html {
 
 .action-button {
     border-radius: 8px;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
+    padding: 1.3rem 1.95rem;
+    font-size: 1.43rem;
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
@@ -85,7 +85,7 @@ html {
 }
 
 .selection-container {
-    padding: 50px 20px;
+    padding: 25px 20px;
 }
 
 .selection-container h2 {
@@ -140,4 +140,48 @@ html {
 
 .image-card {
     border-top-color: #2ecc71;
+}
+
+.dynamic-text-container {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    height: 4rem; 
+    line-height: 4rem;
+    overflow: hidden;
+}
+
+.static-text {
+    color: #636363;
+    margin-right: 0.75rem;
+}
+
+.animated-words {
+    animation: flip-words 8s forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.animated-word-group {
+    display: flex;
+    height: 4rem;
+    line-height: 4rem;
+}
+
+.animated-word-group > span:last-of-type {
+    background: -webkit-linear-gradient(45deg, #0b285e, #84a9d9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes flip-words {
+    0% { transform: translateY(0); }
+    18% { transform: translateY(0); }
+    25% { transform: translateY(-4rem); }
+    43% { transform: translateY(-4rem); }
+    50% { transform: translateY(-8rem); }
+    68% { transform: translateY(-8rem); }
+    75% { transform: translateY(-12rem); }
+    100% { transform: translateY(-12rem); }
 }
