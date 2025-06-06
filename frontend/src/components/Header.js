@@ -5,9 +5,9 @@ import './Header.css';
 function Header() {
     return (
         <header className="app-header">
-            <div className="logo">
+            <Link to="/" className="logo">
                 <img src="/logo.jpg" alt="ATLAS Logo" className="logo-img" />
-            </div>
+            </Link>
             <nav className="main-nav">
                 <Link to="/features">Features</Link>
                 <Link to="/about">About</Link>
