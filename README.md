@@ -35,6 +35,7 @@ This project is currently under development.
 
 2. Install the dependencies:
    ```bash
+   cd backend
    pip install -r requirements.txt
    ```
 
