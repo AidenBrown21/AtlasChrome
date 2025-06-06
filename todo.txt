@@ -1,1 +1,2 @@
 test
+click on left logo to go home
