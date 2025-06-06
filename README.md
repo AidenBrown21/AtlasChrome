@@ -1,6 +1,6 @@
-# 🛡️ ATLAS Scam Protection
+# ![Logo](/frontend/public/logo.jpg) 
 
-This project, created for the AINS 3.0 Hackathon, aims to develop a smart agent capable of detecting, verifying, and explaining scams and fake news in various formats, including text, voice, and images.
+This project, created as a project between two students, aims to develop a smart agent capable of detecting and verifying modern scams and fake news in various formats, including text, audio, and image.
 
 ## Project Goal
 
