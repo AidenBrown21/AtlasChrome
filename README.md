@@ -14,7 +14,7 @@ The primary goal is to create a reliable tool that can help users identify and p
 - **Image Analysis**: Detect manipulated images and visual misinformation.
 
 ## Sources
-* UC Irvine Machine Learning Repository (https://archive.ics.uci.edu/dataset/228/sms+spam+collection)
+* [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/dataset/228/sms+spam+collection)
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ The primary goal is to create a reliable tool that can help users identify and p
 
 - Python 3.8+
 - Node.js v24+
-- MongoDB Database Access
+- MongoDB Database Access (`backend/config.py`)
 
 ### Installation
 
@@ -40,6 +40,13 @@ The primary goal is to create a reliable tool that can help users identify and p
 3. Navigate to the `/frontend` folder and install the Node.js requirements:
    ```bash
    npm install
+   ```
+
+4. Create the `backend/config.py` file in the respective directory, and populate it with the following, adding the appropriate content where indicated:
+   ```
+   MONGO_URI="<insert MONGODB URL>"
+   DATABASE_NAME="all-data"
+   COLLECTION_NAME="text"
    ```
 
 ### Usage
