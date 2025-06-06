@@ -2,3 +2,7 @@ nltk
 scikit-learn 
 dnspython
 pymongo
+Flask
+Flask-Cors
+nltk
+scikit-learn 
