@@ -4,5 +4,6 @@ dnspython
 pymongo
 Flask
 Flask-Cors
-nltk
-scikit-learn 
+vosk
+python-dotenv
+requests
