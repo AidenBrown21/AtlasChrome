@@ -5,10 +5,12 @@ from voice_analysis import transcribe_audio, analyze_audio
 from image_analysis import analyze_image
 from users import create_user, authenticate_user, get_user_by_username
 import os
+from datetime import timedelta
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True)
+CORS(app, origins=["http://localhost:3000"], supports_credentials=True)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev_secret_key')
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)
 
 @app.route('/')
 def index():
@@ -34,6 +36,7 @@ def login():
     if not ok:
         return jsonify({'error': user}), 401
     session['username'] = user['username']
+    session.permanent = True
     return jsonify({'message': 'Logged in', 'user': {
         'first_name': user['first_name'],
         'last_name': user['last_name'],
