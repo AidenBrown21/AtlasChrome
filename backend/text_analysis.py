@@ -1,11 +1,11 @@
 from pymongo import MongoClient
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from config import MONGO_URI, DATABASE_NAME, COLLECTION_NAME
+from .. import config
 
-client = MongoClient(MONGO_URI)
-db = client[DATABASE_NAME]
-collection = db[COLLECTION_NAME]
+client = MongoClient(config.MONGO_URI)
+db = client[config.DATABASE_NAME]
+collection = db[config.COLLECTION_NAME]
 
 SPAM_TEXTS = [doc['text'] for doc in collection.find({"label": "spam"})]
 
