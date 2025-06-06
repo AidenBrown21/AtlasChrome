@@ -1,7 +1,7 @@
 [<p align="center" width="100%"><img src="frontend/public/logo.jpg" alt="drawing" width="200"/>](https://github.com/inthezone006/antiscam-scanner) 
 
 # 🛡️ Anti-Scam Scanner
-This project, created as a project between two students, aims to develop a smart agent capable of detecting and verifying modern scams and fake news in various formats, including text, audio, and picture.
+This service, created as a project between two students, aims to develop a smart agent capable of detecting and verifying modern scams and fake news in various formats, including text, audio, and picture.
 
 ## 🎯 Project Goal
 
