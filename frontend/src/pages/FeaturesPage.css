@@ -1,6 +1,7 @@
 .features-container {
     padding: 8rem 2rem 4rem 2rem;
     max-width: 1200px;
+    min-width: 1000px;
     margin: 0 auto;
     color: #0b285e;
 }
@@ -16,7 +17,7 @@
 }
 
 .features-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: #555;
     max-width: 700px;
     margin: 0 auto;
@@ -24,9 +25,11 @@
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(4, 1fr); 
     gap: 2.5rem;
-    margin-bottom: 4rem;
+    margin-bottom: 0.1rem;
+    justify-content: center;
+   
 }
 
 .feature-card {
@@ -34,9 +37,10 @@
     padding: 2.5rem 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    text-align: center;
     border-top: 4px solid #0b285e;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-width: 240px;
+    max-width: 240px;
 }
 
 .feature-card:hover {
