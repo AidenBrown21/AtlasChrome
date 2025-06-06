@@ -22,7 +22,7 @@ The primary goal is to create a reliable tool that can help users identify and p
 
 - Python 3.8+
 - Node.js v24+
-- MongoDB Database Access (`backend/config.py`)
+- MongoDB Database Access (described in `backend/config.py`)
 
 ### Installation
 
@@ -32,7 +32,7 @@ The primary goal is to create a reliable tool that can help users identify and p
    cd anti-scam-agent
    ```
 
-2. Feel free to create a virtual environment. Then, install the dependencies:
+2. Feel free to create a virtual environment. Then, install the dependencies using the provided `requirements.txt`:
    ```bash
    pip install -r requirements.txt
    ```
@@ -66,3 +66,5 @@ The primary goal is to create a reliable tool that can help users identify and p
    ```
 
 4. If the service does not open automatically, connect to the link shown in the second terminal's Node.js 'Local' section (typically `localhost:3000`)
+
+5. Enjoy :)
