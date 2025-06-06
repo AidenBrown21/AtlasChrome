@@ -1,4 +1,23 @@
-import re
+from pymongo import MongoClient
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from config import MONGO_URI, DATABASE_NAME, COLLECTION_NAME
+
+client = MongoClient(MONGO_URI)
+db = client[DATABASE_NAME]
+collection = db[COLLECTION_NAME]
+
+SPAM_TEXTS = [doc['text'] for doc in collection.find({"label": "spam"})]
+
+VECTOR = TfidfVectorizer()
+SPAM_VECTORS = VECTOR.fit_transform(SPAM_TEXTS)
+
+def similarity_score(text):
+    """Return a similarity score from 0 to 10 against known spam texts."""
+    user_vec = VECTOR.transform([text])
+    similarities = cosine_similarity(user_vec, SPAM_VECTORS)[0]
+    max_sim = similarities.max()
+    return round(max_sim * 10, 2), SPAM_TEXTS[similarities.argmax()][:100]
 
 # A more sophisticated keyword analysis system with weighted scores.
 # Higher weights indicate a stronger likelihood of a scam.
@@ -39,37 +58,36 @@ SCAM_KEYWORD_WEIGHTS = {
 SCAM_THRESHOLD = 10
 
 def analyze_text(text):
-    """
-    Analyzes a given text for potential scams using a weighted keyword approach.
-
-    Args:
-        text (str): The text to analyze.
-
-    Returns:
-        dict: A dictionary containing the analysis results.
-    """
     text_lower = text.lower()
     found_keywords = []
     total_score = 0
     
     for keyword, weight in SCAM_KEYWORD_WEIGHTS.items():
-        # Use a simple 'in' check for broader matching. This is more effective
-        # than strict word boundary matching for catching variations.
         if keyword in text_lower:
             found_keywords.append(keyword)
             total_score += weight
-            
-    is_scam = total_score >= SCAM_THRESHOLD
-    
-    explanation = "This text does not appear to contain common scam characteristics."
-    if is_scam:
-        explanation = f"Potential scam detected. The calculated risk score ({total_score}) exceeds the threshold of {SCAM_THRESHOLD} due to the presence of high-risk keywords."
-    elif found_keywords:
-        explanation = f"This text contains some suspicious keywords ({', '.join(found_keywords)}), but the overall risk score ({total_score}) is below the threshold. Please still proceed with caution."
+
+    is_scam_keywords = total_score >= SCAM_THRESHOLD
+
+    # Get similarity score
+    similarity, matched_snippet = similarity_score(text)
+
+    # Combine results
+    is_scam = is_scam_keywords or similarity >= 7.0  # you can adjust this threshold
+
+    explanation = ""
+    if is_scam_keywords:
+        explanation += f"High-risk keywords detected (score: {total_score}). "
+    if similarity >= 7.0:
+        explanation += f"Text is {similarity}/10 similar to known spam: '{matched_snippet}'"
+    if not explanation:
+        explanation = "No major risk indicators found."
 
     return {
         "is_scam": is_scam,
-        "score": total_score,
+        "score": similarity,
+        "keyword_score": total_score,
+        "matched_spam_snippet": matched_snippet,
         "found_keywords": sorted(found_keywords, key=lambda k: SCAM_KEYWORD_WEIGHTS[k], reverse=True),
         "explanation": explanation
-    } 
+    }

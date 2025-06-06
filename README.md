@@ -8,6 +8,7 @@ The primary goal is to create a reliable tool that can help users identify and p
 
 ## Features
 
+- **User account management (To be added)**: Allows for users to create/edit accounts on the website.
 - **Text Analysis**: Detect scams and fake news in articles, emails, and messages.
 - **Voice Analysis (To be added)**: Analyze audio for signs of scams (e.g., voice phishing).
 - **Image Analysis (To be added)**: Detect manipulated images and visual misinformation.

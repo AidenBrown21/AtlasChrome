@@ -2,10 +2,11 @@ import config
 from flask import Flask
 from pymongo import MongoClient
 
+# Flask app returns all messages labeled 'spam' in MongoDB database
+
 app = Flask(__name__)
 client = MongoClient(config.MONGO_URI)
 
-# Connect to the correct database and collection
 db = client[config.DATABASE_NAME]
 collection = db[config.COLLECTION_NAME]
 
