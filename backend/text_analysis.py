@@ -1,23 +1,39 @@
-from pymongo import MongoClient
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from config import MONGO_URI, DATABASE_NAME, COLLECTION_NAME
 
-client = MongoClient(MONGO_URI)
-db = client[DATABASE_NAME]
-collection = db[COLLECTION_NAME]
-
-SPAM_TEXTS = [doc['text'] for doc in collection.find({"label": "spam"})]
+# Common spam patterns and examples
+SPAM_PATTERNS = [
+    "Congratulations! You've won a prize",
+    "Your account has been suspended",
+    "Urgent: Your payment is required",
+    "You've inherited a large sum of money",
+    "Your package delivery is pending",
+    "Your account needs verification",
+    "Limited time offer - act now",
+    "You've been selected for a special offer",
+    "Your subscription will be charged",
+    "Your device has been infected",
+    "Your bank account needs updating",
+    "You've won a lottery",
+    "Your payment has failed",
+    "Your account will be closed",
+    "You've been chosen for a survey",
+    "Your refund is ready",
+    "Your account has been compromised",
+    "You've been selected for a reward",
+    "Your payment is overdue",
+    "Your account needs attention"
+]
 
 VECTOR = TfidfVectorizer()
-SPAM_VECTORS = VECTOR.fit_transform(SPAM_TEXTS)
+SPAM_VECTORS = VECTOR.fit_transform(SPAM_PATTERNS)
 
 def similarity_score(text):
-    """Return a similarity score from 0 to 10 against known spam texts."""
+    """Return a similarity score from 0 to 10 against known spam patterns."""
     user_vec = VECTOR.transform([text])
     similarities = cosine_similarity(user_vec, SPAM_VECTORS)[0]
     max_sim = similarities.max()
-    return round(max_sim * 10, 2), SPAM_TEXTS[similarities.argmax()][:100]
+    return round(max_sim * 10, 2), SPAM_PATTERNS[similarities.argmax()]
 
 SCAM_KEYWORD_WEIGHTS = {
     "nigerian prince": 10, "inheritance": 8, "lottery": 8, "sweepstakes": 8,
@@ -59,7 +75,6 @@ SCAM_KEYWORD_WEIGHTS = {
     "foreign diplomat": 9, "ambassador": 6, "royal family": 8, "love you": 4,
     "online dating": 3, "military base": 6, "deployment": 5
 }
-
 
 SCAM_THRESHOLD = 10
 

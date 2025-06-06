@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Header from '../components/Header';
 import './TextAnalysis.css';
+import API_URL from '../apiConfig';
 
 function TextAnalysis() {
   const [text, setText] = useState('');
@@ -12,7 +13,7 @@ function TextAnalysis() {
     setLoading(true);
     setResult(null);
     try {
-      const response = await axios.post('http://127.0.0.1:5000/api/analyze', { text });
+      const response = await axios.post(`${API_URL}/api/analyze`, { text });
       setResult(response.data);
     } catch (error) {
       console.error("Error analyzing text:", error);

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import './VoiceAnalysis.css';
+import API_URL from '../apiConfig';
 
 function VoiceAnalysis() {
     const [file, setFile] = useState(null);
@@ -8,6 +9,7 @@ function VoiceAnalysis() {
     const [isLoading, setIsLoading] = useState(false);
     const [result, setResult] = useState(null);
     const [error, setError] = useState(null);
+    const [transcriptExpanded, setTranscriptExpanded] = useState(false);
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
@@ -31,25 +33,23 @@ function VoiceAnalysis() {
         setError(null);
 
         try {
-            // First, create form data for the file upload
             const formData = new FormData();
             formData.append('audio', file);
 
-            // Step 1: Upload file and get transcript
-            const transcriptResponse = await fetch('http://localhost:3001/api/transcribe', {
+            const transcriptResponse = await fetch(`${API_URL}/api/transcribe`, {
                 method: 'POST',
                 body: formData,
             });
 
             if (!transcriptResponse.ok) {
-                throw new Error('Failed to transcribe audio');
+                const errData = await transcriptResponse.json();
+                throw new Error(errData.error || 'Failed to transcribe audio');
             }
 
             const transcriptData = await transcriptResponse.json();
             setTranscript(transcriptData.transcript);
 
-            // Step 2: Analyze transcript for scams
-            const analysisResponse = await fetch('http://localhost:3001/api/analyze', {
+            const analysisResponse = await fetch(`${API_URL}/api/analyze`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -58,7 +58,8 @@ function VoiceAnalysis() {
             });
 
             if (!analysisResponse.ok) {
-                throw new Error('Failed to analyze transcript');
+                const errData = await analysisResponse.json();
+                throw new Error(errData.error || 'Failed to analyze transcript');
             }
 
             const analysisResult = await analysisResponse.json();
@@ -107,7 +108,25 @@ function VoiceAnalysis() {
                 {transcript && (
                     <div className="transcript-container">
                         <h2>Transcript</h2>
-                        <p className="transcript-text">{transcript}</p>
+                        <div
+                            className={`transcript-text${transcriptExpanded ? ' expanded' : ''}`}
+                            style={{
+                                maxHeight: transcriptExpanded ? 'none' : '6em',
+                                overflow: transcriptExpanded ? 'visible' : 'hidden',
+                                position: 'relative',
+                                transition: 'max-height 0.3s ease'
+                            }}
+                        >
+                            {transcript}
+                        </div>
+                        {transcript.length > 200 && (
+                            <button
+                                className="toggle-transcript-btn"
+                                onClick={() => setTranscriptExpanded((prev) => !prev)}
+                            >
+                                {transcriptExpanded ? 'Show less' : 'Show more'}
+                            </button>
+                        )}
                     </div>
                 )}
 

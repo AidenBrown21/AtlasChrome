@@ -1,9 +1,8 @@
 nltk
-scikit-learn 
-dnspython
-pymongo
+scikit-learn
 Flask
 Flask-Cors
 vosk
 python-dotenv
 requests
+pydub
