@@ -1,4 +1,4 @@
-# ![Logo](/frontend/public/logo.jpg) 
+# <center> <img src="frontend/public/logo.jpg" alt="drawing" width="200"/> </center>
 
 This project, created as a project between two students, aims to develop a smart agent capable of detecting and verifying modern scams and fake news in various formats, including text, audio, and image.
 
