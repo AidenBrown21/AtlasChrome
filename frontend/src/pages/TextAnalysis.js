@@ -49,7 +49,7 @@ function TextAnalysis() {
                 <p className={result.is_scam ? 'scam' : 'legitimate'}>
                   {result.is_scam ? '🚨 Potential Scam Detected! 🚨' : '✅ This text seems legitimate.'}
                 </p>
-                <p><strong>Explanation:</strong> {result.explanation}</p>
+
                 <p><strong>Score:</strong> {result.score.toFixed(2)}</p>
                 {result.found_keywords && result.found_keywords.length > 0 && (
                   <p><strong>Flagged Keywords:</strong> {result.found_keywords.join(', ')}</p>
