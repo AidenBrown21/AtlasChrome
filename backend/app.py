@@ -1,15 +1,59 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
 from flask_cors import CORS
 from text_analysis import analyze_text
 from voice_analysis import transcribe_audio, analyze_audio
 from image_analysis import analyze_image
+from users import create_user, authenticate_user, get_user_by_username
+import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True)
+app.secret_key = os.environ.get('SECRET_KEY', 'dev_secret_key')
 
 @app.route('/')
 def index():
     return "Backend server is running."
+
+@app.route('/api/signup', methods=['POST'])
+def signup():
+    data = request.get_json()
+    required = ['first_name', 'last_name', 'username', 'password']
+    if not all(k in data for k in required):
+        return jsonify({'error': 'Missing fields'}), 400
+    ok, msg = create_user(data['first_name'], data['last_name'], data['username'], data['password'])
+    if not ok:
+        return jsonify({'error': msg}), 400
+    return jsonify({'message': msg})
+
+@app.route('/api/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    if not data or 'username' not in data or 'password' not in data:
+        return jsonify({'error': 'Missing username or password'}), 400
+    ok, user = authenticate_user(data['username'], data['password'])
+    if not ok:
+        return jsonify({'error': user}), 401
+    session['username'] = user['username']
+    return jsonify({'message': 'Logged in', 'user': {
+        'first_name': user['first_name'],
+        'last_name': user['last_name'],
+        'username': user['username']
+    }})
+
+@app.route('/api/logout', methods=['POST'])
+def logout():
+    session.pop('username', None)
+    return jsonify({'message': 'Logged out'})
+
+@app.route('/api/me', methods=['GET'])
+def me():
+    username = session.get('username')
+    if not username:
+        return jsonify({'user': None})
+    user = get_user_by_username(username)
+    if not user:
+        return jsonify({'user': None})
+    return jsonify({'user': user})
 
 @app.route('/api/analyze', methods=['POST'])
 def analyze():

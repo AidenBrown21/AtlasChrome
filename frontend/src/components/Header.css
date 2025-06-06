@@ -75,3 +75,99 @@
 .signup-button:hover {
     opacity: 0.9;
 }
+
+.user-greeting {
+    margin-right: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #0b285e;
+}
+
+.logout-button {
+    background-color: #0b285e;
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 1rem;
+}
+
+.logout-button:hover {
+    background-color: #061a3f;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2.5rem 1.5rem 2rem 1.5rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    min-width: 380px;
+    max-width: 380px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal h2 {
+    margin-bottom: 1.5rem;
+    color: #0b285e;
+}
+
+.modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.modal input {
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #d4d4d4;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    background: #fafbfc;
+}
+
+@media (max-width: 250px) {
+    .modal {
+        min-width: 0;
+        padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+    }
+}
+
+.modal-close {
+    margin-top: 1.5rem;
+    background: none;
+    border: none;
+    color: #0b285e;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.modal-close:hover {
+    color: #1a3f85;
+}
