@@ -46,9 +46,21 @@ function TextAnalysis() {
               <p className="error">{result.error}</p>
             ) : (
               <>
-                <p className={result.is_scam ? 'scam' : 'legitimate'}>
-                  {result.is_scam ? '🚨 Potential Scam Detected! 🚨' : '✅ This text seems legitimate.'}
-                </p>
+              <p className={
+                result.score > 4.0
+                  ? 'scam'
+                  : result.score > 1.5
+                    ? 'suspicious'
+                    : 'legitimate'
+              }>
+                {
+                  result.score > 4.0
+                    ? '🚨 Potential Scam Detected! 🚨'
+                    : result.score > 1.5
+                      ? '⚠️ This text seems suspicious. Please use caution.'
+                      : '✅ This text seems legitimate.'
+                }
+              </p>
 
                 <p><strong>Score:</strong> {result.score.toFixed(2)}</p>
                 {result.found_keywords && result.found_keywords.length > 0 && (
