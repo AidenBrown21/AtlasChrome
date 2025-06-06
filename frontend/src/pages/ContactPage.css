@@ -1,0 +1,38 @@
+.contact-container {
+    padding: 8rem 2rem 2rem 2rem;
+    text-align: center;
+    color: #0b285e;
+}
+
+.contact-container h1 {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+}
+
+.contact-columns {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    align-items: flex-start;
+}
+
+.contact-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 250px;
+}
+
+.contact-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.contact-column p {
+    margin: 0.25rem 0;
+    font-size: 1.1rem;
+}

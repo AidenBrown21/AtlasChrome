@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Header from '../components/Header';
 import './TextAnalysis.css';
 
 function TextAnalysis() {
@@ -24,24 +25,22 @@ function TextAnalysis() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>🛡️ Anti-Scam & Misinformation Agent</h1>
-        <p>Enter any text below to check if it's a potential scam.</p>
-      </header>
-      <main>
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Paste text here..."
-          rows="10"
-          cols="80"
-        />
-        <button onClick={handleAnalyze} disabled={loading || !text}>
-          {loading ? 'Analyzing...' : 'Analyze Text'}
-        </button>
+    <>
+      <Header />
+      <div className="text-analysis-container">
+        <main className="analysis-box">
+          <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Paste text here..."
+            rows="10"
+          />
+          <button onClick={handleAnalyze} disabled={loading || !text}>
+            {loading ? 'Analyzing...' : 'Analyze Text'}
+          </button>
+        </main>
         {result && (
-          <div className="result">
+          <div className="result-container">
             <h2>Analysis Result</h2>
             {result.error ? (
               <p className="error">{result.error}</p>
@@ -59,8 +58,16 @@ function TextAnalysis() {
             )}
           </div>
         )}
-      </main>
-    </div>
+        <div className="flex min-h-screen item-center justify-center">
+          <section className="info-section max-w-2xl text-center">
+            <h3>The Dangers of Text-Based Scams</h3>
+            <p>
+            Text-based scams, including phishing emails and smishing (SMS phishing), are becoming increasingly sophisticated and prevalent in our digital lives. Scammers leverage urgent language, enticing offers, and impersonation of trusted entities to trick individuals into revealing sensitive information or sending money. Staying vigilant and using tools like ATLAS are crucial steps in protecting yourself from financial loss and identity theft.
+          </p>
+        </section>
+        </div>
+      </div>
+    </>
   );
 }
 
