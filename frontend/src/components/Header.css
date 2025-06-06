@@ -22,8 +22,9 @@
 }
 
 .main-nav {
-    flex-grow: 1;
-    text-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .main-nav a {
@@ -37,6 +38,11 @@
 
 .main-nav a:hover {
     opacity: 0.8;
+}
+
+.header-actions {
+    /* Adding visibility to maintain space but not show */
+    visibility: visible;
 }
 
 .header-actions button {
