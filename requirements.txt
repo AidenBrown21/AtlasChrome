@@ -1,2 +1,4 @@
 nltk
 scikit-learn 
+dnspython
+pymongo
