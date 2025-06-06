@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+.env
+*.egg-info/
+venv/
+dist/
+
+# Node.js / React
+frontend/node_modules/
+frontend/build/
+frontend/.pnp
+frontend/.pnp.js
+frontend/coverage/
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log* 
