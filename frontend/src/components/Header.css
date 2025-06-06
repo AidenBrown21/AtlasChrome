@@ -1,0 +1,64 @@
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #EDEDED;
+    color: #0b285e;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.logo-img {
+    height: 50px;
+}
+
+.main-nav {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.main-nav a {
+    color: #0b285e;
+    text-decoration: none;
+    margin: 0 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+    opacity: 0.8;
+}
+
+.header-actions button {
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-button {
+    background-color: transparent;
+    color: #0b285e;
+}
+
+.signup-button {
+    background-color: #0b285e;
+    color: #EDEDED;
+    margin-left: 1rem;
+}
+
+.signup-button:hover {
+    opacity: 0.9;
+}

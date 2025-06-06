@@ -1,0 +1,22 @@
+.about-container {
+    padding: 8rem 2rem 2rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #0b285e;
+}
+
+.about-container h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.about-container h2 {
+    font-size: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.about-container p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}

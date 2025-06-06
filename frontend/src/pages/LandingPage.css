@@ -1,24 +1,85 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #EDEDED;
+    color: #0b285e;
+}
+
 .landing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
     text-align: center;
-    color: #333;
 }
 
 .landing-header {
-    background-color: #2c3e50;
-    padding: 50px 20px;
-    color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 3rem;
 }
 
 .landing-header h1 {
-    margin: 0;
-    font-size: 3rem;
+    font-size: 5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    background: -webkit-linear-gradient(45deg, #0b285e, #84a9d9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .landing-header p {
-    font-size: 1.2rem;
-    margin-top: 10px;
-    opacity: 0.9;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.page-nav {
+    margin-bottom: 3rem;
+}
+
+.page-nav a {
+    color: #0b285e;
+    text-decoration: none;
+    margin: 0 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.button-container {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.action-button {
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.action-button.primary {
+    background-color: #0b285e;
+    color: #EDEDED;
+}
+
+.action-button.primary:hover {
+    background-color: #1a3f85;
+}
+
+.action-button.secondary {
+    background-color: #FFFFFF;
+    color: #0b285e;
+    border-color: #d4d4d4;
+}
+
+.action-button.secondary:hover {
+    background-color: #f7f7f7;
+    border-color: #b0b0b0;
 }
 
 .selection-container {
