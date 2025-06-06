@@ -36,3 +36,5 @@ This project is currently under development.
 ### Usage
 
 (Instructions to be added) 
+
+** USING https://archive.ics.uci.edu/dataset/228/sms+spam+collection **
