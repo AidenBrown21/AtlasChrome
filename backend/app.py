@@ -9,8 +9,8 @@ from datetime import timedelta
 
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:3000"], supports_credentials=True)
-app.secret_key = os.environ.get('SECRET_KEY', 'dev_secret_key')
+CORS(app, origins="*", supports_credentials=True)
+app.secret_key = os.environ.get('SECRET_KEY')
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)
 
 @app.route('/')
@@ -122,4 +122,4 @@ def image_analyze():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=int(os.environ.get('PORT', 5000)))
