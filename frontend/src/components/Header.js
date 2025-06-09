@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
-import API_URL from '../apiConfig';
+// import API_URL from '../apiConfig';
+import REACT_APP_API_URL from '../apiConfig';
 
 function Header() {
     const [showLogin, setShowLogin] = useState(false);
@@ -15,7 +16,7 @@ function Header() {
     const [showSignupPassword, setShowSignupPassword] = useState(false);
 
     useEffect(() => {
-        fetch(`${API_URL}/api/me`, {
+        fetch(`${REACT_APP_API_URL}/api/me`, {
             credentials: 'include',
         })
             .then(res => res.json())
@@ -26,7 +27,7 @@ function Header() {
         e.preventDefault();
         setLoginError('');
         try {
-            const res = await fetch(`${API_URL}/api/login`, {
+            const res = await fetch(`${REACT_APP_API_URL}/api/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
@@ -46,7 +47,7 @@ function Header() {
         e.preventDefault();
         setSignupError('');
         try {
-            const res = await fetch(`${API_URL}/api/signup`, {
+            const res = await fetch(`${REACT_APP_API_URL}/api/signup`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
@@ -67,7 +68,7 @@ function Header() {
     };
 
     const handleLogout = async () => {
-        await fetch(`${API_URL}/api/logout`, {
+        await fetch(`${REACT_APP_API_URL}/api/logout`, {
             method: 'POST',
             credentials: 'include',
         });
