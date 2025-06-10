@@ -19,6 +19,11 @@ The primary goal is to create a reliable tool that can help users identify and p
 
 ## 🚀 Getting Started
 
+### 🌐 Live Demo
+
+- 🔗 **Frontend:** [https://www.atlasprotection.live](https://www.atlasprotection.live)
+- 🛠️ **Backend API:** [https://atlas-backend.azurewebsites.net](https://atlas-backend.azurewebsites.net)
+
 ### 🧰 Prerequisites
 
 - 🐍 Python 3.8+
