@@ -76,3 +76,7 @@ The primary goal is to create a reliable tool that can help users identify and p
 4. 🌐 If the service does not open automatically, connect to the link shown in the second terminal's Node.js 'Local' section (typically `localhost:3000`)
 
 5. ✅ Enjoy staying safe:)
+
+### Notes
+
+1. For back-end updates, remember to build/push Dockerfile for every change.
