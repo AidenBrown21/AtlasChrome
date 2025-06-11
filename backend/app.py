@@ -15,6 +15,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)
 
 @app.route('/testmerq')
 def testme():
+    print("And prints work?")
     return "This route works!"
 
 @app.route('/')
