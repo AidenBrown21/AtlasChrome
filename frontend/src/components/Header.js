@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 // import API_URL from '../apiConfig';
@@ -19,8 +19,11 @@ function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const [notification, setNotification] = useState({ message: '', type: 'info', visible: false });
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const location = useLocation();
     const isHomePage = location.pathname === '/';
+
+    const dropdownRef = useRef(null);
 
     useEffect(() => {
         if (notification.visible) {
@@ -30,6 +33,18 @@ function Header() {
             return () => clearTimeout(timer);
         }
     }, [notification.visible]);
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsDropdownOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [dropdownRef]);
 
     const showNotification = (message, type = 'info') => {
         setNotification({ message, type, visible: true });
@@ -100,6 +115,13 @@ function Header() {
         setIsMenuOpen(false);
     };
 
+    const getInitials = () => {
+        if (!user) return '';
+        const firstInitial = user.first_name ? user.first_name[0] : '';
+        const lastInitial = user.last_name ? user.last_name[0] : '';
+        return `${firstInitial}${lastInitial}`.toUpperCase();
+    };
+
     return (
         <>
         <header className={`app-header ${!isHomePage ? 'is-static' : ''}`}>
@@ -119,10 +141,23 @@ function Header() {
                 </nav>
                 <div className="header-actions-desktop">
                     {user ? (
-                        <>
-                            <span className="user-greeting">Hi, {user.first_name}</span>
-                            <button className="logout-button" onClick={handleLogout}>Sign Out</button>
-                        </>
+                        <div className="profile-container" ref={dropdownRef}>
+                            <div className="user-avatar" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                                {getInitials()}
+                            </div>
+
+                            {isDropdownOpen && (
+                                <div className="profile-dropdown">
+                                    <div className="dropdown-user-info">
+                                        <strong>{user.first_name} {user.last_name}</strong>
+                                        <span>{user.username}</span>
+                                    </div>
+                                    <button className="logout-button" onClick={() => { handleLogout(); setIsDropdownOpen(false); }}>
+                                        Sign Out
+                                    </button>
+                                </div>
+                            )}
+                        </div>
                     ) : (
                         <>
                             <button className="login-button" onClick={() => setShowLogin(true)}>Login</button>
