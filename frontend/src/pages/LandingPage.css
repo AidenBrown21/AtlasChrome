@@ -15,12 +15,12 @@ html {
     min-height: 100vh;
     text-align: center;
     box-sizing: border-box;
-    padding-top: 70px;
+    padding-top: 20px;
 }
 
 @media (min-width: 820px) {
   .landing-container {
-    padding-top: 90px;
+    padding-top: 15px;
   }
 }
 
