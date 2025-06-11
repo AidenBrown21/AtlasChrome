@@ -162,37 +162,20 @@ html {
     animation: scroll-words-mobile 8s forwards;
 }
 
-.dynamic-words-list span {
-    display: block;
-    color: #0b285e;
-    text-align: center;
+.phrase {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
     height: 2.2rem;
     line-height: 2.2rem;
 }
 
-.static-text {
-    color: #636363;
-    margin-right: 0.75rem;
+.phrase-preserve {
+    color: #0b285e;
 }
 
-.animated-words {
-    animation: flip-words 8s forwards;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.animated-word-group {
-    display: flex;
-    height: 3rem;
-    line-height: 3rem;
-    animation: flip-words-mobile 8s forwards;
-}
-
-.animated-word-group > span:last-of-type {
-    background: -webkit-linear-gradient(45deg, #0b285e, #84a9d9);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.phrase-dynamic {
+    color: #84a9d9;
 }
 
 @keyframes scroll-words-mobile {
@@ -214,11 +197,8 @@ html {
         font-size: 2.5rem;
     }
 
-    .dynamic-words-wrapper {
-        height: 3rem;
-    }
-
-    .dynamic-words-list span {
+    .dynamic-words-wrapper,
+    .phrase {
         height: 3rem;
         line-height: 3rem;
     }

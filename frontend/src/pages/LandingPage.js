@@ -14,10 +14,22 @@ function LandingPage() {
                     <div className="dynamic-text-container">
                         <div className="dynamic-words-wrapper">
                             <div className="dynamic-words-list">
-                                <span><strong>PRESERVE WHAT'S REAL.</strong></span>
-                                <span><strong>PRESERVE THE FACTS.</strong></span>
-                                <span><strong>PRESERVE THE CERTAINTY.</strong></span>
-                                <span><strong>PRESERVE THE TRUTH.</strong></span>
+                                <div className="phrase">
+                                    <span className="phrase-preserve"><strong>PRESERVE</strong></span>
+                                    <span className="phrase-dynamic"><strong>WHAT'S REAL.</strong></span>
+                                </div>
+                                <div className="phrase">
+                                    <span className="phrase-preserve"><strong>PRESERVE</strong></span>
+                                    <span className="phrase-dynamic"><strong>THE FACTS.</strong></span>
+                                </div>
+                                <div className="phrase">
+                                    <span className="phrase-preserve"><strong>PRESERVE</strong></span>
+                                    <span className="phrase-dynamic"><strong>THE CERTAINTY.</strong></span>
+                                </div>
+                                <div className="phrase">
+                                    <span className="phrase-preserve"><strong>PRESERVE</strong></span>
+                                    <span className="phrase-dynamic"><strong>THE TRUTH.</strong></span>
+                                </div>
                             </div>
                         </div>
                     </div>
