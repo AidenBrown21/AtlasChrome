@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
+import { useTheme } from '../context/ThemeContext';
 // import API_URL from '../apiConfig';
 import REACT_APP_API_URL from '../apiConfig';
 import Notification from './Notification/Notification';
@@ -17,7 +18,7 @@ function Header() {
     const [showSignupPassword, setShowSignupPassword] = useState(false);
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+    const { theme, toggleTheme } = useTheme();
     const [notification, setNotification] = useState({ message: '', type: 'info', visible: false });
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const location = useLocation();
@@ -164,6 +165,9 @@ function Header() {
                             <button className="signup-button" onClick={() => setShowSignup(true)}>Sign Up</button>
                         </>
                     )}
+                    <button onClick={toggleTheme} className="theme-toggle-button">
+                        {theme === 'light' ? '🌙' : '☀️'}
+                    </button>
                 </div>
                 {isMenuOpen && (
                     <div className="mobile-menu">
@@ -189,6 +193,10 @@ function Header() {
                                 </div>
                             )}
                         </div>
+                        
+                        <button onClick={toggleTheme} className="theme-toggle-button mobile-toggle">
+                            {theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+                        </button>
                     </div>
                 )}
                 {/* Login Modal */}
