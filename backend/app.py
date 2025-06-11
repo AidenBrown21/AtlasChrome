@@ -16,6 +16,7 @@ print("FLASK_SECRET_KEY:", os.environ.get("FLASK_SECRET_KEY"))
 
 @app.route('/')
 def index():
+    print("FLASK_SECRET_KEY:", os.environ.get("FLASK_SECRET_KEY"))
     return "Backend server is running."
 
 @app.route('/api/signup', methods=['POST'])
