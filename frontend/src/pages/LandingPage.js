@@ -1,12 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../components/Header';
 import './LandingPage.css';
 
 function LandingPage() {
     return (
         <>
-            <Header />
             <div className="landing-container">
                 <header className="landing-header">
                     <h1>ATLAS</h1>

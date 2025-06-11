@@ -1,11 +1,9 @@
 import React from 'react';
-import Header from '../components/Header';
 import './FeaturesPage.css';
 
 function FeaturesPage() {
     return (
         <>
-            <Header />
             <div className="features-container">
                 <div className="features-hero">
                     <h1>Powerful Features</h1>

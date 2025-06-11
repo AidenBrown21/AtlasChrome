@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Header from '../components/Header';
 import './VoiceAnalysis.css';
 import API_URL from '../apiConfig';
 
@@ -73,7 +72,6 @@ function VoiceAnalysis() {
 
     return (
         <>
-            <Header />
             <div className="voice-analysis-container">
                 <h1>Voice Analysis</h1>
                 <p className="description">

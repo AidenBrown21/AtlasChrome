@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Header from '../components/Header';
 import './ImageAnalysis.css';
 import API_URL from '../apiConfig';
 
@@ -55,7 +54,6 @@ function ImageAnalysis() {
 
     return (
         <>
-            <Header />
             <div className="image-analysis-container">
                 <h1>Image Analysis</h1>
                 <p className="description">

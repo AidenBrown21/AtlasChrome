@@ -1,11 +1,9 @@
 import React from 'react';
-import Header from '../components/Header';
 import './AboutPage.css';
 
 function AboutPage() {
     return (
         <>
-            <Header />
             <div className="about-container">
                 <h1>About ATLAS</h1>
                 <p>

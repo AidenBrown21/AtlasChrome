@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Header from '../components/Header';
 import './TextAnalysis.css';
 import API_URL from '../apiConfig';
 
@@ -27,7 +26,6 @@ function TextAnalysis() {
 
   return (
     <>
-      <Header />
       <div className="text-analysis-container">
         <main className="analysis-box">
           <textarea
