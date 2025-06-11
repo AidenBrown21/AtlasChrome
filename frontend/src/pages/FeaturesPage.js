@@ -8,7 +8,7 @@ function FeaturesPage() {
             <Header />
             <div className="features-container">
                 <div className="features-hero">
-                    <h1>Powerful Tools for Your Digital Safety</h1>
+                    <h1>Powerful Features</h1>
                     <p className="features-subtitle">ATLAS provides a suite of analysis tools to protect you from online scams and misinformation. Here's how we keep you safe.</p>
                 </div>
 
