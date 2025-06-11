@@ -45,7 +45,7 @@
 .hamburger-button span {
   width: 2rem;
   height: 3px;
-  background-color: #0b285e;
+  background-color: var(--text-color);
   border-radius: 10px;
   transition: all 0.3s ease-in-out;
 }
@@ -81,6 +81,14 @@
   margin-bottom: 1rem;
   font-weight: bold;
   font-size: 1.2rem;
+  color: var(--text-color);
+}
+
+.mobile-nav-links a {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
 }
 
 .mobile-nav-links,
@@ -172,7 +180,7 @@
   }
 
   .main-nav-desktop a {
-    color: #0b285e;
+    color: var(--text-color);
     text-decoration: none;
     margin: 0;
     font-size: 1.1rem;
@@ -197,12 +205,12 @@
 
 .login-button {
     background-color: transparent;
-    color: #0b285e;
+    color: var(--text-color);
 }
 
 .signup-button {
-    background-color: #0b285e;
-    color: #EDEDED;
+    background-color: var(--button-primary-bg);
+    color: var(--button-primary-text);
     margin-left: 1rem;
 }
 
@@ -214,7 +222,7 @@
     margin-right: 1rem;
     font-size: 1.1rem;
     font-weight: 500;
-    color: #0b285e;
+    color: var(--text-color);
 }
 
 .logout-button {
@@ -237,8 +245,8 @@
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background-color: #0b285e;
-  color: #fff;
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
@@ -255,10 +263,10 @@
   top: calc(100% + 10px);
   right: 0;
   width: 220px;
-  background-color: #fff;
+  background-color: var(--card-bg-color);
   border-radius: 8px;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-  border: 1px solid #eee;
+  box-shadow: 0 5px 25px var(--shadow-color);
+  border: 1px solid var(--border-color);
   z-index: 1010;
   overflow: hidden;
   
@@ -276,18 +284,18 @@
 
 .dropdown-user-info {
   padding: 1rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .dropdown-user-info strong {
   display: block;
   font-size: 1rem;
-  color: #333;
+  color: var(--text-color);
 }
 
 .dropdown-user-info span {
   font-size: 0.85rem;
-  color: #666;
+  color: var(--subtle-text-color);
 }
 
 .profile-dropdown .logout-button {
@@ -302,7 +310,7 @@
 }
 
 .profile-dropdown .logout-button:hover {
-  background-color: #f7f7f7;
+  background-color: var(--card-bg-hover);
 }
 
 .modal-overlay {
