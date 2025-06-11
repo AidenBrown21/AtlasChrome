@@ -133,11 +133,6 @@ function Header() {
                         className="logo-img" 
                     />
                 </Link>
-                <button className={`hamburger-button ${isMenuOpen ? 'is-open' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
                 <nav className="main-nav-desktop">
                     <Link to="/features">Features</Link>
                     <Link to="/about">About</Link>
