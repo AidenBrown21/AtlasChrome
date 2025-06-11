@@ -79,4 +79,10 @@ The primary goal is to create a reliable tool that can help users identify and p
 
 ### Notes
 
-1. For back-end updates, remember to build/push Dockerfile for every change.
+1. For back-end updates, remember to build/push Dockerfile per API change. For example:
+   ```bash
+   cd backend
+   docker build -t inthezone006/atlas-backend:latest .
+   docker push inthezone006/atlas-backend:latest  
+   ```
+   This also includes restarting the cluster on Azure and ensuring the GitHub Actions run.
