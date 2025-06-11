@@ -3,7 +3,7 @@ from flask_cors import CORS
 from text_analysis import analyze_text
 from voice_analysis import transcribe_audio, analyze_audio
 from image_analysis import analyze_image
-from users import create_user, authenticate_user, get_user_by_username
+from users import create_user, authenticate_user, get_user_by_username, get_user_by_id, serialize_user
 import os
 from datetime import timedelta
 
@@ -39,8 +39,9 @@ def login():
         return jsonify({'error': 'Missing username or password'}), 400
     ok, user = authenticate_user(data['username'], data['password'])
     if not ok:
-        return jsonify({'error': user}), 401
+        return jsonify({'error': user['id']}), 401
     session['username'] = user['username']
+    session['user_id'] = user['id']
     session.permanent = True
     return jsonify({'message': 'Logged in', 'user': {
         'first_name': user['first_name'],
@@ -61,7 +62,7 @@ def me():
     user = get_user_by_username(username)
     if not user:
         return jsonify({'user': None})
-    return jsonify({'user': user})
+    return jsonify({'user': serialize_user(user)})
 
 @app.route('/api/analyze', methods=['POST'])
 def analyze():
