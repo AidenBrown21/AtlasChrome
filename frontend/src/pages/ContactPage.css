@@ -10,10 +10,19 @@
 }
 
 .contact-columns {
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .contact-columns {
+    flex-direction: row;
     align-items: flex-start;
+  }
 }
 
 .contact-column {
