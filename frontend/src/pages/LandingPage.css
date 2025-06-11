@@ -15,7 +15,7 @@ html {
     min-height: 100vh;
     text-align: center;
     box-sizing: border-box;
-    padding-top: 80px;
+    padding-top: 70px;
 }
 
 @media (min-width: 820px) {
