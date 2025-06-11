@@ -14,6 +14,14 @@ html {
     justify-content: center;
     min-height: 100vh;
     text-align: center;
+    box-sizing: border-box;
+    padding-top: 80px;
+}
+
+@media (min-width: 820px) {
+  .landing-container {
+    padding-top: 90px;
+  }
 }
 
 .landing-header {
