@@ -18,7 +18,7 @@ function Header() {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const [notification, setNotification] = useState({ message: '', visible: false });
+    const [notification, setNotification] = useState({ message: '', type: 'info', visible: false });
     const location = useLocation();
     const isHomePage = location.pathname === '/';
 
@@ -31,9 +31,15 @@ function Header() {
         }
     }, [notification.visible]);
 
-    const showNotification = (message) => {
-        setNotification({ message, visible: true });
+    const showNotification = (message, type = 'info') => {
+        setNotification({ message, type, visible: true });
     };
+
+    useEffect(() => {
+        fetch(`${REACT_APP_API_URL}/api/me`, { credentials: 'include' })
+            .then(res => res.json())
+            .then(data => setUser(data.user));
+    }, []);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -52,7 +58,7 @@ function Header() {
             setLoginForm({ username: '', password: '' });
             showNotification('Login Successful!');
         } catch (err) {
-            setLoginError(err.message);
+            showNotification(err.message, 'error');
         }
     };
 
@@ -77,7 +83,7 @@ function Header() {
             setSignupForm({ first_name: '', last_name: '', username: '', password: '' });
             showNotification('Signup Successful!');
         } catch (err) {
-            setSignupError(err.message);
+            showNotification(err.message, 'error');
         }
     };
 
@@ -87,6 +93,7 @@ function Header() {
             credentials: 'include',
         });
         setUser(null);
+        showNotification('You have been signed out.', 'info');
     };
 
     const closeMenu = () => {
@@ -245,6 +252,7 @@ function Header() {
         </header>
         <Notification 
             message={notification.message} 
+            type={notification.type}
             visible={notification.visible} 
         />
         </>

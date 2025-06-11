@@ -25,3 +25,16 @@
   opacity: 1;
   visibility: visible;
 }
+
+/* Type-specific colors */
+.notification.success {
+  background-color: #2ecc71; /* Green */
+}
+
+.notification.error {
+  background-color: #e74c3c; /* Red */
+}
+
+.notification.info {
+  background-color: #34495e; /* Dark Grey/Blue */
+}
