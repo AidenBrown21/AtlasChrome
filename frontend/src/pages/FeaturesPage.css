@@ -3,7 +3,7 @@
   margin: 0 auto;
   color: #0b285e;
 
-  padding: 7rem 0 4rem 0;
+  padding: 4rem 0 4rem 0;
 }
 
 .features-hero {
@@ -97,7 +97,7 @@
 
 @media (min-width: 1024px) {
   .features-container {
-    padding: 10rem 2rem 4rem 2rem;
+    padding: 8rem 2rem 4rem 2rem;
   }
 
   .features-hero h1 {
