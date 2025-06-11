@@ -1,24 +1,30 @@
 .contact-container {
-    padding: 8rem 2rem 2rem 2rem;
-    text-align: center;
-    color: #0b285e;
+  padding: 4rem 1rem 2rem 1rem;
+  text-align: center;
+  color: var(--text-color);
 }
 
 .contact-container h1 {
-    font-size: 3rem;
-    margin-bottom: 3rem;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
 }
 
 .contact-columns {
   display: flex;
   justify-content: center;
   gap: 4rem;
-
   flex-direction: column;
   align-items: center;
 }
 
 @media (min-width: 768px) {
+  .contact-container {
+    padding: 8rem 2rem 2rem 2rem;
+  }
+  .contact-container h1 {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+  }
   .contact-columns {
     flex-direction: row;
     align-items: flex-start;
@@ -26,90 +32,104 @@
 }
 
 .contact-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 250px;
 }
 
 .contact-photo {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    display: block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  display: block;
 }
 
 .contact-name-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
 }
 
 .contact-photo-link {
-    position: relative;
-    display: block;
-    margin-bottom: 0;
-    width: 150px;
-    height: 150px;
+  position: relative;
+  display: block;
+  margin-bottom: 0;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .photo-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(11, 40, 94, 0.75);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 50%;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    font-weight: 600;
-    padding: 1rem;
-    font-size: 1rem;
-    pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(11, 40, 94, 0.75);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  font-weight: 600;
+  padding: 1rem;
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+html[data-theme='dark'] .photo-overlay {
+  background-color: rgba(132, 169, 217, 0.85);
+  color: #000;
 }
 
 .contact-photo-link:hover .photo-overlay {
-    opacity: 1;
+  opacity: 1;
 }
 
 .contact-column p {
-    margin: 0.25rem 0;
-    font-size: 1.1rem;
+  margin: 0.25rem 0;
+  font-size: 1.1rem;
+  color: var(--subtle-text-color);
 }
 
 .contact-name-container p {
-    font-weight: bold;
+  color: var(--text-color);
+  font-weight: bold;
 }
 
 .linkedin-logo {
-    width: 24px;
-    height: 24px;
-    margin-top: 0;
-    transition: transform 0.2s ease;
+  width: 24px;
+  height: 24px;
+  margin-top: 0;
+  transition: transform 0.2s ease;
+}
+
+html[data-theme='dark'] .linkedin-logo,
+html[data-theme='dark'] .github-logo {
+  filter: invert(1);
 }
 
 .linkedin-logo:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .github-logo {
-    width: 60x; /* Adjust size as needed */
-    height: 60px;
-    margin-top: 0.75rem;
-    transition: transform 0.2s ease;
-    display: none;
+  width: 60px;
+  height: 60px;
+  margin-top: 0.75rem;
+  transition: transform 0.2s ease;
+  display: none;
 }
 
 .github-logo:hover {
-    transform: scale(1.0);
-} 
+  transform: scale(1.0);
+}
