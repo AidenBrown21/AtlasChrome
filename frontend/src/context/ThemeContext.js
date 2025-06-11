@@ -22,6 +22,15 @@ export const ThemeProvider = ({ children }) => {
     // Apply the theme to the <html> element and save it to localStorage
     const root = window.document.documentElement;
     root.setAttribute('data-theme', theme);
+    const newColor = theme === 'light' ? '#EDEDED' : '#1e1e1e';
+    let metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (!metaThemeColor) {
+      // If the tag doesn't exist, create it
+      metaThemeColor = document.createElement('meta');
+      metaThemeColor.setAttribute('name', 'theme-color');
+      document.head.appendChild(metaThemeColor);
+    }
+    metaThemeColor.setAttribute('content', newColor);
     localStorage.setItem('theme', theme);
   }, [theme]);
 
