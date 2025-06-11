@@ -89,11 +89,52 @@
   gap: 2rem;
 }
 
-.mobile-nav-links a {
-  font-size: 1.5rem;
-  color: #0b285e;
-  text-decoration: none;
-  font-weight: 500;
+.mobile-login-signup-group {
+    display: flex;
+    gap: 1rem;
+    width: 90%;
+    max-width: 400px;
+}
+
+.mobile-menu-button {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #d4d4d4;
+    background-color: #fff;
+    color: #0b285e;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.mobile-menu-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.mobile-login-signup-group .mobile-menu-button {
+    margin-bottom: 0;
+}
+
+.mobile-menu .signup-button {
+    background-color: #0b285e;
+    color: #fff;
+    border-color: #0b285e;
+}
+
+.mobile-menu .logout-button {
+    width: 90%;
+    max-width: 400px;
+    background-color: #e74c3c;
+    color: #fff;
+    border-color: #e74c3c;
 }
 
 .main-nav-desktop,

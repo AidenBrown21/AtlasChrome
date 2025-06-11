@@ -118,19 +118,19 @@ function Header() {
                     )}
 
                     <nav className="mobile-nav-links">
-                        <Link to="/features" onClick={closeMenu}>Features</Link>
-                        <Link to="/about" onClick={closeMenu}>About</Link>
-                        <Link to="/contact" onClick={closeMenu}>Contact</Link>
+                        <Link to="/features" className="mobile-menu-button" onClick={closeMenu}>Features</Link>
+                        <Link to="/about" className="mobile-menu-button" onClick={closeMenu}>About</Link>
+                        <Link to="/contact" className="mobile-menu-button" onClick={closeMenu}>Contact</Link>
                     </nav>
 
                     <div className="mobile-auth-actions">
                         {user ? (
-                            <button className="logout-button" onClick={() => { handleLogout(); closeMenu(); }}>Sign Out</button>
+                            <button className="mobile-menu-button logout-button" onClick={() => { handleLogout(); closeMenu(); }}>Sign Out</button>
                         ) : (
-                            <>
-                                <button className="login-button" onClick={() => { setShowLogin(true); closeMenu(); }}>Login</button>
-                                <button className="signup-button" onClick={() => { setShowSignup(true); closeMenu(); }}>Sign Up</button>
-                            </>
+                            <div className="mobile-login-signup-group">
+                                <button className="mobile-menu-button login-button" onClick={() => { setShowLogin(true); closeMenu(); }}>Login</button>
+                                <button className="mobile-menu-button signup-button" onClick={() => { setShowSignup(true); closeMenu(); }}>Sign Up</button>
+                            </div>
                         )}
                     </div>
                 </div>
