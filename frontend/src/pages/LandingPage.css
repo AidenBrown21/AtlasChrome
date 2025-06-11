@@ -244,10 +244,10 @@ html {
 
 html[data-theme='dark'] .action-button {
   background-color: transparent;
-  border-color: var(--border-color);
+  border-color: var(--subtle-text-color); 
 }
 
 html[data-theme='dark'] .action-button:hover {
   background-color: var(--card-bg-hover);
-  border-color: var(--border-hover-color);
+  border-color: var(--text-color);
 }
