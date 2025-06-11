@@ -243,11 +243,11 @@ html {
 }
 
 html[data-theme='dark'] .action-button {
-  background-color: transparent;
-  border-color: var(--subtle-text-color); 
+  background-color: var(--card-bg-color);
+  border-color: var(--border-hover-color);
 }
 
 html[data-theme='dark'] .action-button:hover {
-  background-color: var(--card-bg-hover);
   border-color: var(--text-color);
+  background-color: var(--card-bg-hover);
 }
