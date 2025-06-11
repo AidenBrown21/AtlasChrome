@@ -127,8 +127,12 @@ function Header() {
         <>
         <header className={`app-header ${!isHomePage ? 'is-static' : ''}`}>
             <header className="app-header">
-                <Link to="/" className="logo">
-                    <img src="/logo.png" alt="ATLAS Logo" className="logo-img" />
+                <Link to="/" className="logo" onClick={() => { closeMenu(); setIsDropdownOpen(false); }}>
+                    <img 
+                        src={theme === 'light' ? '/logo.jpg' : '/logo_dark.png'} 
+                        alt="ATLAS Logo" 
+                        className="logo-img" 
+                    />
                 </Link>
                 <button className={`hamburger-button ${isMenuOpen ? 'is-open' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     <span></span>
@@ -169,6 +173,16 @@ function Header() {
                         {theme === 'light' ? '🌙' : '☀️'}
                     </button>
                 </div>
+                <div className="mobile-header-actions">
+                    <button onClick={toggleTheme} className="theme-toggle-button">
+                        {theme === 'light' ? '🌙' : '☀️'}
+                    </button>
+                <button className={`hamburger-button ${isMenuOpen ? 'is-open' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                </div>
                 {isMenuOpen && (
                     <div className="mobile-menu">
                         {user && (
@@ -193,10 +207,6 @@ function Header() {
                                 </div>
                             )}
                         </div>
-                        
-                        <button onClick={toggleTheme} className="theme-toggle-button mobile-toggle">
-                            {theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
-                        </button>
                     </div>
                 )}
                 {/* Login Modal */}

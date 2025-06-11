@@ -241,3 +241,13 @@ html {
         animation-name: scroll-words-desktop;
     }
 }
+
+html[data-theme='dark'] .action-button {
+  background-color: transparent;
+  border-color: var(--border-color);
+}
+
+html[data-theme='dark'] .action-button:hover {
+  background-color: var(--card-bg-hover);
+  border-color: var(--border-hover-color);
+}
