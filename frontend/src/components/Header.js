@@ -15,6 +15,8 @@ function Header() {
     const [showLoginPassword, setShowLoginPassword] = useState(false);
     const [showSignupPassword, setShowSignupPassword] = useState(false);
 
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     useEffect(() => {
         fetch(`${REACT_APP_API_URL}/api/me`, {
             credentials: 'include',
@@ -73,6 +75,10 @@ function Header() {
             credentials: 'include',
         });
         setUser(null);
+    };
+
+    const closeMenu = () => {
+        setIsMenuOpen(false);
     };
 
     return (
