@@ -2,6 +2,10 @@
   padding: 4rem 1rem 2rem 1rem;
   text-align: center;
   color: var(--text-color);
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .contact-container h1 {
