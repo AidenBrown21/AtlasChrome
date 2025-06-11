@@ -15,6 +15,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)
 
 @app.route('/')
 def index():
+    print("Everything is working!")
     return "Backend server is running."
 
 @app.route('/api/signup', methods=['POST'])
