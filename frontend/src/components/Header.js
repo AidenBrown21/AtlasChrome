@@ -128,7 +128,7 @@ function Header() {
         <header className={`app-header ${!isHomePage ? 'is-static' : ''}`}>
             <header className="app-header">
                 <Link to="/" className="logo">
-                    <img src="/logo.jpg" alt="ATLAS Logo" className="logo-img" />
+                    <img src="/logo.png" alt="ATLAS Logo" className="logo-img" />
                 </Link>
                 <button className={`hamburger-button ${isMenuOpen ? 'is-open' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     <span></span>
