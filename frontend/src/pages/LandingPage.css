@@ -245,6 +245,7 @@ html {
 html[data-theme='dark'] .action-button {
   background-color: var(--card-bg-color);
   border-color: var(--border-hover-color);
+  color: var(--text-color);
 }
 
 html[data-theme='dark'] .action-button:hover {
