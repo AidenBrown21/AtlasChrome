@@ -15,12 +15,12 @@ html {
     min-height: 100vh;
     text-align: center;
     box-sizing: border-box;
-    padding-top: 20px;
+    padding-top: 80px;
 }
 
 @media (min-width: 820px) {
   .landing-container {
-    padding-top: 15px;
+    padding-top: 90px;
   }
 }
 
@@ -40,6 +40,7 @@ html {
 .landing-header p {
     font-size: 1.1rem;
     font-weight: 300;
+    color: var(--subtle-text-color);
 }
 
 @media (min-width: 768px) {
@@ -76,11 +77,13 @@ html {
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s ease;
-  border: 1px solid #d4d4d4;
   width: 90%;
   max-width: 400px;
   text-align: center;
-}
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}   
 
 .action-button.primary {
   background-color: #FFFFFF;
@@ -100,6 +103,12 @@ html {
 .action-button.secondary:hover {
   background-color: #f7f7f7;
   border-color: #b0b0b0;
+}
+
+.action-button.primary:hover,
+.action-button.secondary:hover {
+  background-color: var(--card-bg-hover);
+  border-color: var(--border-hover-color);
 }
 
 @media (min-width: 768px) {
@@ -143,7 +152,6 @@ html {
     color: #333;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-top: 5px solid #3498db;
-    /* Default border color */
 }
 
 .card:hover {
