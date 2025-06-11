@@ -54,13 +54,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 8rem 2rem 2rem 2rem;
-  color: #0b285e;
+  color: var(--text-color);
+  padding: 4rem 1rem 2rem 1rem;
 }
 
 .analysis-box {
   width: 100%;
-  max-width: 600px;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -75,37 +75,47 @@ body {
   font-size: 1rem;
   resize: vertical;
   box-sizing: border-box;
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.analysis-box textarea:focus {
+  outline: none;
+  border-color: var(--text-color);
 }
 
 .analysis-box button {
-  background-color: #0b285e;
-  color: #EDEDED;
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
   border: none;
   padding: 1rem;
   border-radius: 8px;
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .analysis-box button:disabled {
-  background-color: #a0a0a0;
+  background-color: var(--subtle-text-color);
   cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .analysis-box button:not(:disabled):hover {
-  background-color: #1a3f85;
+  opacity: 0.9;
 }
 
 .result-container {
   width: 100%;
-  max-width: 600px;
+  max-width: 700px;
   margin-top: 2rem;
   padding: 1.5rem;
   border-radius: 8px;
-  background-color: #FFFFFF;
-  border: 1px solid #d4d4d4;
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 .result-container .scam {
@@ -124,18 +134,30 @@ body {
 
 .info-section {
   width: 100%;
-  max-width: 600px;
-  margin-top: 2rem;
+  max-width: 800px;
+  margin-bottom: 3rem;
   text-align: center;
 }
 
 .info-section h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
   
 }
 
 .info-section p {
   font-size: 1rem;
   line-height: 1.5;
+  color: var(--subtle-text-color);
+}
+
+@media (min-width: 768px) {
+  .text-analysis-container {
+    padding-top: 8rem;
+  }
+
+  .info-section h2 {
+    font-size: 2rem;
+  }
 }
