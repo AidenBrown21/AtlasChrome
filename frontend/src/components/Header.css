@@ -29,9 +29,16 @@
 }
 
 .main-nav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .main-nav {
+    display: block;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+  }
 }
 
 .main-nav a {
