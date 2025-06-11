@@ -80,15 +80,20 @@ function Header() {
             <Link to="/" className="logo">
                 <img src="/logo.jpg" alt="ATLAS Logo" className="logo-img" />
             </Link>
-            <nav className="main-nav">
+            <button className={`hamburger-button ${isMenuOpen ? 'is-open' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav className="main-nav-desktop">
                 <Link to="/features">Features</Link>
                 <Link to="/about">About</Link>
                 <Link to="/contact">Contact</Link>
             </nav>
-            <div className="header-actions">
+            <div className="header-actions-desktop">
                 {user ? (
                     <>
-                        <span className="user-greeting">Hi, {user.first_name} {user.last_name}</span>
+                        <span className="user-greeting">Hi, {user.first_name}</span>
                         <button className="logout-button" onClick={handleLogout}>Sign Out</button>
                     </>
                 ) : (
@@ -98,6 +103,32 @@ function Header() {
                     </>
                 )}
             </div>
+            {isMenuOpen && (
+                <div className="mobile-menu">
+                    {user && (
+                        <div className="mobile-user-info">
+                            <span>Hi, {user.first_name} {user.last_name}</span>
+                        </div>
+                    )}
+
+                    <nav className="mobile-nav-links">
+                        <Link to="/features" onClick={closeMenu}>Features</Link>
+                        <Link to="/about" onClick={closeMenu}>About</Link>
+                        <Link to="/contact" onClick={closeMenu}>Contact</Link>
+                    </nav>
+
+                    <div className="mobile-auth-actions">
+                        {user ? (
+                            <button className="logout-button" onClick={() => { handleLogout(); closeMenu(); }}>Sign Out</button>
+                        ) : (
+                            <>
+                                <button className="login-button" onClick={() => { setShowLogin(true); closeMenu(); }}>Login</button>
+                                <button className="signup-button" onClick={() => { setShowSignup(true); closeMenu(); }}>Sign Up</button>
+                            </>
+                        )}
+                    </div>
+                </div>
+            )}
             {/* Login Modal */}
             {showLogin && (
                 <div className="modal-overlay">
