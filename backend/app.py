@@ -13,9 +13,12 @@ CORS(app, origins="*", supports_credentials=True)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "fallback-dev-secret")
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)
 
+@app.route('/testmerq')
+def testme():
+    return "This route works!"
+
 @app.route('/')
 def index():
-    print("Everything is working!")
     return "Backend server is running."
 
 @app.route('/api/signup', methods=['POST'])
