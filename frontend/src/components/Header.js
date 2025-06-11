@@ -169,7 +169,7 @@ function Header() {
                     <div className="mobile-menu">
                         {user && (
                             <div className="mobile-user-info">
-                                <span>Hi, {user.first_name} {user.last_name}</span>
+                                <span>Hi, {user.first_name} {user.last_name}!</span>
                             </div>
                         )}
 
