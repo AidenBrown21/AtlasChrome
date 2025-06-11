@@ -30,8 +30,14 @@ html {
 }
 
 .landing-header p {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: 300;
+}
+
+@media (min-width: 768px) {
+  .landing-header p {
+    font-size: 1.5rem;
+  }
 }
 
 .page-nav {

@@ -9,7 +9,7 @@ function AboutPage() {
             <div className="about-container">
                 <h1>About ATLAS</h1>
                 <p>
-                    ATLAS (RAHUL WAS HERE) is your digital map to online safety. In an age of rampant misinformation and sophisticated scams, ATLAS provides you with the tools to navigate the digital world with confidence.
+                    ATLAS is your digital map to online safety. In an age of rampant misinformation and sophisticated scams, ATLAS provides you with the tools to navigate the digital world with confidence.
                 </p>
                 <h2>Our Mission</h2>
                 <p>
