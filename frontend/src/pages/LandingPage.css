@@ -173,19 +173,7 @@ html {
     display: flex;
     height: 3rem;
     line-height: 3rem;
-}
-
-@media (min-width: 768px) {
-  .dynamic-text-container {
-    font-size: 2.5rem;
-    height: 4rem;
-    line-height: 4rem;
-  }
-
-  .animated-word-group {
-    height: 4rem;
-    line-height: 4rem;
-  }
+    animation: flip-words-mobile 8s forwards;
 }
 
 .animated-word-group > span:last-of-type {
@@ -203,4 +191,29 @@ html {
     68% { transform: translateY(-8rem); }
     75% { transform: translateY(-12rem); }
     100% { transform: translateY(-12rem); }
+}
+
+@keyframes flip-words-mobile {
+    0% { transform: translateY(0); }
+    18% { transform: translateY(0); }
+    25% { transform: translateY(-3rem); }
+    43% { transform: translateY(-3rem); }
+    50% { transform: translateY(-6rem); }
+    68% { transform: translateY(-6rem); }
+    75% { transform: translateY(-9rem); }
+    100% { transform: translateY(-9rem); }
+}
+
+@media (min-width: 768px) {
+  .dynamic-text-container {
+    font-size: 2.5rem;
+    height: 4rem;
+    line-height: 4rem;
+  }
+
+  .animated-word-group {
+    height: 4rem;
+    line-height: 4rem;
+    animation-name: flip-words;
+  }
 }
