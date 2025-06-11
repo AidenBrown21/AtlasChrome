@@ -4,6 +4,8 @@ import './FeaturesPage.css';
 function FeaturesPage() {
     return (
         <>
+            <title>Features - ATLAS Scam Protection</title>
+            <meta name="description" content="Explore the powerful text, voice, and image analysis tools provided by ATLAS to protect you from online scams and misinformation." />
             <div className="features-container">
                 <div className="features-hero">
                     <h1>Powerful Features</h1>

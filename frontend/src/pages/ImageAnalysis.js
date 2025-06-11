@@ -54,6 +54,8 @@ function ImageAnalysis() {
 
     return (
         <>
+            <title>Image Analysis Tool - ATLAS Scam Protection</title>
+            <meta name="description" content="Scan screenshots and images for scams. Our OCR technology extracts and analyzes text from any image to detect potential threats and red flags instantly." />
             <div className="image-analysis-container">
                 <h1>Image Analysis</h1>
                 <p className="description">

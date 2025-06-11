@@ -5,6 +5,8 @@ import './LandingPage.css';
 function LandingPage() {
     return (
         <>
+            <title>ATLAS | Your Digital Map to Online Safety</title>
+            <meta name="description" content="Protect yourself from online scams with ATLAS. Our free suite of analysis tools for text, voice, and images helps you identify threats and navigate the digital world safely." />
             <div className="landing-container">
                 <header className="landing-header">
                     <h1>ATLAS</h1>

@@ -4,6 +4,8 @@ import './ContactPage.css';
 function ContactPage() {
     return (
         <>
+            <title>Contact Us - ATLAS Scam Protection</title>
+            <meta name="description" content="Get in touch with the development team behind ATLAS. We welcome your feedback and questions about our online safety and scam analysis tools." />
             <div className="contact-container">
                 <h1>Contact Us</h1>
                 <div className="contact-columns">
