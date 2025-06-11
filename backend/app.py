@@ -26,6 +26,8 @@ def signup():
     ok, msg = create_user(data['first_name'], data['last_name'], data['username'], data['password'])
     if not ok:
         return jsonify({'error': msg}), 400
+    session['username'] = data['username']
+    session.permanent = True
     return jsonify({'message': msg})
 
 @app.route('/api/login', methods=['POST'])
