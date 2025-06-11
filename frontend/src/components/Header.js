@@ -126,7 +126,6 @@ function Header() {
     return (
         <>
         <header className={`app-header ${!isHomePage ? 'is-static' : ''}`}>
-            <header className="app-header">
                 <Link to="/" className="logo" onClick={() => { closeMenu(); setIsDropdownOpen(false); }}>
                     <img 
                         src={theme === 'light' ? '/logo.jpg' : '/logo_dark.png'} 
@@ -302,7 +301,6 @@ function Header() {
                     </div>
                 )}
             </header>
-        </header>
         <Notification 
             message={notification.message} 
             type={notification.type}
