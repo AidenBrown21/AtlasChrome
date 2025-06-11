@@ -12,22 +12,12 @@ function LandingPage() {
                     <h1>ATLAS</h1>
                     <p>YOUR DIGITAL MAP TO ONLINE SAFETY</p>
                     <div className="dynamic-text-container">
-                        <div className="animated-words">
-                            <div className="animated-word-group">
-                                <span className="static-text"><strong>PRESERVE</strong></span>
-                                <span><strong>WHAT'S REAL.</strong></span>
-                            </div>
-                            <div className="animated-word-group">
-                                <span className="static-text"><strong>PRESERVE</strong></span>
-                                <span><strong>THE FACTS.</strong></span>
-                            </div>
-                            <div className="animated-word-group">
-                                <span className="static-text"><strong>PRESERVE</strong></span>
-                                <span><strong>THE CERTAINTY.</strong></span>
-                            </div>
-                            <div className="animated-word-group">
-                                <span className="static-text"><strong>PRESERVE</strong></span>
-                                <span><strong>THE TRUTH.</strong></span>
+                        <div className="dynamic-words-wrapper">
+                            <div className="dynamic-words-list">
+                                <span><strong>PRESERVE WHAT'S REAL.</strong></span>
+                                <span><strong>PRESERVE THE FACTS.</strong></span>
+                                <span><strong>PRESERVE THE CERTAINTY.</strong></span>
+                                <span><strong>PRESERVE THE TRUTH.</strong></span>
                             </div>
                         </div>
                     </div>

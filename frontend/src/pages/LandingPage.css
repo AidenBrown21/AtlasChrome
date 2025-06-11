@@ -149,12 +149,25 @@ html {
 }
 
 .dynamic-text-container {
-    font-size: 1.7rem;
     font-weight: 700;
-    height: 3rem;
-    line-height: 3rem;
-    margin-top: 1rem;
+    font-size: 1.7rem;
+}
+
+.dynamic-words-wrapper {
     overflow: hidden;
+    height: 2.2rem;
+}
+
+.dynamic-words-list {
+    animation: scroll-words-mobile 8s forwards;
+}
+
+.dynamic-words-list span {
+    display: block;
+    color: #0b285e;
+    text-align: center;
+    height: 2.2rem;
+    line-height: 2.2rem;
 }
 
 .static-text {
@@ -182,38 +195,35 @@ html {
     -webkit-text-fill-color: transparent;
 }
 
-@keyframes flip-words {
-    0% { transform: translateY(0); }
-    18% { transform: translateY(0); }
-    25% { transform: translateY(-4rem); }
-    43% { transform: translateY(-4rem); }
-    50% { transform: translateY(-8rem); }
-    68% { transform: translateY(-8rem); }
-    75% { transform: translateY(-12rem); }
-    100% { transform: translateY(-12rem); }
+@keyframes scroll-words-mobile {
+    0%, 18% { transform: translateY(0); }
+    25%, 43% { transform: translateY(-2.2rem); }
+    50%, 68% { transform: translateY(-4.4rem); }
+    75%, 100% { transform: translateY(-6.6rem); }
 }
 
-@keyframes flip-words-mobile {
-    0% { transform: translateY(0); }
-    18% { transform: translateY(0); }
-    25% { transform: translateY(-3rem); }
-    43% { transform: translateY(-3rem); }
-    50% { transform: translateY(-6rem); }
-    68% { transform: translateY(-6rem); }
-    75% { transform: translateY(-9rem); }
-    100% { transform: translateY(-9rem); }
+@keyframes scroll-words-desktop {
+    0%, 18% { transform: translateY(0); }
+    25%, 43% { transform: translateY(-3rem); }
+    50%, 68% { transform: translateY(-6rem); }
+    75%, 100% { transform: translateY(-9rem); }
 }
 
 @media (min-width: 768px) {
-  .dynamic-text-container {
-    font-size: 2.5rem;
-    height: 4rem;
-    line-height: 4rem;
-  }
+    .dynamic-text-container {
+        font-size: 2.5rem;
+    }
 
-  .animated-word-group {
-    height: 4rem;
-    line-height: 4rem;
-    animation-name: flip-words;
-  }
+    .dynamic-words-wrapper {
+        height: 3rem;
+    }
+
+    .dynamic-words-list span {
+        height: 3rem;
+        line-height: 3rem;
+    }
+
+    .dynamic-words-list {
+        animation-name: scroll-words-desktop;
+    }
 }
