@@ -14,6 +14,7 @@ app.secret_key = os.environ.get("FLASK_SECRET_KEY", "fallback-dev-secret")
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)
 app.config['SESSION_COOKIE_SAMESITE'] = 'None'
 app.config['SESSION_COOKIE_SECURE'] = True
+app.config['SESSION_COOKIE_DOMAIN'] = 'https://atlas-backend-fkgye9e7b6dkf4cj.westus-01.azurewebsites.net/'
 
 @app.route('/')
 def index():
