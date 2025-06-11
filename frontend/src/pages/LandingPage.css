@@ -54,40 +54,58 @@ html {
 }
 
 .button-container {
-    display: flex;
-    gap: 1.5rem;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
 .action-button {
-    border-radius: 8px;
-    padding: 1.3rem 1.95rem;
-    font-size: 1.43rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid #d4d4d4;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
 }
 
 .action-button.primary {
-    background-color: #FFFFFF;
-    color: #0b285e;
-    border-color: #d4d4d4;
+  background-color: #FFFFFF;
+  color: #0b285e;
 }
 
 .action-button.primary:hover {
-    background-color: #f7f7f7;
-    border-color: #b0b0b0;
+  background-color: #f7f7f7;
+  border-color: #b0b0b0;
 }
 
 .action-button.secondary {
-    background-color: #FFFFFF;
-    color: #0b285e;
-    border-color: #d4d4d4;
+  background-color: #FFFFFF;
+  color: #0b285e;
 }
 
 .action-button.secondary:hover {
-    background-color: #f7f7f7;
-    border-color: #b0b0b0;
+  background-color: #f7f7f7;
+  border-color: #b0b0b0;
+}
+
+@media (min-width: 768px) {
+  .button-container {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .action-button {
+    width: auto;
+    padding: 1.3rem 1.95rem;
+    font-size: 1.43rem;
+  }
 }
 
 .selection-container {
