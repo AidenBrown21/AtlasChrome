@@ -29,6 +29,10 @@ function TextAnalysis() {
       <title>Text Analysis Tool - ATLAS Scam Protection</title>
       <meta name="description" content="Received a suspicious email or text message? Paste it into the ATLAS Text Analysis tool to instantly scan for phishing links, scam language, and other risks." /> 
       <div className="text-analysis-container">
+        <h1>Text Analysis</h1>
+        <p className="description">
+          Upload a screenshot or meme. We'll extract the text and analyze it for scams or fake news patterns.
+        </p>
         <main className="analysis-box">
           <textarea
             value={text}

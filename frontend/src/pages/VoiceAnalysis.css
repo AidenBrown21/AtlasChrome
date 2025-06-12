@@ -75,7 +75,7 @@
 }
 
 .analyze-button:hover:not(:disabled) {
-    opacity: 0.9;
+  opacity: 0.9;
 }
 
 .analyze-button:disabled {
