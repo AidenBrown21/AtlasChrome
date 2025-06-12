@@ -112,26 +112,26 @@
 }
 
 .mobile-menu-button {
-    display: block;
-    width: 100%;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    text-align: center;
-    text-decoration: none;
-    border: 1px solid #d4d4d4;
-    background-color: #fff;
-    color: #0b285e;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: none;
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
 }
 
 .mobile-menu-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background-color: var(--card-bg-hover);
+  border-color: var(--border-hover-color);
 }
 
 .mobile-login-signup-group .mobile-menu-button {
