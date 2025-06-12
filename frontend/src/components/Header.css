@@ -216,6 +216,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 1rem;
+    white-space: nowrap;
 }
 
 .login-button {
