@@ -69,14 +69,19 @@
   overflow: hidden;
 }
 
+/* In ContactPage.css */
+
 .photo-overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(11, 40, 94, 0.75);
-  color: #fff;
+  
+  /* Use your theme's primary button colors for the best contrast */
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,14 +92,16 @@
   font-weight: 600;
   padding: 1rem;
   font-size: 1rem;
+  box-sizing: border-box; /* Add for better padding calculation */
   pointer-events: none;
 }
 
+/* This rule is no longer needed as the variables handle it automatically */
 html[data-theme='dark'] .photo-overlay {
-  background-color: rgba(132, 169, 217, 0.85);
-  color: #000;
+  /* No overrides needed here anymore! */
 }
 
+/* This hover rule remains the same */
 .contact-photo-link:hover .photo-overlay {
   opacity: 1;
 }
