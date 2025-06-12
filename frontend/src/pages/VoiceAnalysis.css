@@ -163,12 +163,3 @@
 .result-container p strong {
     color: var(--text-color);
 }
-
-@media (min-width: 768px) {
-  .voice-analysis-container {
-    padding-top: 8rem;
-  }
-  .voice-analysis-container h1 {
-    font-size: 3rem;
-  }
-}

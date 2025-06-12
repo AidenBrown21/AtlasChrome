@@ -164,10 +164,6 @@ body {
 }
 
 @media (min-width: 768px) {
-  .text-analysis-container {
-    padding-top: 8rem;
-  }
-
   .info-section h2 {
     font-size: 2rem;
   }
