@@ -18,7 +18,7 @@ function ImageAnalysis() {
         } else {
             setError('Please select a valid image file');
             setFile(null);
-        }
+        }   
     };
 
     const handleSubmit = async (event) => {
