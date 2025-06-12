@@ -31,7 +31,7 @@ function TextAnalysis() {
       <div className="text-analysis-container">
         <h1>Text Analysis</h1>
         <p className="description">
-          Upload a screenshot or meme. We'll extract the text and analyze it for scams or fake news patterns.
+          Paste any suspicious text, from a questionable email to a weird text message. Our AI will instantly scan it for high-risk keywords, phishing language, and other red flags.
         </p>
         <main className="analysis-box">
           <textarea
