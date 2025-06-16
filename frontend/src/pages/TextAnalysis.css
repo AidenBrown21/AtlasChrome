@@ -57,6 +57,7 @@ body {
   color: var(--text-color);
   padding: 4rem 1rem 2rem 1rem;
   box-sizing: border-box;
+  min-height: 100vh;
 }
 
 .analysis-box {
