@@ -152,7 +152,7 @@ function Header() {
                                         <span>{user.username}</span>
                                     </div>
                                     <button className="logout-button" onClick={() => { handleLogout(); setIsDropdownOpen(false); }}>
-                                        Sign Out
+                                        <center>Sign Out</center>
                                     </button>
                                 </div>
                             )}
