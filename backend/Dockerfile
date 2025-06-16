@@ -15,4 +15,6 @@ COPY . /app/
 
 EXPOSE 5000
 
+ENV FLASK_SECRET_KEY=${FLASK_SECRET_KEY}
+
 CMD ["python", "app.py"]

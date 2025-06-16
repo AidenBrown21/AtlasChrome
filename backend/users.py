@@ -1,13 +1,22 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 import os
 
-MONGO_URI = os.environ.get('MONGO_URI')
-DATABASE_NAME = os.environ.get('DATABASE_NAME')
+MONGO_URI = str(os.environ.get('MONGO_URI'))
+DATABASE_NAME = str(os.environ.get('DATABASE_NAME'))
 
 client = MongoClient(MONGO_URI)
 db = client[DATABASE_NAME]
 users = db['user-data']
+
+def serialize_user(user_data):
+    if not user_data:
+        return None
+    if '_id' in user_data:
+        user_data['id'] = str(user_data.pop('_id'))
+    user_data.pop('password', None)
+    return user_data
 
 def create_user(first_name, last_name, username, password):
     if users.find_one({'username': username}):
@@ -28,10 +37,17 @@ def authenticate_user(username, password):
         return False, 'User not found.'
     if not check_password_hash(user['password'], password):
         return False, 'Incorrect password.'
-    return True, user
+    return True, serialize_user(user)
 
 def get_user_by_username(username):
     user = users.find_one({'username': username})
     if user:
         user.pop('password', None)
     return user 
+
+def get_user_by_id(user_id):
+    try:
+        user = users.find_one({'_id': ObjectId(user_id)})
+        return user
+    except:
+        return None

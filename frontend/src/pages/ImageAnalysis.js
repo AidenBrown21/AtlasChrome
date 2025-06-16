@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Header from '../components/Header';
 import './ImageAnalysis.css';
 import API_URL from '../apiConfig';
 
@@ -19,7 +18,7 @@ function ImageAnalysis() {
         } else {
             setError('Please select a valid image file');
             setFile(null);
-        }
+        }   
     };
 
     const handleSubmit = async (event) => {
@@ -55,7 +54,8 @@ function ImageAnalysis() {
 
     return (
         <>
-            <Header />
+            <title>Image Analysis Tool - ATLAS Scam Protection</title>
+            <meta name="description" content="Scan screenshots and images for scams. Our OCR technology extracts and analyzes text from any image to detect potential threats and red flags instantly." />
             <div className="image-analysis-container">
                 <h1>Image Analysis</h1>
                 <p className="description">

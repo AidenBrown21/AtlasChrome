@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Header from '../components/Header';
 import './VoiceAnalysis.css';
 import API_URL from '../apiConfig';
 
@@ -73,7 +72,8 @@ function VoiceAnalysis() {
 
     return (
         <>
-            <Header />
+            <title>Voice & Audio Analysis Tool - ATLAS Scam Protection</title>
+            <meta name="description" content="Analyze suspicious voicemails and audio files (MP3, WAV, M4A). ATLAS transcribes the audio and scans the text for potential scam patterns and keywords." />
             <div className="voice-analysis-container">
                 <h1>Voice Analysis</h1>
                 <p className="description">

@@ -1,14 +1,14 @@
 import React from 'react';
-import Header from '../components/Header';
 import './FeaturesPage.css';
 
 function FeaturesPage() {
     return (
         <>
-            <Header />
+            <title>Features - ATLAS Scam Protection</title>
+            <meta name="description" content="Explore the powerful text, voice, and image analysis tools provided by ATLAS to protect you from online scams and misinformation." />
             <div className="features-container">
                 <div className="features-hero">
-                    <h1>Powerful Tools for Your Digital Safety</h1>
+                    <h1>Powerful Features</h1>
                     <p className="features-subtitle">ATLAS provides a suite of analysis tools to protect you from online scams and misinformation. Here's how we keep you safe.</p>
                 </div>
 

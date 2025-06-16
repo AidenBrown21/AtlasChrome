@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Header from '../components/Header';
 import './TextAnalysis.css';
 import API_URL from '../apiConfig';
 
@@ -27,8 +26,13 @@ function TextAnalysis() {
 
   return (
     <>
-      <Header />
+      <title>Text Analysis Tool - ATLAS Scam Protection</title>
+      <meta name="description" content="Received a suspicious email or text message? Paste it into the ATLAS Text Analysis tool to instantly scan for phishing links, scam language, and other risks." /> 
       <div className="text-analysis-container">
+        <h1>Text Analysis</h1>
+        <p className="description">
+          Paste any suspicious text, from a questionable email to a weird text message. Our AI will instantly scan it for high-risk keywords, phishing language, and other red flags.
+        </p>
         <main className="analysis-box">
           <textarea
             value={text}
