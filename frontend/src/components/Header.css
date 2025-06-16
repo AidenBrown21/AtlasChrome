@@ -145,12 +145,13 @@
 }
 
 .mobile-menu .logout-button {
-    width: 90%;
-    max-width: 400px;
-    background-color: #e74c3c;
-    color: #fff;
-    border-color: #e74c3c;
-    text-align: center;
+  width: 100%; 
+  margin-left: 0;
+  margin-right: 0;
+  text-align: center;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
 }
 
 .main-nav-desktop,
@@ -331,15 +332,12 @@
   background-color: var(--card-bg-hover);
 }
 
-/* === Final, Themed Modal Styles === */
-
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  /* Use a semi-transparent version of the text color for the overlay */
   background: hsla(from var(--text-color) h s l / 0.3);
   display: flex;
   align-items: center;
@@ -392,7 +390,6 @@
   border-color: var(--text-color);
 }
 
-/* Style for the main submit button inside the modal */
 .modal .analyze-button {
   background-color: var(--button-primary-bg);
   color: var(--button-primary-text);
@@ -408,8 +405,6 @@
   opacity: 0.9;
 }
 
-
-/* New styles for the Show/Hide password button */
 .toggle-password-btn {
   position: absolute;
   right: 10px;
@@ -427,8 +422,6 @@
   color: var(--text-color);
 }
 
-
-/* Styles for the "Close" button at the bottom of the modal */
 .modal-close {
   margin-top: 1.5rem;
   background: none;
@@ -443,8 +436,6 @@
   color: var(--text-color);
 }
 
-
-/* Responsive styles for the modal on very small screens */
 @media (max-width: 400px) {
   .modal {
     min-width: 0;
