@@ -331,75 +331,126 @@
   background-color: var(--card-bg-hover);
 }
 
+/* === Final, Themed Modal Styles === */
+
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* Use a semi-transparent version of the text color for the overlay */
+  background: hsla(from var(--text-color) h s l / 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
 }
 
 .modal {
-    background: #fff;
-    border-radius: 16px;
-    padding: 2.5rem 1.5rem 2rem 1.5rem;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-    min-width: 380px;
-    max-width: 380px;
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  background: var(--card-bg-color);
+  color: var(--text-color);
+  border-radius: 16px;
+  padding: 2.5rem 1.5rem 2rem 1.5rem;
+  box-shadow: 0 8px 32px var(--shadow-color);
+  min-width: 380px;
+  max-width: 380px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--border-color);
 }
 
 .modal h2 {
-    margin-bottom: 1.5rem;
-    color: #0b285e;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
 }
 
 .modal form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .modal input {
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
-    border: 1px solid #d4d4d4;
-    font-size: 1rem;
-    width: 100%;
-    box-sizing: border-box;
-    background: #fafbfc;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--background-color);
+  color: var(--text-color);
 }
 
-@media (max-width: 250px) {
-    .modal {
-        min-width: 0;
-        padding: 1.2rem 0.5rem 1.2rem 0.5rem;
-    }
+.modal input:focus {
+  outline: none;
+  border-color: var(--text-color);
 }
 
+/* Style for the main submit button inside the modal */
+.modal .analyze-button {
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+.modal .analyze-button:hover {
+  opacity: 0.9;
+}
+
+
+/* New styles for the Show/Hide password button */
+.toggle-password-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--subtle-text-color);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem;
+}
+.toggle-password-btn:hover {
+  color: var(--text-color);
+}
+
+
+/* Styles for the "Close" button at the bottom of the modal */
 .modal-close {
-    margin-top: 1.5rem;
-    background: none;
-    border: none;
-    color: #0b285e;
-    font-size: 1rem;
-    cursor: pointer;
-    font-weight: 600;
+  margin-top: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--subtle-text-color);
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 .modal-close:hover {
-    color: #1a3f85;
+  color: var(--text-color);
+}
+
+
+/* Responsive styles for the modal on very small screens */
+@media (max-width: 400px) {
+  .modal {
+    min-width: 0;
+    width: 95%;
+    padding: 1.5rem 1rem 1.5rem 1rem;
+  }
 }
 
 .theme-toggle-button {

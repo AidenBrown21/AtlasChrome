@@ -230,7 +230,6 @@ function Header() {
                                         className="toggle-password-btn"
                                         onClick={() => setShowLoginPassword(v => !v)}
                                         tabIndex={-1}
-                                        style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#0b285e', cursor: 'pointer', fontSize: '0.95rem' }}
                                     >
                                         {showLoginPassword ? 'Hide' : 'Show'}
                                     </button>
@@ -283,7 +282,6 @@ function Header() {
                                         className="toggle-password-btn"
                                         onClick={() => setShowSignupPassword(v => !v)}
                                         tabIndex={-1}
-                                        style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#0b285e', cursor: 'pointer', fontSize: '0.95rem' }}
                                     >
                                         {showSignupPassword ? 'Hide' : 'Show'}
                                     </button>
