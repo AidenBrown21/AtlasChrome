@@ -31,7 +31,9 @@ function TextAnalysis() {
       <div className="text-analysis-container">
         <h1>Text Analysis</h1>
         <p className="description">
-          Paste any suspicious text, from a questionable email to a weird text message. Our AI will instantly scan it for high-risk keywords, phishing language, and other red flags.
+          Paste any suspicious text, from a questionable email to a weird text message. Our AI instantly cross-references it against a vast database of known online scams, analyzing the content for phishing language and other red flags.
+
+          You'll receive a clear risk score from 0 to 10—the higher the score, the more likely it is a scam.
         </p>
         <main className="analysis-box">
           <textarea
