@@ -34,7 +34,7 @@ function FeaturesPage() {
                     <div className="feature-card">
                         <div className="feature-icon">📊</div>
                         <h3>Intelligent Scam Scoring</h3>
-                        <p>Don't guess—get a clear, data-driven rating. Every analysis provides a score indicating how likely the content is a scam, along with a simple explanation. This helps you make quick, informed decisions without needing to be a security expert.</p>
+                        <p>Don't guess—get a clear, data-driven rating. Every analysis provides a clear risk score from 0 to 10, indicating how likely the content is a scam, along with a simple explanation. This helps you make quick, informed decisions without needing to be a security expert.</p>
                     </div>
                 </div>
 
