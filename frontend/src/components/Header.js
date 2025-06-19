@@ -52,10 +52,29 @@ function Header() {
     };
 
     useEffect(() => {
-        fetch(`${REACT_APP_API_URL}/api/me`, { credentials: 'include' })
-            .then(res => res.json())
-            .then(data => setUser(data.user));
-    }, []);
+        const token = localStorage.getItem('authToken');
+
+        if (token) {
+            fetch(`${REACT_APP_API_URL}/api/me`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(res => {
+                if (!res.ok) {
+                    localStorage.removeItem('authToken');
+                    return Promise.reject('Invalid token');
+                }
+                return res.json();
+            })
+            .then(data => {
+                if (data.user) {
+                    setUser(data.user);
+                }
+            })
+            .catch(err => console.error("Session check failed:", err));
+        }
+    }, [])
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -64,17 +83,19 @@ function Header() {
             const res = await fetch(`${REACT_APP_API_URL}/api/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
                 body: JSON.stringify(loginForm),
             });
             const data = await res.json();
             if (!res.ok) throw new Error(data.error || 'Login failed');
+            localStorage.setItem('authToken', data.token);
+
             setUser(data.user);
             setShowLogin(false);
             setLoginForm({ username: '', password: '' });
-            showNotification('Login Successful!');
+            showNotification('Login Successful!', 'success');
         } catch (err) {
             showNotification(err.message, 'error');
+            localStorage.removeItem('authToken');
         }
     };
 
@@ -104,10 +125,11 @@ function Header() {
     };
 
     const handleLogout = async () => {
+        localStorage.removeItem('authToken');
         await fetch(`${REACT_APP_API_URL}/api/logout`, {
             method: 'POST',
-            credentials: 'include',
         });
+        
         setUser(null);
         showNotification('You have been signed out.', 'info');
     };
