@@ -36,20 +36,24 @@ def signup():
 @app.route('/api/login', methods=['POST'])
 def login():
     data = request.get_json()
-    if not data or 'username' not in data or 'password' not in data:
-        return jsonify({'error': 'Missing username or password'}), 400
-    ok, user = authenticate_user(data['username'], data['password'])
-    if not ok:
-        return jsonify({'error': user['id']}), 401
-    token = jwt.encode(
-    {
-        'user_id': user['id'],
-        'exp': datetime.now(timezone.utc) + timedelta(days=30)
-    },
-    app.secret_key,
-    algorithm="HS256"
-    )
-    return jsonify({'user': user, 'token': token})
+    username = data.get('username')
+    password = data.get('password')
+    authenticated, user_data = authenticate_user(username, password)
+    if authenticated:
+        try:
+            token = jwt.encode(
+                {
+                    'user_id': user_data['id'],
+                    'exp': datetime.now(timezone.utc) + app.config['PERMANENT_SESSION_LIFETIME']
+                },
+                app.secret_key,
+                algorithm="HS256"
+            )
+            return jsonify({'user': user_data, 'token': token})
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+    else:
+        return jsonify({'error': user_data}), 401
 
 @app.route('/api/me')
 def me():
