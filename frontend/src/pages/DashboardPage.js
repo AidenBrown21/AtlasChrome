@@ -1,7 +1,6 @@
 // src/pages/DashboardPage.js
 
 import React, { useState } from 'react';
-import Header from '../components/Header';
 import './DashboardPage.css';
 // import API_URL from '../apiConfig';
 // import { useAuth } from '../context/AuthContext';
@@ -34,9 +33,7 @@ function DashboardPage() {
         <>
             <title>Dashboard - ATLAS Protection</title>
             <meta name="description" content="View your ATLAS dashboard for analysis history and statistics." />
-            
-            <Header />
-
+        
             <div className="dashboard-container">
                 <h1>Dashboard</h1>
                 <div className="dashboard-grid">
