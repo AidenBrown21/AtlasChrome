@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
-import { useTheme } from '../context/ThemeContext';
+import { useAppContext } from '../context/AppContext';
 // import API_URL from '../apiConfig';
 import REACT_APP_API_URL from '../apiConfig';
 import Notification from './Notification/Notification';
@@ -18,8 +18,7 @@ function Header() {
     const [showSignupPassword, setShowSignupPassword] = useState(false);
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { theme, toggleTheme } = useTheme();
-    const [notification, setNotification] = useState({ message: '', type: 'info', visible: false });
+    const { theme, toggleTheme, showNotification } = useAppContext();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const location = useLocation();
     const isHomePage = location.pathname === '/';
@@ -46,10 +45,6 @@ function Header() {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [dropdownRef]);
-
-    const showNotification = (message, type = 'info') => {
-        setNotification({ message, type, visible: true });
-    };
 
     useEffect(() => {
         const token = localStorage.getItem('authToken');

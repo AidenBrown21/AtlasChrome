@@ -136,5 +136,24 @@ def image_analyze():
         print(f"[ERROR] {e}")
         return jsonify({'error': str(e)}), 500
 
+pending_scams_collection = db['pending_scams']
+
+@app.route('/api/submit-scam', methods=['POST'])
+def submit_scam():
+    data = request.get_json()
+    scam_text = data.get('text')
+
+    if not scam_text or len(scam_text) < 50:
+        return jsonify({'error': 'Submission text is too short.'}), 400
+
+    submission = {
+        'text': scam_text,
+        'submitted_on': datetime.now(timezone.utc),
+        'status': 'pending'
+    }
+    pending_scams_collection.insert_one(submission)
+
+    return jsonify({'message': 'Submission received. Thank you for your contribution!'}), 201
+
 if __name__ == '__main__':
     app.run(debug=True, port=int(os.environ.get('PORT', 5000)), host="0.0.0.0")
