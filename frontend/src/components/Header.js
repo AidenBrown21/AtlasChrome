@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 import { useAppContext } from '../context/AppContext';
-// import API_URL from '../apiConfig';
 import REACT_APP_API_URL from '../apiConfig';
 import Notification from './Notification/Notification';
 
@@ -18,21 +17,12 @@ function Header() {
     const [showSignupPassword, setShowSignupPassword] = useState(false);
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { theme, toggleTheme, showNotification } = useAppContext();
+    const { theme, toggleTheme, notification, showNotification } = useAppContext();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const location = useLocation();
     const isHomePage = location.pathname === '/';
 
     const dropdownRef = useRef(null);
-
-    useEffect(() => {
-        if (notification.visible) {
-            const timer = setTimeout(() => {
-                setNotification(prev => ({ ...prev, visible: false }));
-            }, 3000);
-            return () => clearTimeout(timer);
-        }
-    }, [notification.visible]);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -45,6 +35,23 @@ function Header() {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [dropdownRef]);
+
+    useEffect(() => {
+        const token = localStorage.getItem('authToken');
+        if (token) {
+            fetch(`${REACT_APP_API_URL}/api/me`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            })
+            .then(res => res.ok ? res.json() : Promise.reject('Invalid token'))
+            .then(data => {
+                if (data.user) setUser(data.user);
+            })
+            .catch(err => {
+                console.error("Session check failed:", err);
+                localStorage.removeItem('authToken');
+            });
+        }
+    }, []);
 
     useEffect(() => {
         const token = localStorage.getItem('authToken');
@@ -106,7 +113,6 @@ function Header() {
             });
             const data = await res.json();
             if (!res.ok) throw new Error(data.error || 'Sign up failed');
-            // Auto-login after signup
             await handleLogin({
                 preventDefault: () => {},
                 target: { value: '' },
@@ -223,6 +229,13 @@ function Header() {
                         </div>
                     </div>
                 )}
+                
+                <Notification 
+                message={notification.message} 
+                type={notification.type}
+                visible={notification.visible} 
+                />
+
                 {/* Login Modal */}
                 {showLogin && (
                     <div className="modal-overlay">
