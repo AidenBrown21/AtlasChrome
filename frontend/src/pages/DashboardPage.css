@@ -20,7 +20,6 @@
   max-width: 1200px;
   display: grid;
   gap: 1.5rem;
-  /* Default to a single column on mobile */
   grid-template-columns: 1fr;
 }
 
@@ -32,7 +31,111 @@
   min-height: 200px;
 }
 
-/* Desktop layout for the grid */
+.placeholder-text {
+  color: var(--subtle-text-color);
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.dashboard-card.submit-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.dashboard-card.submit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+.submission-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: hsla(from var(--text-color) h s l / 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+}
+
+.submission-modal {
+  background: var(--card-bg-color);
+  color: var(--text-color);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px var(--shadow-color);
+  max-width: 600px;
+  width: 90%;
+  box-sizing: border-box;
+  border: 1px solid var(--border-color);
+}
+
+.submission-modal h2 {
+  margin-top: 0;
+}
+
+.submission-modal .modal-description {
+  color: var(--subtle-text-color);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.submission-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.submission-modal textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 1rem;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+  box-sizing: border-box;
+  background: var(--background-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.submission-modal .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.submission-modal .button-primary,
+.submission-modal .button-secondary {
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.submission-modal .button-primary {
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
+}
+
+.submission-modal .button-secondary {
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.submission-modal .button-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 @media (min-width: 768px) {
   .dashboard-container {
     padding-top: 8rem;
@@ -41,11 +144,10 @@
     font-size: 3rem;
   }
   .dashboard-grid {
-    /* Create a more interesting grid on desktop */
     grid-template-columns: repeat(3, 1fr);
   }
   .dashboard-card.tall-card {
-    grid-row: span 2 / span 2; /* Make the first card taller */
+    grid-row: span 2 / span 2;
     min-height: 423px;
   }
 }
