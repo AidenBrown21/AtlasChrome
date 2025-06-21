@@ -7,6 +7,7 @@ from users import create_user, authenticate_user, get_user_by_username, get_user
 import os
 from datetime import timedelta, datetime, timezone
 import jwt
+from database import db
 
 
 app = Flask(__name__)

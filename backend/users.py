@@ -1,13 +1,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
-from pymongo import MongoClient
+from database import db
 from bson.objectid import ObjectId
-import os
 
-MONGO_URI = str(os.environ.get('MONGO_URI'))
-DATABASE_NAME = str(os.environ.get('DATABASE_NAME'))
-
-client = MongoClient(MONGO_URI)
-db = client[DATABASE_NAME]
 users = db['user-data']
 
 def serialize_user(user_data):
