@@ -466,3 +466,19 @@
   transform: scale(1.1) rotate(-15deg);
 }
 
+.profile-dropdown .dropdown-link {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-color);
+  cursor: pointer;
+}
+.profile-dropdown .dropdown-link:hover {
+  background-color: var(--card-bg-hover);
+}

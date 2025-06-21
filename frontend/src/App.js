@@ -7,6 +7,7 @@ import ImageAnalysis from './pages/ImageAnalysis';
 import AboutPage from './pages/AboutPage';
 import FeaturesPage from './pages/FeaturesPage';
 import ContactPage from './pages/ContactPage';
+import DashboardPage from './pages/DashboardPage'
 import './App.css';
 import Header from './components/Header'
 
@@ -24,6 +25,7 @@ function App() {
                         <Route path="/about" element={<AboutPage />} />
                         <Route path="/features" element={<FeaturesPage />} />
                         <Route path="/contact" element={<ContactPage />} />
+                        <Route path="/dashboard" element={<DashboardPage />} />
                     </Routes>
                 </main>
             </div>

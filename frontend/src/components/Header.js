@@ -173,6 +173,9 @@ function Header() {
                                         <strong>{user.first_name} {user.last_name}</strong>
                                         <span>{user.username}</span>
                                     </div>
+                                    <Link to="/dashboard" className="dropdown-link" onClick={() => setIsDropdownOpen(false)}>
+                                        Dashboard
+                                    </Link>
                                     <button className="logout-button" onClick={() => { handleLogout(); setIsDropdownOpen(false); }}>
                                         <center>Sign Out</center>
                                     </button>
@@ -203,7 +206,7 @@ function Header() {
                     <div className="mobile-menu">
                         {user && (
                             <div className="mobile-user-info">
-                                <span>Hi, {user.first_name} {user.last_name}!</span>
+                                <Link to="/dashboard" className="mobile-menu-button" onClick={closeMenu}>Dashboard</Link>
                             </div>
                         )}
 
