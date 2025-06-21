@@ -1,7 +1,6 @@
 // src/pages/DashboardPage.js
 
 import React from 'react';
-import Header from '../components/Header';
 import './DashboardPage.css';
 
 function DashboardPage() {
