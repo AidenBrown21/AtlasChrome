@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, session
+from flask import Flask, request, jsonify, session, make_response
 from flask_cors import CORS
 from text_analysis import analyze_text
 from voice_analysis import transcribe_audio, analyze_audio
@@ -13,6 +13,9 @@ from functools import wraps
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
+        if request.method == 'OPTIONS':
+            return make_response("OK", 200)
+
         token = None
         if 'Authorization' in request.headers:
             token = request.headers['Authorization'].split(' ')[1]
@@ -25,7 +28,7 @@ def token_required(f):
             current_user = get_user_by_id(data['user_id'])
             if not current_user:
                  return jsonify({'error': 'User not found'}), 401
-        except Exception as e:
+        except:
             return jsonify({'error': 'Token is invalid or expired!'}), 401
         
         return f(current_user, *args, **kwargs)
