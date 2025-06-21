@@ -8,7 +8,28 @@ import os
 from datetime import timedelta, datetime, timezone
 import jwt
 from database import db
+from functools import wraps
 
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = None
+        if 'Authorization' in request.headers:
+            token = request.headers['Authorization'].split(' ')[1]
+        
+        if not token:
+            return jsonify({'error': 'Authentication Token is missing!'}), 401
+
+        try:
+            data = jwt.decode(token, app.secret_key, algorithms=["HS256"])
+            current_user = get_user_by_id(data['user_id'])
+            if not current_user:
+                 return jsonify({'error': 'User not found'}), 401
+        except Exception as e:
+            return jsonify({'error': 'Token is invalid or expired!'}), 401
+        
+        return f(current_user, *args, **kwargs)
+    return decorated
 
 app = Flask(__name__)
 CORS(app, origins=["https://www.atlasprotection.live"], supports_credentials=True)
@@ -140,21 +161,24 @@ def image_analyze():
 pending_scams_collection = db['pending_scams']
 
 @app.route('/api/submit-scam', methods=['POST'])
-def submit_scam():
+@token_required
+def submit_scam(current_user):
     data = request.get_json()
     scam_text = data.get('text')
 
     if not scam_text or len(scam_text) < 50:
         return jsonify({'error': 'Submission text is too short.'}), 400
-
+    
     submission = {
         'text': scam_text,
+        'submitted_by_id': current_user['_id'],
         'submitted_on': datetime.now(timezone.utc),
-        'status': 'pending'
+        'status': 'pending' 
     }
     pending_scams_collection.insert_one(submission)
 
     return jsonify({'message': 'Submission received. Thank you for your contribution!'}), 201
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=int(os.environ.get('PORT', 5000)), host="0.0.0.0")

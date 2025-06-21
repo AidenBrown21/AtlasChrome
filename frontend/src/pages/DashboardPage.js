@@ -22,17 +22,28 @@ function DashboardPage() {
     const handleModalSubmit = async (event) => {
         event.preventDefault();
         setIsSubmitting(true);
-        
+
+        const token = localStorage.getItem('authToken');
+
+        if (!token) {
+            showNotification('You must be logged in to submit.', 'error');
+            setIsSubmitting(false);
+            return;
+        }
+
         try {
             const response = await fetch(`${API_URL}/api/submit-scam`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify({ text: scamText })
             });
 
+            const data = await response.json();
             if (!response.ok) {
-                const errData = await response.json();
-                throw new Error(errData.error || 'Submission failed');
+                throw new Error(data.error || 'Submission failed');
             }
 
             showNotification('Submission successful. Thank you!', 'success');
