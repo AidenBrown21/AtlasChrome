@@ -138,7 +138,7 @@
 
 @media (min-width: 768px) {
   .dashboard-container {
-    padding-top: 8rem;
+    padding: 4rem 2rem 2rem 2rem;
   }
   .dashboard-container h1 {
     font-size: 3rem;
