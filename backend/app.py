@@ -3,12 +3,13 @@ from flask_cors import CORS
 from text_analysis import analyze_text
 from voice_analysis import transcribe_audio, analyze_audio
 from image_analysis import analyze_image
-from users import create_user, authenticate_user, get_user_by_username, get_user_by_id, serialize_user
+from users import create_user, authenticate_user, get_user_by_id, serialize_user
 import os
 from datetime import timedelta, datetime, timezone
 import jwt
 from database import db
 from functools import wraps
+from bson.objectid import ObjectId
 
 def token_required(f):
     @wraps(f)
@@ -33,6 +34,32 @@ def token_required(f):
         
         return f(current_user, *args, **kwargs)
     return decorated
+
+def admin_required(f):
+    @wraps(f)
+    def decorated_admin(*args, **kwargs):
+        token = None
+        if 'Authorization' in request.headers:
+            token = request.headers['Authorization'].split(' ')[1]
+        
+        if not token:
+            return jsonify({'error': 'Authentication Token is missing!'}), 401
+
+        try:
+            data = jwt.decode(token, app.secret_key, algorithms=["HS256"])
+            current_user = get_user_by_id(data['user_id'])
+            
+            if not current_user:
+                return jsonify({'error': 'User not found'}), 401
+            
+            if current_user.get('role') != 'admin':
+                return jsonify({'error': 'Admin privileges required!'}), 403
+
+        except:
+            return jsonify({'error': 'Token is invalid or expired!'}), 401
+        
+        return f(current_user, *args, **kwargs)
+    return decorated_admin
 
 app = Flask(__name__)
 CORS(app, origins=["https://www.atlasprotection.live"], supports_credentials=True)
@@ -162,6 +189,56 @@ def image_analyze():
         return jsonify({'error': str(e)}), 500
 
 pending_scams_collection = db['pending_scams']
+approved_scams_collection = db['approved_scams'] 
+
+@app.route('/api/admin/pending-submissions', methods=['GET'])
+@admin_required
+def get_pending_submissions(current_user):
+    try:
+        pending = list(pending_scams_collection.find({'status': 'pending'}))
+
+        for submission in pending:
+            submission['_id'] = str(submission['_id'])
+            if 'submitted_by_id' in submission:
+                submission['submitted_by_id'] = str(submission['submitted_by_id'])
+
+        return jsonify(pending)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/admin/submission/<submission_id>/approve', methods=['POST'])
+@admin_required
+def approve_submission(current_user, submission_id):
+    try:
+        submission = pending_scams_collection.find_one({'_id': ObjectId(submission_id)})
+        
+        if not submission:
+            return jsonify({'error': 'Submission not found'}), 404
+        
+        approved_scams_collection.insert_one({
+            'text': submission['text'],
+            'approved_by': current_user['_id'],
+            'approved_on': datetime.now(timezone.utc)
+        })
+        
+        pending_scams_collection.delete_one({'_id': ObjectId(submission_id)})
+        
+        return jsonify({'message': 'Submission approved successfully'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/admin/submission/<submission_id>/reject', methods=['POST'])
+@admin_required
+def reject_submission(current_user, submission_id):
+    try:
+        result = pending_scams_collection.delete_one({'_id': ObjectId(submission_id)})
+        
+        if result.deleted_count == 0:
+            return jsonify({'error': 'Submission not found'}), 404
+            
+        return jsonify({'message': 'Submission rejected successfully'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/submit-scam', methods=['POST'])
 @token_required
