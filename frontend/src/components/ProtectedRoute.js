@@ -1,20 +1,15 @@
 // src/components/ProtectedRoute.js
 
 import React from 'react';
+// 👇 This line imports both Navigate and Outlet
 import { Navigate, Outlet } from 'react-router-dom';
 
 const ProtectedRoute = () => {
-    // Check for the authentication token in localStorage
     const token = localStorage.getItem('authToken');
 
-    // If the token exists, allow access to the page.
-    // The <Outlet /> component is a placeholder for whatever page we are protecting.
-    if (token) {
-        return <Outlet />;
-    }
-
-    // If no token exists, redirect the user to the homepage.
-    return <Navigate to="/" replace />;
+    // If a token exists, show the requested page (the Outlet).
+    // If not, redirect to the homepage.
+    return token ? <Outlet /> : <Navigate to="/" replace />;
 };
 
 export default ProtectedRoute;
