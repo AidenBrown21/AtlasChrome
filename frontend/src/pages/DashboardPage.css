@@ -217,3 +217,16 @@
   box-shadow: 0 8px 20px var(--shadow-color);
   opacity: 0.9;
 }
+
+.log-text-snippet {
+    color: var(--text-color);
+    font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.log-meta {
+    font-size: 0.85rem;
+    color: var(--subtle-text-color);
+}

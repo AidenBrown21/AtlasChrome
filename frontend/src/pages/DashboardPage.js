@@ -17,26 +17,22 @@ const useAuth = () => {
     }
 };
 
-const ActivityItem = ({ item, isAdmin }) => {
-    const isScam = isAdmin ? false : item.result_score > 4.0;
-    const itemDate = new Date(isAdmin ? item.approved_on : item.created_at).toLocaleDateString();
+const LogItem = ({ item, isAdmin }) => {
+    const logDate = new Date(item.approved_on).toLocaleDateString();
 
     return (
         <div className="activity-item">
+            <span className="activity-icon">
+                {isAdmin ? '✅' : '📤'}
+            </span>
             <div className="activity-details">
+                <span className="log-text-snippet">"{item.text.substring(0, 50)}..."</span>
                 {isAdmin ? (
-                    <>
-                        <strong>ID: {item.id}</strong>
-                        <span>Submitted by: {item.submitted_by}</span>
-                    </>
+                    <span className="log-meta">You approved this on {logDate}</span>
                 ) : (
-                    <>
-                        <strong>{item.analysis_type.charAt(0).toUpperCase() + item.analysis_type.slice(1)} Analysis</strong>
-                        <span className={`activity-result ${isScam ? 'scam' : 'legit'}`}>{isScam ? 'Scam Detected' : 'Seemed Legit'}</span>
-                    </>
+                    <span className="log-meta">You submitted this (approved on {logDate})</span>
                 )}
             </div>
-            <span className="activity-date">{itemDate}</span>
         </div>
     );
 };
@@ -47,36 +43,36 @@ function DashboardPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [logData, setLogData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+
     const { showNotification } = useAppContext();
     const { user } = useAuth(); 
+    const isAdmin = user && user.role === 'admin';
 
     useEffect(() => {
         const fetchData = async () => {
             const token = localStorage.getItem('authToken');
-            if (!token || !user) {
+            if (!token) {
                 setIsLoading(false);
                 return;
             }
-
-            const isAdmin = user.role === 'admin';
-            const endpoint = isAdmin ? '/api/admin/approval-log' : '/api/me/activity';
             
             try {
-                const response = await fetch(`${API_URL}${endpoint}`, {
+                const response = await fetch(`${API_URL}/api/dashboard/log`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-                if (!response.ok) throw new Error('Failed to fetch data.');
+                if (!response.ok) throw new Error('Failed to fetch log data.');
                 const data = await response.json();
                 setLogData(data);
             } catch (error) {
                 console.error(error);
+                showNotification(error.message, 'error');
             } finally {
                 setIsLoading(false);
             }
         };
 
         fetchData();
-    }, [user]);
+    }, [showNotification]);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => {
@@ -122,8 +118,6 @@ function DashboardPage() {
         }
     };
 
-    const isAdmin = user && user.role === 'admin';
-
     return (
         <>
             <title>Dashboard - ATLAS Protection</title>
@@ -133,29 +127,29 @@ function DashboardPage() {
                 <h1>Dashboard</h1>
                 <div className="dashboard-grid">
                     <div className="dashboard-card tall-card">
-                        <h3>{isAdmin ? 'Approval Log' : 'Recent Activity'}</h3>
+                        <h3>{isAdmin ? 'Your Approval History' : 'Your Submission History'}</h3>
                         {isLoading ? (
-                            <p className="placeholder-text">Loading data...</p>
+                            <p className="placeholder-text">Loading history...</p>
                         ) : logData.length > 0 ? (
                             <div className="activity-list">
                                 {logData.map(item => (
-                                    <ActivityItem key={item.id || item._id} item={item} isAdmin={isAdmin} />
+                                    <LogItem key={item._id} item={item} isAdmin={isAdmin} />
                                 ))}
                             </div>
                         ) : (
-                            <p className="placeholder-text">{isAdmin ? 'No approved items to show.' : 'Your recent analyses will appear here.'}</p>
+                            <p className="placeholder-text">{isAdmin ? 'Your approved items will appear here.' : 'Your submitted items will appear here after they are approved.'}</p>
                         )}
                     </div>
 
-                    {user && user.role === 'admin' ? (
+                    {isAdmin ? (
                         <Link to="/admin" className="dashboard-card admin-card">
                             <h3>Review Submissions</h3>
-                            <p className="placeholder-text">Approve or reject user-submitted scam examples.</p>
+                            <p className="placeholder-text">Approve or reject new user-submitted scam examples.</p>
                         </Link>
                     ) : (
                         <div className="dashboard-card">
                             <h3>Statistics</h3>
-                            <p className="placeholder-text">Usage stats will be shown here.</p>
+                            <p className="placeholder-text">Your usage stats will be shown here.</p>
                         </div>
                     )}
 

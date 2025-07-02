@@ -277,5 +277,31 @@ def submit_scam(current_user):
     return jsonify({'message': 'Submission received. Thank you for your contribution!'}), 201
 
 
+@app.route('/api/dashboard/log')
+@token_required
+def get_dashboard_log(current_user):
+    try:
+        username = current_user.get('username')
+        user_role = current_user.get('role')
+
+        query_filter = {}
+        if user_role == 'admin':
+            query_filter = {'approved_user': username}
+
+        else:
+            query_filter = {'submitted_user': username}
+
+        log_entries = list(blame_map_collection.find(query_filter).sort('approved_on', -1).limit(5))
+
+        result_list = []
+        for entry in log_entries:
+            entry['_id'] = str(entry['_id'])
+            entry['approved_on'] = entry['approved_on'].isoformat()
+            result_list.append(entry)
+
+        return jsonify(result_list)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 if __name__ == '__main__':
     app.run(debug=True, port=int(os.environ.get('PORT', 5000)), host="0.0.0.0")
