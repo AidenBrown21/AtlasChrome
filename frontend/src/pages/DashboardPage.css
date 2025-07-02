@@ -230,3 +230,23 @@
     font-size: 0.85rem;
     color: var(--subtle-text-color);
 }
+
+.activity-details, .log-text {
+  flex-grow: 1;
+  overflow: hidden; 
+  min-width: 0;
+}
+
+.log-text-snippet {
+  color: var(--text-color);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  display: block;
+}
+
+.log-text {
+  color: var(--subtle-text-color);
+  word-break: break-all;
+}
