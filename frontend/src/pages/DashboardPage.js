@@ -17,29 +17,58 @@ const useAuth = () => {
     }
 };
 
+const ActivityItem = ({ item, isAdmin }) => {
+    const isScam = isAdmin ? false : item.result_score > 4.0;
+    const itemDate = new Date(isAdmin ? item.approved_on : item.created_at).toLocaleDateString();
+
+    return (
+        <div className="activity-item">
+            <div className="activity-details">
+                {isAdmin ? (
+                    <>
+                        <strong>ID: {item.id}</strong>
+                        <span>Submitted by: {item.submitted_by}</span>
+                    </>
+                ) : (
+                    <>
+                        <strong>{item.analysis_type.charAt(0).toUpperCase() + item.analysis_type.slice(1)} Analysis</strong>
+                        <span className={`activity-result ${isScam ? 'scam' : 'legit'}`}>{isScam ? 'Scam Detected' : 'Seemed Legit'}</span>
+                    </>
+                )}
+            </div>
+            <span className="activity-date">{itemDate}</span>
+        </div>
+    );
+};
+
 function DashboardPage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [scamText, setScamText] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [logData, setLogData] = useState([]);
     const [activities, setActivities] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const { showNotification } = useAppContext();
     const { user } = useAuth(); 
 
     useEffect(() => {
-        const fetchActivities = async () => {
+        const fetchData = async () => {
             const token = localStorage.getItem('authToken');
-            if (!token) {
+            if (!token || !user) {
                 setIsLoading(false);
                 return;
             }
+
+            const isAdmin = user.role === 'admin';
+            const endpoint = isAdmin ? '/api/admin/approval-log' : '/api/me/activity';
+            
             try {
-                const response = await fetch(`${API_URL}/api/me/activity`, {
+                const response = await fetch(`${API_URL}${endpoint}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-                if (!response.ok) throw new Error('Failed to fetch activities');
+                if (!response.ok) throw new Error('Failed to fetch data.');
                 const data = await response.json();
-                setActivities(data);
+                setLogData(data);
             } catch (error) {
                 console.error(error);
             } finally {
@@ -47,8 +76,8 @@ function DashboardPage() {
             }
         };
 
-        fetchActivities();
-    }, []);
+        fetchData();
+    }, [user]);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => {
@@ -94,6 +123,8 @@ function DashboardPage() {
         }
     };
 
+    const isAdmin = user && user.role === 'admin';
+
     return (
         <>
             <title>Dashboard - ATLAS Protection</title>
@@ -103,18 +134,20 @@ function DashboardPage() {
                 <h1>Dashboard</h1>
                 <div className="dashboard-grid">
                     <div className="dashboard-card tall-card">
-                        <h3>Recent Activity</h3>
+                        <h3>{isAdmin ? 'Approval Log' : 'Recent Activity'}</h3>
                         {isLoading ? (
-                            <p className="placeholder-text">Loading activities...</p>
-                        ) : activities.length > 0 ? (
+                            <p className="placeholder-text">Loading data...</p>
+                        ) : logData.length > 0 ? (
                             <div className="activity-list">
-                                {/* ... your activity mapping ... */}
+                                {logData.map(item => (
+                                    <ActivityItem key={item.id || item._id} item={item} isAdmin={isAdmin} />
+                                ))}
                             </div>
                         ) : (
-                            <p className="placeholder-text">Your recent analysis results will appear here.</p>
+                            <p className="placeholder-text">{isAdmin ? 'No approved items to show.' : 'Your recent analyses will appear here.'}</p>
                         )}
                     </div>
-                    
+
                     {user && user.role === 'admin' ? (
                         <Link to="/admin" className="dashboard-card admin-card">
                             <h3>Review Submissions</h3>
