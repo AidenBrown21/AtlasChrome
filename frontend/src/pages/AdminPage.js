@@ -45,10 +45,11 @@ function AdminPage() {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await response.json();
-            if (!response.ok) throw new Error(data.error);
+            if (!response.ok) throw new Error(data.error || `Failed to ${action} submission.`);
             
-            showNotification(`Submission ${action}d successfully!`, 'success');
-            // Remove the submission from the list in the UI without a page refresh
+            const pastTenseAction = action === 'approve' ? 'approved' : 'rejected';
+            showNotification(`Submission ${pastTenseAction} successfully!`, 'success');
+            
             setSubmissions(prev => prev.filter(sub => sub._id !== submissionId));
         } catch (err) {
             showNotification(err.message, 'error');
