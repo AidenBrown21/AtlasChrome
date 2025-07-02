@@ -1,16 +1,54 @@
-// src/pages/DashboardPage.js
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import './DashboardPage.css';
 import API_URL from '../apiConfig';
+import { jwtDecode } from 'jwt-decode';
+
+const useAuth = () => {
+    const token = localStorage.getItem('authToken');
+    if (!token) return { user: null };
+
+    try {
+        const decoded = jwtDecode(token);
+        return { user: decoded };
+    } catch (e) {
+        return { user: null };
+    }
+};
 
 function DashboardPage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [scamText, setScamText] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
-    
+    const [activities, setActivities] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const { showNotification } = useAppContext();
+    const { user } = useAuth(); 
+
+    useEffect(() => {
+        const fetchActivities = async () => {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                setIsLoading(false);
+                return;
+            }
+            try {
+                const response = await fetch(`${API_URL}/api/me/activity`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!response.ok) throw new Error('Failed to fetch activities');
+                const data = await response.json();
+                setActivities(data);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchActivities();
+    }, []);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => {
@@ -66,12 +104,28 @@ function DashboardPage() {
                 <div className="dashboard-grid">
                     <div className="dashboard-card tall-card">
                         <h3>Recent Activity</h3>
-                        <p className="placeholder-text">Your recent analysis results will appear here.</p>
+                        {isLoading ? (
+                            <p className="placeholder-text">Loading activities...</p>
+                        ) : activities.length > 0 ? (
+                            <div className="activity-list">
+                                {/* ... your activity mapping ... */}
+                            </div>
+                        ) : (
+                            <p className="placeholder-text">Your recent analysis results will appear here.</p>
+                        )}
                     </div>
-                    <div className="dashboard-card">
-                        <h3>Statistics</h3>
-                        <p className="placeholder-text">Usage stats will be shown here.</p>
-                    </div>
+                    
+                    {user && user.role === 'admin' ? (
+                        <Link to="/admin" className="dashboard-card admin-card">
+                            <h3>Review Submissions</h3>
+                            <p className="placeholder-text">Approve or reject user-submitted scam examples.</p>
+                        </Link>
+                    ) : (
+                        <div className="dashboard-card">
+                            <h3>Statistics</h3>
+                            <p className="placeholder-text">Usage stats will be shown here.</p>
+                        </div>
+                    )}
 
                     <div className="dashboard-card submit-card" onClick={openModal}>
                         <h3>Submit New Scam</h3>

@@ -151,3 +151,25 @@
     min-height: 423px;
   }
 }
+
+.dashboard-card.admin-card {
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.dashboard-card.admin-card h3 {
+  color: var(--button-primary-text);
+}
+
+.dashboard-card.admin-card .placeholder-text {
+  color: hsla(from var(--button-primary-text) h s l / 0.8);
+}
+
+.dashboard-card.admin-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px var(--shadow-color);
+  opacity: 0.9;
+}
