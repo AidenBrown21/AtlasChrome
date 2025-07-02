@@ -20,7 +20,8 @@ def create_user(first_name, last_name, username, password):
         'first_name': first_name,
         'last_name': last_name,
         'username': username,
-        'password': hashed
+        'password': hashed,
+        'role': 'user'
     }
     users.insert_one(user)
     return True, 'User created.'
