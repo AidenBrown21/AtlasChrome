@@ -49,7 +49,7 @@ function AdminPage() {
             
             const pastTenseAction = action === 'approve' ? 'approved' : 'rejected';
             showNotification(`Submission ${pastTenseAction} successfully!`, 'success');
-            
+
             setSubmissions(prev => prev.filter(sub => sub._id !== submissionId));
         } catch (err) {
             showNotification(err.message, 'error');
@@ -63,7 +63,7 @@ function AdminPage() {
         <>
             <title>Admin Dashboard - ATLAS</title>
             <div className="admin-container">
-                <h1>Pending Submissions ({submissions.length})</h1>
+                <h1>Pending Submissions</h1>
                 <p className="admin-description">Review user-submitted scam messages. Approving adds them to the main dataset for model retraining. Rejecting deletes them permanently.</p>
 
                 {isLoading && <p>Loading submissions...</p>}
