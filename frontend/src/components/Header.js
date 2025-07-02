@@ -177,6 +177,11 @@ function Header() {
                                     <Link to="/dashboard" className="dropdown-link" onClick={() => setIsDropdownOpen(false)}>
                                         Dashboard
                                     </Link>
+                                    {user && user.role === 'admin' && (
+                                        <Link to="/admin" className="dropdown-link" onClick={() => setIsDropdownOpen(false)}>
+                                            Admin Panel
+                                        </Link>
+                                    )}
                                     <button className="logout-button" onClick={() => { handleLogout(); setIsDropdownOpen(false); }}>
                                         <center>Sign Out</center>
                                     </button>
@@ -208,6 +213,9 @@ function Header() {
                         {user && (
                             <div className="mobile-user-info">
                                 <Link to="/dashboard" className="mobile-menu-button" onClick={closeMenu}>Dashboard</Link>
+                                {user.role === 'admin' && (
+                                    <Link to="/admin" className="mobile-menu-button" onClick={closeMenu}>Admin Panel</Link>
+                                )}
                             </div>
                         )}
 
