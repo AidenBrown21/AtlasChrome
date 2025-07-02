@@ -42,6 +42,7 @@ function DashboardPage() {
     const [scamText, setScamText] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [logData, setLogData] = useState([]);
+    const [stats, setStats] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
     const { showNotification } = useAppContext();
@@ -57,12 +58,19 @@ function DashboardPage() {
             }
             
             try {
-                const response = await fetch(`${API_URL}/api/dashboard/log`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                if (!response.ok) throw new Error('Failed to fetch log data.');
-                const data = await response.json();
-                setLogData(data);
+                const [logRes, statsRes] = await Promise.all([
+                    fetch(`${API_URL}/api/dashboard/log`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                    fetch(`${API_URL}/api/me/stats`, { headers: { 'Authorization': `Bearer ${token}` } })
+                ]);
+
+                if (!logRes.ok) throw new Error('Failed to fetch log data.');
+                if (!statsRes.ok) throw new Error('Failed to fetch stats.');
+                
+                const logData = await logRes.json();
+                const statsData = await statsRes.json();
+
+                setLogData(logData);
+                setStats(statsData);
             } catch (error) {
                 console.error(error);
                 showNotification(error.message, 'error');
@@ -71,8 +79,10 @@ function DashboardPage() {
             }
         };
 
-        fetchData();
-    }, [showNotification]);
+        if (user) {
+            fetchData();
+        }
+    }, [user, showNotification]);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => {
@@ -149,7 +159,26 @@ function DashboardPage() {
                     ) : (
                         <div className="dashboard-card">
                             <h3>Statistics</h3>
-                            <p className="placeholder-text">Your usage stats will be shown here.</p>
+                            {isLoading ? (
+                                <p className="placeholder-text">Loading stats...</p>
+                            ) : stats ? (
+                                <div className="stats-grid">
+                                    <div className="stat-item">
+                                        <span className="stat-value">{stats.total_analyses}</span>
+                                        <span className="stat-label">Analyses Ran</span>
+                                    </div>
+                                    <div className="stat-item">
+                                        <span className="stat-value">{stats.scams_detected}</span>
+                                        <span className="stat-label">Scams Detected</span>
+                                    </div>
+                                    <div className="stat-item">
+                                        <span className="stat-value">{stats.community_submissions}</span>
+                                        <span className="stat-label">Submissions Approved</span>
+                                    </div>
+                                </div>
+                            ) : (
+                                <p className="placeholder-text">No stats to show yet.</p>
+                            )}
                         </div>
                     )}
 

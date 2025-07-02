@@ -61,6 +61,24 @@ def admin_required(f):
         return f(current_user, *args, **kwargs)
     return decorated_admin
 
+def token_optional(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = None
+        current_user = None
+        if 'Authorization' in request.headers and request.headers['Authorization'].startswith('Bearer '):
+            token = request.headers['Authorization'].split(' ')[1]
+
+        if token:
+            try:
+                data = jwt.decode(token, app.secret_key, algorithms=["HS256"])
+                current_user = get_user_by_id(data['user_id'])
+            except:
+                current_user = None
+
+        return f(current_user, *args, **kwargs)
+    return decorated
+
 app = Flask(__name__)
 CORS(app, origins=["https://www.atlasprotection.live"], supports_credentials=True)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "fallback-dev-secret")
@@ -71,6 +89,8 @@ app.config['SESSION_COOKIE_SECURE'] = True
 @app.route('/')
 def index():
     return "Backend server is running."
+
+analysis_collection = db['analyses']
 
 @app.route('/api/signup', methods=['POST'])
 def signup():
@@ -125,17 +145,25 @@ def me():
         return jsonify({'error': 'Invalid token'}), 401
 
 @app.route('/api/analyze', methods=['POST'])
-def analyze():
+@token_optional
+def analyze(current_user):
     try:
         data = request.get_json()
         if not data or 'text' not in data:
             return jsonify({'error': 'No text provided'}), 400
 
         result = analyze_text(data['text'])
-        return jsonify(result)
 
+        if current_user:
+            analysis_collection.insert_one({
+                'user_id': current_user['_id'],
+                'analysis_type': 'text',
+                'result_score': result.get('score', 0),
+                'is_scam': result.get('is_scam', False),
+                'created_at': datetime.now(timezone.utc)
+            })
+        return jsonify(result)
     except Exception as e:
-        print(f"[ERROR] {e}")
         return jsonify({'error': 'Server error'}), 500
 
 @app.route('/api/transcribe', methods=['POST'])
@@ -156,34 +184,49 @@ def transcribe():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/analyze-audio', methods=['POST'])
-def analyze_audio_endpoint():
+@token_optional
+def analyze_audio_endpoint(current_user):
     try:
         if 'audio' not in request.files:
             return jsonify({'error': 'No audio file provided'}), 400
-
         audio_file = request.files['audio']
-        if not audio_file.filename:
-            return jsonify({'error': 'No audio file selected'}), 400
+        if not audio_file.filename: return jsonify({'error': 'No audio file selected'}), 400
 
         result = analyze_audio(audio_file)
-        return jsonify(result)
 
+        if current_user:
+            analysis_collection.insert_one({
+                'user_id': current_user['_id'],
+                'analysis_type': 'voice',
+                'result_score': result.get('score', 0),
+                'is_scam': result.get('is_scam', False),
+                'created_at': datetime.now(timezone.utc)
+            })
+        return jsonify(result)
     except Exception as e:
-        print(f"[ERROR] {e}")
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/image-analyze', methods=['POST'])
-def image_analyze():
+@token_optional
+def image_analyze(current_user):
     try:
         if 'image' not in request.files:
             return jsonify({'error': 'No image file provided'}), 400
         image_file = request.files['image']
-        if not image_file.filename:
-            return jsonify({'error': 'No image file selected'}), 400
+        if not image_file.filename: return jsonify({'error': 'No image file selected'}), 400
+
         text, analysis = analyze_image(image_file)
+
+        if current_user:
+            analysis_collection.insert_one({
+                'user_id': current_user['_id'],
+                'analysis_type': 'image',
+                'result_score': analysis.get('score', 0),
+                'is_scam': analysis.get('is_scam', False),
+                'created_at': datetime.now(timezone.utc)
+            })
         return jsonify({'text': text, 'analysis': analysis})
     except Exception as e:
-        print(f"[ERROR] {e}")
         return jsonify({'error': str(e)}), 500
 
 pending_scams_collection = db['pending_scams']
@@ -300,6 +343,28 @@ def get_dashboard_log(current_user):
             result_list.append(entry)
 
         return jsonify(result_list)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/me/stats')
+@token_required
+def get_user_stats(current_user):
+    try:
+        user_id = current_user.get('_id')
+        username = current_user.get('username')
+
+        total_analyses = analysis_collection.count_documents({'user_id': user_id})
+
+        scams_detected = analysis_collection.count_documents({'user_id': user_id, 'is_scam': True})
+
+        community_submissions = blame_map_collection.count_documents({'submitted_user': username})
+
+        stats = {
+            'total_analyses': total_analyses,
+            'scams_detected': scams_detected,
+            'community_submissions': community_submissions
+        }
+        return jsonify(stats)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
