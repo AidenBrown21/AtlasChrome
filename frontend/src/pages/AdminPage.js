@@ -11,31 +11,31 @@ function AdminPage() {
     const [error, setError] = useState(null);
     const { showNotification } = useAppContext(); // Get the notification function
 
-    // Function to fetch pending submissions from the backend
-    const fetchSubmissions = async () => {
-        setIsLoading(true);
-        const token = localStorage.getItem('authToken');
-        try {
-            const response = await fetch(`${API_URL}/api/admin/pending-submissions`, {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            if (!response.ok) {
-                throw new Error('Could not fetch submissions. Are you logged in as an admin?');
-            }
-            const data = await response.json();
-            setSubmissions(data);
-        } catch (err) {
-            setError(err.message);
-            showNotification(err.message, 'error');
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    // useEffect to run fetchSubmissions when the page first loads
     useEffect(() => {
+        // The function is now defined inside the effect
+        const fetchSubmissions = async () => {
+            setIsLoading(true);
+            setError(null);
+            const token = localStorage.getItem('authToken');
+            try {
+                const response = await fetch(`${API_URL}/api/admin/pending-submissions`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!response.ok) {
+                    throw new Error('Could not fetch submissions. Are you an admin?');
+                }
+                const data = await response.json();
+                setSubmissions(data);
+            } catch (err) {
+                setError(err.message);
+                showNotification(err.message, 'error');
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
         fetchSubmissions();
-    }, []);
+    }, [showNotification]);
 
     const handleAction = async (submissionId, action) => {
         const token = localStorage.getItem('authToken');
