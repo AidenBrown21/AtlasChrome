@@ -81,8 +81,8 @@ function AdminPage() {
                                     <span>Submitted on: {new Date(submission.submitted_on).toLocaleDateString()}</span>
                                 </div>
                                 <div className="submission-actions">
-                                    <button className="approve-btn" onClick={() => handleApprove(submission._id)}>✔️</button>
-                                    <button className="reject-btn" onClick={() => handleReject(submission._id)}>❌</button>
+                                    <button className="approve-btn" onClick={() => handleApprove(submission._id)}>Approve</button>
+                                    <button className="reject-btn" onClick={() => handleReject(submission._id)}>Reject</button>
                                 </div>
                             </div>
                             <div className="submission-text">
