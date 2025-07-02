@@ -92,18 +92,16 @@ def login():
     password = data.get('password')
     authenticated, user_data = authenticate_user(username, password)
     if authenticated:
-        try:
-            token = jwt.encode(
-                {
-                    'user_id': user_data['id'],
-                    'exp': datetime.now(timezone.utc) + app.config['PERMANENT_SESSION_LIFETIME']
-                },
-                app.secret_key,
-                algorithm="HS256"
-            )
-            return jsonify({'user': user_data, 'token': token})
-        except Exception as e:
-            return jsonify({'error': str(e)}), 500
+        token = jwt.encode(
+            {
+                'user_id': user_data['id'],
+                'role': user_data.get('role', 'user'), # NEW: Add the user's role
+                'exp': datetime.now(timezone.utc) + app.config['PERMANENT_SESSION_LIFETIME']
+            },
+            app.secret_key,
+            algorithm="HS256"
+        )
+        return jsonify({'user': user_data, 'token': token})
     else:
         return jsonify({'error': user_data}), 401
 

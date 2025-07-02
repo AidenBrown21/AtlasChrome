@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import AdminRoute from './components/AdminRoute';
 import ProtectedRoute from './components/ProtectedRoute';
 import LandingPage from './pages/LandingPage';
 import TextAnalysis from './pages/TextAnalysis';
@@ -28,6 +29,9 @@ function App() {
                         <Route path="/contact" element={<ContactPage />} />
                         <Route element={<ProtectedRoute />}>
                             <Route path="/dashboard" element={<DashboardPage />} />
+                        </Route>
+                        <Route element={<AdminRoute />}>
+                            <Route path="/admin" element={<AdminPage />} />
                         </Route>
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
