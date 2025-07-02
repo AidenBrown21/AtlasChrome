@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Header.css';
 import { useAppContext } from '../context/AppContext';
 import REACT_APP_API_URL from '../apiConfig';
 import Notification from './Notification/Notification';
 
 function Header() {
+    const navigate = useNavigate();
     const [showLogin, setShowLogin] = useState(false);
     const [showSignup, setShowSignup] = useState(false);
     const [user, setUser] = useState(null);
@@ -133,6 +134,8 @@ function Header() {
         
         setUser(null);
         showNotification('You have been signed out.', 'info');
+        setIsDropdownOpen(false);
+        navigate('/');
     };
 
     const closeMenu = () => {
