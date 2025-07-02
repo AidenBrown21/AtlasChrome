@@ -204,6 +204,7 @@ def get_pending_submissions(current_user):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+text_training_collection = db['text'] 
 @app.route('/api/admin/submission/<submission_id>/approve', methods=['POST'])
 @admin_required
 def approve_submission(current_user, submission_id):
@@ -213,12 +214,12 @@ def approve_submission(current_user, submission_id):
         if not submission:
             return jsonify({'error': 'Submission not found'}), 404
         
-        approved_scams_collection.insert_one({
-            'text': submission['text'],
-            'approved_by': current_user['_id'],
-            'approved_on': datetime.now(timezone.utc)
-        })
+        new_training_document = {
+            'label': 'spam',
+            'text': submission['text']
+        }
         
+        text_training_collection.insert_one(new_training_document)
         pending_scams_collection.delete_one({'_id': ObjectId(submission_id)})
         
         return jsonify({'message': 'Submission approved successfully'})
