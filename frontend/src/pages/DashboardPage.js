@@ -46,7 +46,6 @@ function DashboardPage() {
     const [scamText, setScamText] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [logData, setLogData] = useState([]);
-    const [activities, setActivities] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const { showNotification } = useAppContext();
     const { user } = useAuth(); 
