@@ -98,3 +98,9 @@
     font-size: 3rem;
   }
 }
+
+@media (max-width: 480px) {
+  .submission-actions {
+    justify-content: center;
+  }
+}
