@@ -5,7 +5,7 @@ function AboutPage() {
     return (
         <>
             <title>About ATLAS - Our Mission for Online Safety</title>
-            <meta name="description" content="Learn about ATLAS, the powerful scam protection tool designed to keep you safe online. Discover our mission to fight misinformation and empower users." />
+            <meta name="description" content="Learn about ATLAS, the powerful scam protection tool designed to keep you safe online. Discover our mission to fight misinformation and promote digital safety." />
             <div className="about-container">
                 <h1>About ATLAS</h1>
                 <p>
