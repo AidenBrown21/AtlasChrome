@@ -205,6 +205,7 @@ def get_pending_submissions(current_user):
         return jsonify({'error': str(e)}), 500
 
 text_training_collection = db['text'] 
+blame_map_collection = db['blame_map']
 @app.route('/api/admin/submission/<submission_id>/approve', methods=['POST'])
 @admin_required
 def approve_submission(current_user, submission_id):
@@ -220,6 +221,23 @@ def approve_submission(current_user, submission_id):
         }
         
         text_training_collection.insert_one(new_training_document)
+
+        submitter_username = "Unknown"
+        if submission.get('submitted_by_id'):
+            submitter = get_user_by_id(submission['submitted_by_id'])
+            if submitter:
+                submitter_username = submitter.get('username')
+
+
+        blame_map_entry = {
+            'approved_user': current_user.get('username'),
+            'submitted_user': submitter_username,
+            'text': submission['text'],
+            'approved_on': datetime.now(timezone.utc)
+        }
+
+        blame_map_collection.insert_one(blame_map_entry)
+
         pending_scams_collection.delete_one({'_id': ObjectId(submission_id)})
         
         return jsonify({'message': 'Submission approved successfully'})
