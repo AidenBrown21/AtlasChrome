@@ -7,10 +7,11 @@ The primary goal is to create a reliable tool that can help users identify and p
 
 ## ✨ Features
 
-- 🔐 **User Account Management**: Allows for users to create accounts and help fine-tune the model.
+- 🔐 **NEW: User Account Management**: Allows for users to create accounts and help fine-tune the model.
 - 📝 **Text Analysis**: Detect scams and fake news in articles, emails, and messages.
 - 🎙️ **Voice Analysis**: Analyze audio for signs of scams (e.g., voice phishing).
 - 🖼️ **Image Analysis**: Detect manipulated images and visual misinformation.
+- 👌 **NEW: Smart Training System**: Enables users to upload scams for admins to approve, allowing for a continously learning model.
 
 ## 📚 Sources
 * [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/dataset/228/sms+spam+collection)
