@@ -1,7 +1,6 @@
 // src/pages/AdminPage.js
 
 import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
 import { useAppContext } from '../context/AppContext'; // Import the context hook for notifications
 import './AdminPage.css';
 import API_URL from '../apiConfig';

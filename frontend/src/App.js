@@ -10,6 +10,7 @@ import AboutPage from './pages/AboutPage';
 import FeaturesPage from './pages/FeaturesPage';
 import ContactPage from './pages/ContactPage';
 import DashboardPage from './pages/DashboardPage'
+import AdminPage from './pages/AdminPage';
 import './App.css';
 import Header from './components/Header'
 
