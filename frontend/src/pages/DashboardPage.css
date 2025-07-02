@@ -270,4 +270,11 @@
     text-align: right;
     opacity: 0.8;
   }
+
+  .log-text-snippet {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    word-break: break-word;
+  }
 }
