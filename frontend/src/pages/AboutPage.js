@@ -9,15 +9,15 @@ function AboutPage() {
             <div className="about-container">
                 <h1>About ATLAS</h1>
                 <p>
-                    ATLAS is your digital map to online safety. In an age of rampant misinformation and sophisticated scams, ATLAS provides you with the tools to navigate the digital world with confidence.
+                    ATLAS is your digital map to online safety. In the current age of widespread misinformation and advanced scams, ATLAS provides you with tools to help navigate the digital world with confidence.
                 </p>
                 <h2>Our Mission</h2>
                 <p>
-                    Our mission is to empower users to detect, verify, and understand scams and fake news. We believe that with the right tools, everyone can protect themselves from digital threats. We analyze text, voice, and images to identify potential risks and provide clear explanations, helping you make informed decisions.
+                    Our mission is to provide users smart tools to detect, verify, and understand scams and fake news. We believe that with the right tools and explanations, everyone can protect themselves from digital threats. ATLAS can analyze either text, audio, or image data and identify potential risks and provide clear explanations, helping you make informed decisions.
                 </p>
                 <h2>How It Works</h2>
                 <p>
-                    Using state-of-the-art AI and machine learning models, ATLAS examines the content you provide for common patterns and indicators of scams. Whether it's a suspicious email, a strange voice message, or a questionable image, our platform gives you a real-time analysis to keep you safe.
+                    Using constantly-improving AI and machine learning models, ATLAS examines the content you provide for common patterns and indicators of scams. Whether it's  a strange email, an odd voice message, or a questionable image, our platform can scan through various forms of media to form an analysis to keep you safe.
                 </p>
             </div>
         </>
