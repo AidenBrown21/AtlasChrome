@@ -59,7 +59,7 @@ function ImageAnalysis() {
             <div className="image-analysis-container">
                 <h1>Image Analysis</h1>
                 <p className="description">
-                    Upload a screenshot or meme. We'll extract the text and analyze it for scams or fake news patterns.
+                    Upload a screenshot or meme. We'll extract the text and analyze it for scams or malicious patterns.
                 </p>
                 <form onSubmit={handleSubmit} className="upload-form">
                     <div className="file-upload-container">

@@ -1,11 +1,9 @@
 .features-container {
   max-width: 1200px;
   margin: 0 auto;
-  color: var(--text-color);
+  color: #0b285e;
 
   padding: 4rem 0 4rem 0;
-  min-height: 100vh;
-  box-sizing: border-box;
 }
 
 .features-hero {
@@ -104,7 +102,7 @@
 
 @media (min-width: 1024px) {
   .features-container {
-    padding: 8rem 2rem 4rem 2rem;
+    padding: 4rem 2rem 4rem 2rem;
   }
 
   .features-hero h1 {
