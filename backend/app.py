@@ -115,7 +115,7 @@ def login():
         token = jwt.encode(
             {
                 'user_id': user_data['id'],
-                'role': user_data.get('role', 'user'), # NEW: Add the user's role
+                'role': user_data.get('role', 'user'),
                 'exp': datetime.now(timezone.utc) + app.config['PERMANENT_SESSION_LIFETIME']
             },
             app.secret_key,
