@@ -1,7 +1,5 @@
-// src/pages/AdminPage.js
-
 import React, { useState, useEffect } from 'react';
-import { useAppContext } from '../context/AppContext'; // Import the context hook for notifications
+import { useAppContext } from '../context/AppContext';
 import './AdminPage.css';
 import API_URL from '../apiConfig';
 
@@ -9,10 +7,9 @@ function AdminPage() {
     const [submissions, setSubmissions] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { showNotification } = useAppContext(); // Get the notification function
+    const { showNotification } = useAppContext();
 
     useEffect(() => {
-        // The function is now defined inside the effect
         const fetchSubmissions = async () => {
             setIsLoading(true);
             setError(null);
