@@ -46,17 +46,18 @@
 .feature-card {
   padding: 2.5rem 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  border-top: 4px solid #0b285e;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 4px solid var(--text-color);
   background-color: var(--card-bg-color);
   width: 280px;
   flex-shrink: 0;
+  cursor: pointer;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .feature-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px var(--shadow-color);
 }
 
 .feature-icon {
