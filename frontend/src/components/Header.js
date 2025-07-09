@@ -221,8 +221,8 @@ function Header() {
                         )}
                     </div>
 
-                    <Link to="/features" className="nav-link">Features</Link>
-                    <Link to="/about" className="nav-link">About</Link>
+                    <Link to="/features" className="nav-link">What's New</Link>
+                    <Link to="/about" className="nav-link">Our Vision</Link>
                 </nav>
                 <div className="header-actions-desktop">
                     {user ? (
