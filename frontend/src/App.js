@@ -7,10 +7,9 @@ import TextAnalysis from './pages/TextAnalysis';
 import VoiceAnalysis from './pages/VoiceAnalysis';
 import ImageAnalysis from './pages/ImageAnalysis';
 import VisionPage from './pages/VisionPage';
-import FeaturesPage from './pages/FeaturesPage';
-import ContactPage from './pages/ContactPage';
 import DashboardPage from './pages/DashboardPage'
 import AdminPage from './pages/AdminPage';
+import WhatsNewPage from './pages/WhatsNewPage';
 import './App.css';
 import Header from './components/Header'
 
@@ -26,8 +25,7 @@ function App() {
                         <Route path="/voice" element={<VoiceAnalysis />} />
                         <Route path="/image" element={<ImageAnalysis />} />
                         <Route path="/vision" element={<VisionPage />} />
-                        <Route path="/features" element={<FeaturesPage />} />
-                        <Route path="/contact" element={<ContactPage />} />
+                        <Route path="/whats-new" element={<WhatsNewPage />} />
                         <Route element={<ProtectedRoute />}>
                             <Route path="/dashboard" element={<DashboardPage />} />
                         </Route>
