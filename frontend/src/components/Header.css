@@ -514,7 +514,7 @@
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 0.75rem;
+  padding-top: 10px;
   background-color: var(--card-bg-color);
   border: 1px solid var(--border-color);
   border-radius: 8px;

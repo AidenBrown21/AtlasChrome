@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import './LandingPage.css';
 
 function LandingPage() {
@@ -36,15 +36,7 @@ function LandingPage() {
                 </header>
                 <main className="selection-container">
                     <div className="button-container">
-                        <Link to="/text" className="action-button primary">
-                            Text Analysis
-                        </Link>
-                        <Link to="/voice" className="action-button secondary">
-                            Voice Analysis
-                        </Link>
-                        <Link to="/image" className="action-button secondary">
-                            Image Analysis
-                        </Link>
+
                     </div>
                 </main>
             </div>
