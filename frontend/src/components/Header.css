@@ -219,6 +219,7 @@
     transition: all 0.3s ease;
     font-size: 1rem;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .login-button {
@@ -486,6 +487,7 @@
 
 .nav-item.dropdown {
   position: relative;
+  cursor: pointer;
 }
 
 .nav-link {
@@ -493,7 +495,7 @@
   text-decoration: none;
   font-weight: 500;
   transition: opacity 0.2s ease;
-  cursor: default;
+  cursor: pointer;
   font-size: 1.1rem;
   padding: 1rem 0.75rem;
   display: inline-flex;
@@ -534,6 +536,7 @@
   display: block;
   font-weight: 500;
   font-size: 1rem;
+  cursor: pointer;
 }
 .dropdown-item:hover {
   background-color: var(--card-bg-hover);
