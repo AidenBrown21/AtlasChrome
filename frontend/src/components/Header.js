@@ -21,6 +21,9 @@ function Header() {
     const { theme, toggleTheme, notification, showNotification } = useAppContext();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
+    const [isOnlineServicesOpen, setIsOnlineServicesOpen] = useState(false);
+    const [isDesktopAppsOpen, setIsDesktopAppsOpen] = useState(false);
+    const [isMobileAppsOpen, setIsMobileAppsOpen] = useState(false);
     const location = useLocation();
     const isHomePage = location.pathname === '/';
 
@@ -161,7 +164,7 @@ function Header() {
                     />
                 </Link>
                 <nav className="main-nav-desktop">
-                    <Link to="/">Home</Link>
+                    <Link to="/" className="nav-link">Home</Link>
 
                     <div 
                         className="nav-item dropdown" 
@@ -171,14 +174,55 @@ function Header() {
                         <span className="nav-link">Products</span>
                         {isProductsDropdownOpen && (
                             <div className="dropdown-menu">
-                                <Link to="/on-the-web">On the Web</Link>
-                                <Link to="/atlas-for-windows">ATLAS on Windows</Link>
+                                <div 
+                                    className="dropdown-item nested-dropdown"
+                                    onMouseEnter={() => setIsOnlineServicesOpen(true)}
+                                    onMouseLeave={() => setIsOnlineServicesOpen(false)}
+                                >
+                                    <span>Online Services ▸</span>
+                                    {isOnlineServicesOpen && (
+                                        <div className="nested-menu">
+                                            <Link to="/text" className="dropdown-item">Text Analysis</Link>
+                                            <Link to="/voice" className="dropdown-item">Voice Analysis</Link>
+                                            <Link to="/image" className="dropdown-item">Image Analysis</Link>
+                                            <Link to="/chrome-extension" className="dropdown-item">ATLAS on Chrome</Link>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div 
+                                    className="dropdown-item nested-dropdown"
+                                    onMouseEnter={() => setIsDesktopAppsOpen(true)}
+                                    onMouseLeave={() => setIsDesktopAppsOpen(false)}
+                                >
+                                    <span>ATLAS on Desktop ▸</span>
+                                    {isDesktopAppsOpen && (
+                                        <div className="nested-menu">
+                                            <Link to="/apps/windows" className="dropdown-item">Windows</Link>
+                                            <Link to="/apps/macos" className="dropdown-item">MacOS</Link>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div 
+                                    className="dropdown-item nested-dropdown"
+                                    onMouseEnter={() => setIsMobileAppsOpen(true)}
+                                    onMouseLeave={() => setIsMobileAppsOpen(false)}
+                                >
+                                    <span>ATLAS on Mobile ▸</span>
+                                    {isMobileAppsOpen && (
+                                        <div className="nested-menu">
+                                            <Link to="/apps/android" className="dropdown-item">Android</Link>
+                                            <Link to="/apps/ios" className="dropdown-item">iOS</Link>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         )}
                     </div>
 
-                    <Link to="/features">Features</Link>
-                    <Link to="/about">About</Link>
+                    <Link to="/features" className="nav-link">Features</Link>
+                    <Link to="/about" className="nav-link">About</Link>
                 </nav>
                 <div className="header-actions-desktop">
                     {user ? (
