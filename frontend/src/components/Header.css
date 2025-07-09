@@ -494,6 +494,8 @@
   font-weight: 500;
   transition: opacity 0.2s ease;
   cursor: default;
+  font-size: 1.1rem;
+  padding: 1rem 0.75rem;
 }
 
 .nav-link:hover {
@@ -502,7 +504,7 @@
 
 .dropdown-menu {
   position: absolute;
-  top: 120%;
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--card-bg-color);
