@@ -20,6 +20,7 @@ function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { theme, toggleTheme, notification, showNotification } = useAppContext();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
     const location = useLocation();
     const isHomePage = location.pathname === '/';
 
@@ -160,9 +161,24 @@ function Header() {
                     />
                 </Link>
                 <nav className="main-nav-desktop">
+                    <Link to="/">Home</Link>
+
+                    <div 
+                        className="nav-item dropdown" 
+                        onMouseEnter={() => setIsProductsDropdownOpen(true)} 
+                        onMouseLeave={() => setIsProductsDropdownOpen(false)}
+                    >
+                        <span className="nav-link">Products</span>
+                        {isProductsDropdownOpen && (
+                            <div className="dropdown-menu">
+                                <Link to="/on-the-web">On the Web</Link>
+                                <Link to="/atlas-for-windows">ATLAS on Windows</Link>
+                            </div>
+                        )}
+                    </div>
+
                     <Link to="/features">Features</Link>
                     <Link to="/about">About</Link>
-                    <Link to="/contact">Contact</Link>
                 </nav>
                 <div className="header-actions-desktop">
                     {user ? (
