@@ -179,7 +179,7 @@ function Header() {
                                     onMouseEnter={() => setIsOnlineServicesOpen(true)}
                                     onMouseLeave={() => setIsOnlineServicesOpen(false)}
                                 >
-                                    <span>Online Services ▸</span>
+                                    <span>🌎 Online Services ▸</span>
                                     {isOnlineServicesOpen && (
                                         <div className="nested-menu">
                                             <Link to="/text" className="dropdown-item">Text Analysis</Link>
@@ -195,11 +195,11 @@ function Header() {
                                     onMouseEnter={() => setIsDesktopAppsOpen(true)}
                                     onMouseLeave={() => setIsDesktopAppsOpen(false)}
                                 >
-                                    <span>ATLAS on Desktop ▸</span>
+                                    <span>💻 ATLAS on Desktop ▸</span>
                                     {isDesktopAppsOpen && (
                                         <div className="nested-menu">
-                                            <Link to="/apps/windows" className="dropdown-item">Windows</Link>
-                                            <Link to="/apps/macos" className="dropdown-item">MacOS</Link>
+                                            <Link to="/apps/windows" className="dropdown-item">🪟 Windows</Link>
+                                            <Link to="/apps/macos" className="dropdown-item">🍏 MacOS</Link>
                                         </div>
                                     )}
                                 </div>
@@ -209,11 +209,11 @@ function Header() {
                                     onMouseEnter={() => setIsMobileAppsOpen(true)}
                                     onMouseLeave={() => setIsMobileAppsOpen(false)}
                                 >
-                                    <span>ATLAS on Mobile ▸</span>
+                                    <span>📱 ATLAS on Mobile ▸</span>
                                     {isMobileAppsOpen && (
                                         <div className="nested-menu">
-                                            <Link to="/apps/android" className="dropdown-item">Android</Link>
-                                            <Link to="/apps/ios" className="dropdown-item">iOS</Link>
+                                            <Link to="/apps/android" className="dropdown-item">🤖 Android</Link>
+                                            <Link to="/apps/ios" className="dropdown-item">🍏 iOS</Link>
                                         </div>
                                     )}
                                 </div>
