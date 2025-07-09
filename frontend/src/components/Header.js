@@ -182,10 +182,10 @@ function Header() {
                                     <span>🌎 Online Services ▸</span>
                                     {isOnlineServicesOpen && (
                                         <div className="nested-menu">
-                                            <Link to="/text" className="dropdown-item">Text Analysis</Link>
-                                            <Link to="/voice" className="dropdown-item">Voice Analysis</Link>
-                                            <Link to="/image" className="dropdown-item">Image Analysis</Link>
-                                            <Link to="/chrome-extension" className="dropdown-item">ATLAS on Chrome</Link>
+                                            <Link to="/text" className="dropdown-item">📝 Text Analysis</Link>
+                                            <Link to="/voice" className="dropdown-item">🎤 Voice Analysis</Link>
+                                            <Link to="/image" className="dropdown-item">🖼️ Image Analysis</Link>
+                                            <Link to="/chrome-extension" className="dropdown-item">🌐 ATLAS on Chrome</Link>
                                         </div>
                                     )}
                                 </div>
@@ -199,7 +199,7 @@ function Header() {
                                     {isDesktopAppsOpen && (
                                         <div className="nested-menu">
                                             <Link to="/apps/windows" className="dropdown-item">🪟 Windows</Link>
-                                            <Link to="/apps/macos" className="dropdown-item">🍏 MacOS</Link>
+                                            <Link to="/apps/macos" className="dropdown-item">🧭 MacOS</Link>
                                         </div>
                                     )}
                                 </div>
@@ -213,7 +213,7 @@ function Header() {
                                     {isMobileAppsOpen && (
                                         <div className="nested-menu">
                                             <Link to="/apps/android" className="dropdown-item">🤖 Android</Link>
-                                            <Link to="/apps/ios" className="dropdown-item">🍏 iOS</Link>
+                                            <Link to="/apps/ios" className="dropdown-item">🍎 iOS</Link>
                                         </div>
                                     )}
                                 </div>
