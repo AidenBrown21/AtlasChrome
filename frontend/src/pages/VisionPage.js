@@ -1,13 +1,13 @@
 import React from 'react';
-import './AboutPage.css';
+import './VisionPage.css';
 
-function AboutPage() {
+function VisionPage() {
     return (
         <>
             <title>About ATLAS - Our Mission for Online Safety</title>
             <meta name="description" content="Learn about ATLAS, the powerful scam protection tool designed to keep you safe online. Discover our mission to fight misinformation and promote digital safety." />
             <div className="about-container">
-                <h1>About ATLAS</h1>
+                <h1>Our Vision</h1>
                 <p>
                     ATLAS is your digital map to online safety. In the current age of widespread misinformation and advanced scams, ATLAS provides you with tools to help navigate the digital world with confidence.
                 </p>
@@ -24,4 +24,4 @@ function AboutPage() {
     );
 }
 
-export default AboutPage; 
+export default VisionPage; 

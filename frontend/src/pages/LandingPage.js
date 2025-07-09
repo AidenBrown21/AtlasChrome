@@ -1,5 +1,5 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './LandingPage.css';
 
 function LandingPage() {
@@ -34,11 +34,9 @@ function LandingPage() {
                         </div>
                     </div>
                 </header>
-                <main className="selection-container">
-                    <div className="button-container">
-
-                    </div>
-                </main>
+                <Link to="/vision" className="cta-button">
+                        Check out our mission →
+                </Link>
             </div>
         </>
     );
