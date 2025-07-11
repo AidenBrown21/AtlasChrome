@@ -16,7 +16,7 @@ function Header() {
     const [signupForm, setSignupForm] = useState({ first_name: '', last_name: '', username: '', password: '' });
     const [showLoginPassword, setShowLoginPassword] = useState(false);
     const [showSignupPassword, setShowSignupPassword] = useState(false);
-
+    const [activeMobileMenu, setActiveMobileMenu] = useState('main');
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { theme, toggleTheme, notification, showNotification } = useAppContext();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -28,6 +28,13 @@ function Header() {
     const isHomePage = location.pathname === '/';
 
     const dropdownRef = useRef(null);
+
+    const openMobileMenu = () => {
+        setActiveMobileMenu('main');
+        setIsMobileMenuOpen(true);
+    };
+
+    const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -260,35 +267,53 @@ function Header() {
                     <button onClick={toggleTheme} className="theme-toggle-button">
                         {theme === 'light' ? '🌙' : '☀️'}
                     </button>
-                <button className={`hamburger-button ${isMenuOpen ? 'is-open' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <button className={`hamburger-button ${isMobileMenuOpen ? 'is-open' : ''}`} onClick={isMobileMenuOpen ? closeMobileMenu : openMobileMenu}>
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
                 </div>
-                {isMenuOpen && (
+                {isMobileMenuOpen && (
                     <div className="mobile-menu">
-                        {user && (
-                            <div className="mobile-user-info">
-                                <Link to="/dashboard" className="mobile-menu-button" onClick={closeMenu}>Dashboard</Link>
+                        <div className={`menu-panel ${activeMobileMenu === 'main' ? 'is-active' : ''}`}>
+                            <div className="mobile-menu-header">
+                                <span>Menu</span>
                             </div>
-                        )}
-
-                        <nav className="mobile-nav-links">
-                            <Link to="/features" className="mobile-menu-button" onClick={closeMenu}>Features</Link>
-                            <Link to="/about" className="mobile-menu-button" onClick={closeMenu}>About</Link>
-                            <Link to="/contact" className="mobile-menu-button" onClick={closeMenu}>Contact</Link>
-                        </nav>
-
-                        <div className="mobile-auth-actions">
-                            {user ? (
-                                <button className="mobile-menu-button logout-button" onClick={() => { handleLogout(); closeMenu(); }}>Sign Out</button>
-                            ) : (
-                                <div className="mobile-login-signup-group">
-                                    <button className="mobile-menu-button login-button" onClick={() => { setShowLogin(true); closeMenu(); }}>Login</button>
-                                    <button className="mobile-menu-button signup-button" onClick={() => { setShowSignup(true); closeMenu(); }}>Sign Up</button>
+                            {user && (
+                                <div className="mobile-user-info">
+                                    <Link to="/dashboard" className="mobile-menu-button" onClick={closeMenu}>Dashboard</Link>
                                 </div>
                             )}
+                            <nav className="mobile-nav-links">
+                                <Link to="/" className="mobile-menu-button" onClick={closeMobileMenu}>Home</Link>
+                                <button className="mobile-menu-button" onClick={() => setActiveMobileMenu('products')}>Products ▸</button>
+                                <Link to="/whats-new" className="mobile-menu-button" onClick={closeMobileMenu}>What's New</Link>
+                            </nav>
+
+                            <div className="mobile-auth-actions">
+                                {user ? (
+                                    <button className="mobile-menu-button logout-button" onClick={() => { handleLogout(); closeMenu(); }}>Sign Out</button>
+                                ) : (
+                                    <div className="mobile-login-signup-group">
+                                        <button className="mobile-menu-button login-button" onClick={() => { setShowLogin(true); closeMenu(); }}>Login</button>
+                                        <button className="mobile-menu-button signup-button" onClick={() => { setShowSignup(true); closeMenu(); }}>Sign Up</button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                        <div className={`menu-panel ${activeMobileMenu === 'products' ? 'is-active' : ''}`}>
+                            <div className="mobile-menu-header">
+                                <button className="back-button" onClick={() => setActiveMobileMenu('main')}>◂ Menu</button>
+                                <span>Products</span>
+                            </div>
+                            <nav className="mobile-nav-links">
+                                <Link to="/text" className="mobile-menu-button" onClick={closeMobileMenu}>Text Analysis</Link>
+                                <Link to="/voice" className="mobile-menu-button" onClick={closeMobileMenu}>Voice Analysis</Link>
+                                <Link to="/image" className="mobile-menu-button" onClick={closeMobileMenu}>Image Analysis</Link>
+                                <Link to="/chrome-extension" className="mobile-menu-button" onClick={closeMobileMenu}>Chrome Extension</Link>
+                                <Link to="/apps/windows" className="mobile-menu-button" onClick={closeMobileMenu}>Windows App</Link>
+                                {/* ... etc */}
+                            </nav>
                         </div>
                     </div>
                 )}
