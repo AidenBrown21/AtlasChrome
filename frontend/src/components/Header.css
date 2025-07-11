@@ -107,18 +107,19 @@
     max-width: 400px;
 }
 
-.mobile-menu-button {
+.mobile-nav-links .mobile-menu-button,
+.mobile-auth-actions .mobile-menu-button {
   display: block;
   width: 100%;
-  margin-bottom: 1rem;
-  border-radius: 8px;
+  margin-bottom: 0;
   padding: 1rem;
+  border-radius: 8px;
   font-size: 1.1rem;
   font-weight: 600;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease-in-out;
   box-shadow: none;
   background-color: var(--card-bg-color);
   color: var(--text-color);

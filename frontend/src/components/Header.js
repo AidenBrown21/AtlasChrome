@@ -279,24 +279,24 @@ function Header() {
                                 <span>Menu</span>
                             </div>
                             {user && (
-                                <div className="mobile-user-info">
-                                    <Link to="/dashboard" className="mobile-menu-button" onClick={closeMobileMenu}>Dashboard</Link>
+                                <div className="mobile-nav-links">
+                                    <Link to="/dashboard" className="mobile-menu-button" onClick={closeMobileMenu}>📊 Dashboard</Link>
                                 </div>
                             )}
                             <nav className="mobile-nav-links">
-                                <Link to="/" className="mobile-menu-button" onClick={closeMobileMenu}>Home</Link>
-                                <button className="mobile-menu-button" onClick={() => setActiveMobileMenu('products')}>Products ▸</button>
-                                <Link to="/whats-new" className="mobile-menu-button" onClick={closeMobileMenu}>What's New</Link>
-                                <Link to="/vision" className="mobile-menu-button" onClick={closeMobileMenu}>Our Vision</Link>
+                                <Link to="/" className="mobile-menu-button" onClick={closeMobileMenu}>🏠 Home</Link>
+                                <button className="mobile-menu-button" onClick={() => setActiveMobileMenu('products')}>🛍️ Products ▸</button>
+                                <Link to="/whats-new" className="mobile-menu-button" onClick={closeMobileMenu}>🆕 What's New</Link>
+                                <Link to="/vision" className="mobile-menu-button" onClick={closeMobileMenu}>👁️ Our Vision</Link>
                             </nav>
 
                             <div className="mobile-auth-actions">
                                 {user ? (
-                                    <button className="mobile-menu-button logout-button" onClick={() => { handleLogout(); closeMobileMenu(); }}>Sign Out</button>
+                                    <button className="mobile-menu-button logout-button" onClick={() => { handleLogout(); closeMobileMenu(); }}>🔒 Sign Out</button>
                                 ) : (
                                     <div className="mobile-login-signup-group">
-                                        <button className="mobile-menu-button login-button" onClick={() => { setShowLogin(true); closeMobileMenu(); }}>Login</button>
-                                        <button className="mobile-menu-button signup-button" onClick={() => { setShowSignup(true); closeMobileMenu(); }}>Sign Up</button>
+                                        <button className="mobile-menu-button login-button" onClick={() => { setShowLogin(true); closeMobileMenu(); }}>🔑 Login</button>
+                                        <button className="mobile-menu-button signup-button" onClick={() => { setShowSignup(true); closeMobileMenu(); }}>📝 Sign Up</button>
                                     </div>
                                 )}
                             </div>
