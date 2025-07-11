@@ -75,6 +75,7 @@
   background-color: var(--background-color);
   z-index: 2000;
   overflow: hidden;
+  border-top: 1px solid var(--border-color);
 }
 
 .mobile-user-info {
