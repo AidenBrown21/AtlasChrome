@@ -264,7 +264,7 @@ function Header() {
                         {theme === 'light' ? '🌙' : '☀️'}
                     </button>
                 <button 
-                    className={`hamburger-button ${isMobileMenuOpen ? 'is-open' : ''}`} 
+                    className="hamburger-button" // 👈 REMOVED: the is-open class logic
                     onClick={isMobileMenuOpen ? closeMobileMenu : openMobileMenu}
                 >
                     <span></span>
@@ -274,6 +274,9 @@ function Header() {
                 </div>
                 {isMobileMenuOpen && (
                     <div className="mobile-menu">
+                        <button className="menu-close-button" onClick={closeMobileMenu} aria-label="Close menu">
+                            &times;
+                        </button>
                         <div className={`menu-panel ${activeMobileMenu === 'main' ? 'is-active' : ''}`}>
                             <div className="mobile-menu-header">
                                 <span>Menu</span>
