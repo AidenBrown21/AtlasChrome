@@ -287,6 +287,7 @@ function Header() {
                                 <Link to="/" className="mobile-menu-button" onClick={closeMobileMenu}>Home</Link>
                                 <button className="mobile-menu-button" onClick={() => setActiveMobileMenu('products')}>Products ▸</button>
                                 <Link to="/whats-new" className="mobile-menu-button" onClick={closeMobileMenu}>What's New</Link>
+                                <Link to="/vision" className="mobile-menu-button" onClick={closeMobileMenu}>Our Vision</Link>
                             </nav>
 
                             <div className="mobile-auth-actions">
@@ -306,12 +307,41 @@ function Header() {
                                 <span>Products</span>
                             </div>
                             <nav className="mobile-nav-links">
-                                <Link to="/text" className="mobile-menu-button" onClick={closeMobileMenu}>Text Analysis</Link>
-                                <Link to="/voice" className="mobile-menu-button" onClick={closeMobileMenu}>Voice Analysis</Link>
-                                <Link to="/image" className="mobile-menu-button" onClick={closeMobileMenu}>Image Analysis</Link>
-                                <Link to="/chrome-extension" className="mobile-menu-button" onClick={closeMobileMenu}>Chrome Extension</Link>
-                                <Link to="/apps/windows" className="mobile-menu-button" onClick={closeMobileMenu}>Windows App</Link>
-                                {/* ... etc */}
+                                <button className="mobile-menu-button" onClick={() => setActiveMobileMenu('online')}>🌎 Online Services ▸</button>
+                                <button className="mobile-menu-button" onClick={() => setActiveMobileMenu('desktop')}>💻 ATLAS on Desktop ▸</button>
+                                <button className="mobile-menu-button" onClick={() => setActiveMobileMenu('mobile')}>📱 ATLAS on Mobile ▸</button>
+                            </nav>
+                        </div>
+                        <div className={`menu-panel ${activeMobileMenu === 'online' ? 'is-active' : ''}`}>
+                            <div className="mobile-menu-header">
+                                <button className="back-button" onClick={() => setActiveMobileMenu('products')}>◂ Products</button>
+                                <span>Online Services</span>
+                            </div>
+                            <nav className="mobile-nav-links">
+                                <Link to="/text" className="mobile-menu-button" onClick={closeMobileMenu}>📝 Text Analysis</Link>
+                                <Link to="/voice" className="mobile-menu-button" onClick={closeMobileMenu}>🎤 Voice Analysis</Link>
+                                <Link to="/image" className="mobile-menu-button" onClick={closeMobileMenu}>🖼️ Image Analysis</Link>
+                                <Link to="/chrome-extension" className="mobile-menu-button" onClick={closeMobileMenu}>🌐 ATLAS on Chrome</Link>
+                            </nav>
+                        </div>
+                        <div className={`menu-panel ${activeMobileMenu === 'desktop' ? 'is-active' : ''}`}>
+                            <div className="mobile-menu-header">
+                                <button className="back-button" onClick={() => setActiveMobileMenu('products')}>◂ Products</button>
+                                <span>Desktop Apps</span>
+                            </div>
+                            <nav className="mobile-nav-links">
+                                <Link to="/apps/windows" className="mobile-menu-button" onClick={closeMobileMenu}>🪟 Windows</Link>
+                                <Link to="/apps/macos" className="mobile-menu-button" onClick={closeMobileMenu}>🍎 MacOS</Link>
+                            </nav>
+                        </div>
+                        <div className={`menu-panel ${activeMobileMenu === 'mobile' ? 'is-active' : ''}`}>
+                            <div className="mobile-menu-header">
+                                <button className="back-button" onClick={() => setActiveMobileMenu('products')}>◂ Products</button>
+                                <span>Mobile Apps</span>
+                            </div>
+                            <nav className="mobile-nav-links">
+                                <Link to="/apps/android" className="mobile-menu-button" onClick={closeMobileMenu}>🤖 Android</Link>
+                                <Link to="/apps/ios" className="mobile-menu-button" onClick={closeMobileMenu}>📱 iOS</Link>
                             </nav>
                         </div>
                     </div>

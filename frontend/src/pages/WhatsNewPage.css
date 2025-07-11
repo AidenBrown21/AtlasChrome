@@ -67,7 +67,6 @@
 
 
 @media (min-width: 768px) {
-  .whats-new-container { padding-top: 8rem; }
   .whats-new-container h1 { font-size: 3rem; }
   .update-section h2 { font-size: 2rem; }
 }
