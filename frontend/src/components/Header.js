@@ -17,9 +17,9 @@ function Header() {
     const [showLoginPassword, setShowLoginPassword] = useState(false);
     const [showSignupPassword, setShowSignupPassword] = useState(false);
     const [activeMobileMenu, setActiveMobileMenu] = useState('main');
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { theme, toggleTheme, notification, showNotification } = useAppContext();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
     const [isOnlineServicesOpen, setIsOnlineServicesOpen] = useState(false);
     const [isDesktopAppsOpen, setIsDesktopAppsOpen] = useState(false);
@@ -149,10 +149,6 @@ function Header() {
         navigate('/');
     };
 
-    const closeMenu = () => {
-        setIsMenuOpen(false);
-    };
-
     const getInitials = () => {
         if (!user) return '';
         const firstInitial = user.first_name ? user.first_name[0] : '';
@@ -163,7 +159,7 @@ function Header() {
     return (
         <>
         <header className={`app-header ${!isHomePage ? 'is-static' : ''}`}>
-                <Link to="/" className="logo" onClick={() => { closeMenu(); setIsDropdownOpen(false); }}>
+                <Link to="/" className="logo" onClick={() => { closeMobileMenu(); setIsDropdownOpen(false); }}>
                     <img 
                         src={theme === 'light' ? '/logo.jpg' : '/logo_dark.png'} 
                         alt="ATLAS Logo" 
@@ -267,7 +263,10 @@ function Header() {
                     <button onClick={toggleTheme} className="theme-toggle-button">
                         {theme === 'light' ? '🌙' : '☀️'}
                     </button>
-                <button className={`hamburger-button ${isMobileMenuOpen ? 'is-open' : ''}`} onClick={isMobileMenuOpen ? closeMobileMenu : openMobileMenu}>
+                <button 
+                    className={`hamburger-button ${isMobileMenuOpen ? 'is-open' : ''}`} 
+                    onClick={isMobileMenuOpen ? closeMobileMenu : openMobileMenu}
+                >
                     <span></span>
                     <span></span>
                     <span></span>
@@ -281,7 +280,7 @@ function Header() {
                             </div>
                             {user && (
                                 <div className="mobile-user-info">
-                                    <Link to="/dashboard" className="mobile-menu-button" onClick={closeMenu}>Dashboard</Link>
+                                    <Link to="/dashboard" className="mobile-menu-button" onClick={closeMobileMenu}>Dashboard</Link>
                                 </div>
                             )}
                             <nav className="mobile-nav-links">
@@ -292,11 +291,11 @@ function Header() {
 
                             <div className="mobile-auth-actions">
                                 {user ? (
-                                    <button className="mobile-menu-button logout-button" onClick={() => { handleLogout(); closeMenu(); }}>Sign Out</button>
+                                    <button className="mobile-menu-button logout-button" onClick={() => { handleLogout(); closeMobileMenu(); }}>Sign Out</button>
                                 ) : (
                                     <div className="mobile-login-signup-group">
-                                        <button className="mobile-menu-button login-button" onClick={() => { setShowLogin(true); closeMenu(); }}>Login</button>
-                                        <button className="mobile-menu-button signup-button" onClick={() => { setShowSignup(true); closeMenu(); }}>Sign Up</button>
+                                        <button className="mobile-menu-button login-button" onClick={() => { setShowLogin(true); closeMobileMenu(); }}>Login</button>
+                                        <button className="mobile-menu-button signup-button" onClick={() => { setShowSignup(true); closeMobileMenu(); }}>Sign Up</button>
                                     </div>
                                 )}
                             </div>
