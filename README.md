@@ -21,7 +21,7 @@ The primary goal is to create a reliable tool that can help users identify and p
 ### 🌐 Live Demo
 
 - 🔗 **Frontend:** [https://www.atlasprotection.live](https://www.atlasprotection.live)
-- 🛠️ **Backend API:** [https://atlas-backend.azurewebsites.net](https://atlas-backend.azurewebsites.net)
+- 🛠️ **Backend API:** [https://atlas-backend-fkgye9e7b6dkf4cj.westus-01.azurewebsites.net](https://atlas-backend-fkgye9e7b6dkf4cj.westus-01.azurewebsites.net)
 
 ### 🧰 Prerequisites
 

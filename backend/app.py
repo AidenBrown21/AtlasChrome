@@ -368,5 +368,43 @@ def get_user_stats(current_user):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+changelog_collection = db['changelog']
+@app.route('/api/admin/changelog', methods=['POST'])
+@admin_required
+def add_changelog_entry(current_user):
+    try:
+        data = request.get_json()
+        version = data.get('version')
+        entry_type = data.get('type') # e.g., 'new', 'improve', 'future'
+        description = data.get('description')
+
+        if not all([version, entry_type, description]):
+            return jsonify({'error': 'Missing required fields'}), 400
+
+        new_entry = {
+            "version": version,
+            "type": entry_type,
+            "description": description,
+            "date": datetime.now(timezone.utc)
+        }
+        changelog_collection.insert_one(new_entry)
+        
+        return jsonify({'message': 'Changelog entry added successfully'}), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+@app.route('/api/changelog', methods=['GET'])
+def get_changelog():
+    try:
+        entries = list(changelog_collection.find().sort('date', -1))
+        
+        for entry in entries:
+            entry['_id'] = str(entry['_id'])
+            entry['date'] = entry['date'].isoformat()
+            
+        return jsonify(entries)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 if __name__ == '__main__':
     app.run(debug=True, port=int(os.environ.get('PORT', 5000)), host="0.0.0.0")
