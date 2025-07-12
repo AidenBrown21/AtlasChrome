@@ -252,3 +252,22 @@ html[data-theme='dark'] .action-button:hover {
   border-color: var(--text-color);
   background-color: var(--card-bg-hover);
 }
+
+.cta-button {
+  margin-top: 2.5rem;
+  display: inline-block;
+  padding: 0.8rem 1.75rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  border: 2px solid transparent;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  opacity: 0.9;
+}

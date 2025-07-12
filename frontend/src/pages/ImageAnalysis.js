@@ -59,7 +59,7 @@ function ImageAnalysis() {
             <div className="image-analysis-container">
                 <h1>Image Analysis</h1>
                 <p className="description">
-                    Upload a screenshot or meme. We'll extract the text and analyze it for scams or fake news patterns.
+                    Upload a screenshot or meme. We'll extract the text and analyze it for scams or malicious patterns.
                 </p>
                 <form onSubmit={handleSubmit} className="upload-form">
                     <div className="file-upload-container">
@@ -129,7 +129,15 @@ function ImageAnalysis() {
                                                 : '✅ This image seems legitimate.'
                                     }
                                 </p>
-                                <p><strong>Score:</strong> {result.score.toFixed(2)}</p>
+                                <p>
+                                    <strong>Score:</strong> {result.score.toFixed(2)}
+                                    <span 
+                                        className="tooltip-trigger" 
+                                        data-tooltip="This score combines a similarity analysis (out of 10) with a cumulative score based on any high-risk keywords found in the text."
+                                    >
+                                        ℹ️
+                                    </span>
+                                </p>
                                 {result.found_keywords && result.found_keywords.length > 0 && (
                                     <p><strong>Flagged Keywords:</strong> {result.found_keywords.join(', ')}</p>
                                 )}

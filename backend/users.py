@@ -1,13 +1,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
-from pymongo import MongoClient
+from database import db
 from bson.objectid import ObjectId
-import os
 
-MONGO_URI = str(os.environ.get('MONGO_URI'))
-DATABASE_NAME = str(os.environ.get('DATABASE_NAME'))
-
-client = MongoClient(MONGO_URI)
-db = client[DATABASE_NAME]
 users = db['user-data']
 
 def serialize_user(user_data):
@@ -26,7 +20,8 @@ def create_user(first_name, last_name, username, password):
         'first_name': first_name,
         'last_name': last_name,
         'username': username,
-        'password': hashed
+        'password': hashed,
+        'role': 'user'
     }
     users.insert_one(user)
     return True, 'User created.'

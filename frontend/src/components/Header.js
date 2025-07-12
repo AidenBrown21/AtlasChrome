@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Header.css';
-import { useTheme } from '../context/ThemeContext';
-// import API_URL from '../apiConfig';
+import { useAppContext } from '../context/AppContext';
 import REACT_APP_API_URL from '../apiConfig';
 import Notification from './Notification/Notification';
 
 function Header() {
+    const navigate = useNavigate();
     const [showLogin, setShowLogin] = useState(false);
     const [showSignup, setShowSignup] = useState(false);
     const [user, setUser] = useState(null);
@@ -16,24 +16,25 @@ function Header() {
     const [signupForm, setSignupForm] = useState({ first_name: '', last_name: '', username: '', password: '' });
     const [showLoginPassword, setShowLoginPassword] = useState(false);
     const [showSignupPassword, setShowSignupPassword] = useState(false);
-
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { theme, toggleTheme } = useTheme();
-    const [notification, setNotification] = useState({ message: '', type: 'info', visible: false });
+    const [activeMobileMenu, setActiveMobileMenu] = useState('main');
+    const { theme, toggleTheme, notification, showNotification } = useAppContext();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
+    const [isOnlineServicesOpen, setIsOnlineServicesOpen] = useState(false);
+    const [isDesktopAppsOpen, setIsDesktopAppsOpen] = useState(false);
+    const [isMobileAppsOpen, setIsMobileAppsOpen] = useState(false);
     const location = useLocation();
     const isHomePage = location.pathname === '/';
 
     const dropdownRef = useRef(null);
 
-    useEffect(() => {
-        if (notification.visible) {
-            const timer = setTimeout(() => {
-                setNotification(prev => ({ ...prev, visible: false }));
-            }, 3000);
-            return () => clearTimeout(timer);
-        }
-    }, [notification.visible]);
+    const openMobileMenu = () => {
+        setActiveMobileMenu('main');
+        setIsMobileMenuOpen(true);
+    };
+
+    const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -47,15 +48,47 @@ function Header() {
         };
     }, [dropdownRef]);
 
-    const showNotification = (message, type = 'info') => {
-        setNotification({ message, type, visible: true });
-    };
+    useEffect(() => {
+        const token = localStorage.getItem('authToken');
+        if (token) {
+            fetch(`${REACT_APP_API_URL}/api/me`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            })
+            .then(res => res.ok ? res.json() : Promise.reject('Invalid token'))
+            .then(data => {
+                if (data.user) setUser(data.user);
+            })
+            .catch(err => {
+                console.error("Session check failed:", err);
+                localStorage.removeItem('authToken');
+            });
+        }
+    }, []);
 
     useEffect(() => {
-        fetch(`${REACT_APP_API_URL}/api/me`, { credentials: 'include' })
-            .then(res => res.json())
-            .then(data => setUser(data.user));
-    }, []);
+        const token = localStorage.getItem('authToken');
+
+        if (token) {
+            fetch(`${REACT_APP_API_URL}/api/me`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(res => {
+                if (!res.ok) {
+                    localStorage.removeItem('authToken');
+                    return Promise.reject('Invalid token');
+                }
+                return res.json();
+            })
+            .then(data => {
+                if (data.user) {
+                    setUser(data.user);
+                }
+            })
+            .catch(err => console.error("Session check failed:", err));
+        }
+    }, [])
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -64,17 +97,19 @@ function Header() {
             const res = await fetch(`${REACT_APP_API_URL}/api/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
                 body: JSON.stringify(loginForm),
             });
             const data = await res.json();
             if (!res.ok) throw new Error(data.error || 'Login failed');
+            localStorage.setItem('authToken', data.token);
+
             setUser(data.user);
             setShowLogin(false);
             setLoginForm({ username: '', password: '' });
-            showNotification('Login Successful!');
+            showNotification('Login Successful!', 'success');
         } catch (err) {
             showNotification(err.message, 'error');
+            localStorage.removeItem('authToken');
         }
     };
 
@@ -90,7 +125,6 @@ function Header() {
             });
             const data = await res.json();
             if (!res.ok) throw new Error(data.error || 'Sign up failed');
-            // Auto-login after signup
             await handleLogin({
                 preventDefault: () => {},
                 target: { value: '' },
@@ -104,16 +138,15 @@ function Header() {
     };
 
     const handleLogout = async () => {
+        localStorage.removeItem('authToken');
         await fetch(`${REACT_APP_API_URL}/api/logout`, {
             method: 'POST',
-            credentials: 'include',
         });
+        
         setUser(null);
         showNotification('You have been signed out.', 'info');
-    };
-
-    const closeMenu = () => {
-        setIsMenuOpen(false);
+        setIsDropdownOpen(false);
+        navigate('/');
     };
 
     const getInitials = () => {
@@ -126,7 +159,7 @@ function Header() {
     return (
         <>
         <header className={`app-header ${!isHomePage ? 'is-static' : ''}`}>
-                <Link to="/" className="logo" onClick={() => { closeMenu(); setIsDropdownOpen(false); }}>
+                <Link to="/" className="logo" onClick={() => { closeMobileMenu(); setIsDropdownOpen(false); }}>
                     <img 
                         src={theme === 'light' ? '/logo.jpg' : '/logo_dark.png'} 
                         alt="ATLAS Logo" 
@@ -134,9 +167,65 @@ function Header() {
                     />
                 </Link>
                 <nav className="main-nav-desktop">
-                    <Link to="/features">Features</Link>
-                    <Link to="/about">About</Link>
-                    <Link to="/contact">Contact</Link>
+                    <Link to="/" className="nav-link">Home</Link>
+
+                    <div 
+                        className="nav-item dropdown" 
+                        onMouseEnter={() => setIsProductsDropdownOpen(true)} 
+                        onMouseLeave={() => setIsProductsDropdownOpen(false)}
+                    >
+                        <span className="nav-link">Products</span>
+                        {isProductsDropdownOpen && (
+                            <div className="dropdown-menu">
+                                <div 
+                                    className="dropdown-item nested-dropdown"
+                                    onMouseEnter={() => setIsOnlineServicesOpen(true)}
+                                    onMouseLeave={() => setIsOnlineServicesOpen(false)}
+                                >
+                                    <span>🌎 Online Services ▸</span>
+                                    {isOnlineServicesOpen && (
+                                        <div className="nested-menu">
+                                            <Link to="/text" className="dropdown-item">📝 Text Analysis</Link>
+                                            <Link to="/voice" className="dropdown-item">🎤 Voice Analysis</Link>
+                                            <Link to="/image" className="dropdown-item">🖼️ Image Analysis</Link>
+                                            <Link to="/chrome-extension" className="dropdown-item">🌐 ATLAS on Chrome</Link>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div 
+                                    className="dropdown-item nested-dropdown"
+                                    onMouseEnter={() => setIsDesktopAppsOpen(true)}
+                                    onMouseLeave={() => setIsDesktopAppsOpen(false)}
+                                >
+                                    <span>💻 ATLAS on Desktop ▸</span>
+                                    {isDesktopAppsOpen && (
+                                        <div className="nested-menu">
+                                            <Link to="/apps/windows" className="dropdown-item">🪟 Windows</Link>
+                                            <Link to="/apps/macos" className="dropdown-item">🧭 MacOS</Link>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div 
+                                    className="dropdown-item nested-dropdown"
+                                    onMouseEnter={() => setIsMobileAppsOpen(true)}
+                                    onMouseLeave={() => setIsMobileAppsOpen(false)}
+                                >
+                                    <span>📱 ATLAS on Mobile ▸</span>
+                                    {isMobileAppsOpen && (
+                                        <div className="nested-menu">
+                                            <Link to="/apps/android" className="dropdown-item">🤖 Android</Link>
+                                            <Link to="/apps/ios" className="dropdown-item">🍎 iOS</Link>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    <Link to="/whats-new" className="nav-link">What's New</Link>
+                    <Link to="/vision" className="nav-link">Our Vision</Link>
                 </nav>
                 <div className="header-actions-desktop">
                     {user ? (
@@ -151,6 +240,9 @@ function Header() {
                                         <strong>{user.first_name} {user.last_name}</strong>
                                         <span>{user.username}</span>
                                     </div>
+                                    <Link to="/dashboard" className="dropdown-link" onClick={() => setIsDropdownOpen(false)}>
+                                        Dashboard
+                                    </Link>
                                     <button className="logout-button" onClick={() => { handleLogout(); setIsDropdownOpen(false); }}>
                                         <center>Sign Out</center>
                                     </button>
@@ -171,38 +263,96 @@ function Header() {
                     <button onClick={toggleTheme} className="theme-toggle-button">
                         {theme === 'light' ? '🌙' : '☀️'}
                     </button>
-                <button className={`hamburger-button ${isMenuOpen ? 'is-open' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <button 
+                    className={`hamburger-button ${isMobileMenuOpen ? 'is-open' : ''}`} 
+                    onClick={isMobileMenuOpen ? closeMobileMenu : openMobileMenu}
+                >
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
                 </div>
-                {isMenuOpen && (
+                {isMobileMenuOpen && (
                     <div className="mobile-menu">
-                        {user && (
-                            <div className="mobile-user-info">
-                                <span>Hi, {user.first_name} {user.last_name}!</span>
+                        <div className={`menu-panel ${activeMobileMenu === 'main' ? 'is-active' : ''}`}>
+                            <div className="mobile-menu-header">
+                                <span>Menu</span>
                             </div>
-                        )}
-
-                        <nav className="mobile-nav-links">
-                            <Link to="/features" className="mobile-menu-button" onClick={closeMenu}>Features</Link>
-                            <Link to="/about" className="mobile-menu-button" onClick={closeMenu}>About</Link>
-                            <Link to="/contact" className="mobile-menu-button" onClick={closeMenu}>Contact</Link>
-                        </nav>
-
-                        <div className="mobile-auth-actions">
-                            {user ? (
-                                <button className="mobile-menu-button logout-button" onClick={() => { handleLogout(); closeMenu(); }}>Sign Out</button>
-                            ) : (
-                                <div className="mobile-login-signup-group">
-                                    <button className="mobile-menu-button login-button" onClick={() => { setShowLogin(true); closeMenu(); }}>Login</button>
-                                    <button className="mobile-menu-button signup-button" onClick={() => { setShowSignup(true); closeMenu(); }}>Sign Up</button>
+                            {user && (
+                                <div className="mobile-nav-links">
+                                    <Link to="/dashboard" className="mobile-menu-button" onClick={closeMobileMenu}>📊 Dashboard</Link>
                                 </div>
                             )}
+                            <nav className="mobile-nav-links">
+                                <Link to="/" className="mobile-menu-button" onClick={closeMobileMenu}>🏠 Home</Link>
+                                <button className="mobile-menu-button" onClick={() => setActiveMobileMenu('products')}>🛍️ Products ▸</button>
+                                <Link to="/whats-new" className="mobile-menu-button" onClick={closeMobileMenu}>🆕 What's New</Link>
+                                <Link to="/vision" className="mobile-menu-button" onClick={closeMobileMenu}>👁️ Our Vision</Link>
+                            </nav>
+
+                            <div className="mobile-auth-actions">
+                                {user ? (
+                                    <button className="mobile-menu-button logout-button" onClick={() => { handleLogout(); closeMobileMenu(); }}>🔒 Sign Out</button>
+                                ) : (
+                                    <div className="mobile-login-signup-group">
+                                        <button className="mobile-menu-button login-button" onClick={() => { setShowLogin(true); closeMobileMenu(); }}>🔑 Login</button>
+                                        <button className="mobile-menu-button signup-button" onClick={() => { setShowSignup(true); closeMobileMenu(); }}>📝 Sign Up</button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                        <div className={`menu-panel ${activeMobileMenu === 'products' ? 'is-active' : ''}`}>
+                            <div className="mobile-menu-header">
+                                <button className="back-button" onClick={() => setActiveMobileMenu('main')}>◂ Menu</button>
+                                <span>Products</span>
+                            </div>
+                            <nav className="mobile-nav-links">
+                                <button className="mobile-menu-button" onClick={() => setActiveMobileMenu('online')}>🌎 Online Services ▸</button>
+                                <button className="mobile-menu-button" onClick={() => setActiveMobileMenu('desktop')}>💻 ATLAS on Desktop ▸</button>
+                                <button className="mobile-menu-button" onClick={() => setActiveMobileMenu('mobile')}>📱 ATLAS on Mobile ▸</button>
+                            </nav>
+                        </div>
+                        <div className={`menu-panel ${activeMobileMenu === 'online' ? 'is-active' : ''}`}>
+                            <div className="mobile-menu-header">
+                                <button className="back-button" onClick={() => setActiveMobileMenu('products')}>◂ Products</button>
+                                <span>Online Services</span>
+                            </div>
+                            <nav className="mobile-nav-links">
+                                <Link to="/text" className="mobile-menu-button" onClick={closeMobileMenu}>📝 Text Analysis</Link>
+                                <Link to="/voice" className="mobile-menu-button" onClick={closeMobileMenu}>🎤 Voice Analysis</Link>
+                                <Link to="/image" className="mobile-menu-button" onClick={closeMobileMenu}>🖼️ Image Analysis</Link>
+                                <Link to="/chrome-extension" className="mobile-menu-button" onClick={closeMobileMenu}>🌐 ATLAS on Chrome</Link>
+                            </nav>
+                        </div>
+                        <div className={`menu-panel ${activeMobileMenu === 'desktop' ? 'is-active' : ''}`}>
+                            <div className="mobile-menu-header">
+                                <button className="back-button" onClick={() => setActiveMobileMenu('products')}>◂ Products</button>
+                                <span>Desktop Apps</span>
+                            </div>
+                            <nav className="mobile-nav-links">
+                                <Link to="/apps/windows" className="mobile-menu-button" onClick={closeMobileMenu}>🪟 Windows</Link>
+                                <Link to="/apps/macos" className="mobile-menu-button" onClick={closeMobileMenu}>🍎 MacOS</Link>
+                            </nav>
+                        </div>
+                        <div className={`menu-panel ${activeMobileMenu === 'mobile' ? 'is-active' : ''}`}>
+                            <div className="mobile-menu-header">
+                                <button className="back-button" onClick={() => setActiveMobileMenu('products')}>◂ Products</button>
+                                <span>Mobile Apps</span>
+                            </div>
+                            <nav className="mobile-nav-links">
+                                <Link to="/apps/android" className="mobile-menu-button" onClick={closeMobileMenu}>🤖 Android</Link>
+                                <Link to="/apps/ios" className="mobile-menu-button" onClick={closeMobileMenu}>📱 iOS</Link>
+                            </nav>
                         </div>
                     </div>
                 )}
+                
+                <Notification 
+                message={notification.message} 
+                type={notification.type}
+                visible={notification.visible} 
+                />
+
                 {/* Login Modal */}
                 {showLogin && (
                     <div className="modal-overlay">
@@ -230,7 +380,6 @@ function Header() {
                                         className="toggle-password-btn"
                                         onClick={() => setShowLoginPassword(v => !v)}
                                         tabIndex={-1}
-                                        style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#0b285e', cursor: 'pointer', fontSize: '0.95rem' }}
                                     >
                                         {showLoginPassword ? 'Hide' : 'Show'}
                                     </button>
@@ -283,7 +432,6 @@ function Header() {
                                         className="toggle-password-btn"
                                         onClick={() => setShowSignupPassword(v => !v)}
                                         tabIndex={-1}
-                                        style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#0b285e', cursor: 'pointer', fontSize: '0.95rem' }}
                                     >
                                         {showSignupPassword ? 'Hide' : 'Show'}
                                     </button>

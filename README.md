@@ -7,10 +7,11 @@ The primary goal is to create a reliable tool that can help users identify and p
 
 ## ✨ Features
 
-- 🔐 **User Account Management**: Allows for users to sign in and sign out of accounts on the website.
+- 🔐 **NEW: User Account Management**: Allows for users to create accounts and help fine-tune the model.
 - 📝 **Text Analysis**: Detect scams and fake news in articles, emails, and messages.
 - 🎙️ **Voice Analysis**: Analyze audio for signs of scams (e.g., voice phishing).
 - 🖼️ **Image Analysis**: Detect manipulated images and visual misinformation.
+- 👌 **NEW: Smart Training System**: Enables users to upload scams for admins to approve, allowing for a continously learning model.
 
 ## 📚 Sources
 * [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/dataset/228/sms+spam+collection)
@@ -20,7 +21,7 @@ The primary goal is to create a reliable tool that can help users identify and p
 ### 🌐 Live Demo
 
 - 🔗 **Frontend:** [https://www.atlasprotection.live](https://www.atlasprotection.live)
-- 🛠️ **Backend API:** [https://atlas-backend.azurewebsites.net](https://atlas-backend.azurewebsites.net)
+- 🛠️ **Backend API:** [https://atlas-backend-fkgye9e7b6dkf4cj.westus-01.azurewebsites.net](https://atlas-backend-fkgye9e7b6dkf4cj.westus-01.azurewebsites.net)
 
 ### 🧰 Prerequisites
 
@@ -57,7 +58,7 @@ The primary goal is to create a reliable tool that can help users identify and p
 
 ### Usage
 
-1. 🧵 Open two terminals.
+1. 🧵 Open two terminal windows for ease.
 
 2. In the **first terminal**, run the Flask back-end by navigating to the `/backend` folder, and running the `app.py` file:
    ```bash
@@ -65,7 +66,7 @@ The primary goal is to create a reliable tool that can help users identify and p
    python app.py
    ```
 
-3. In the **second terminal**, run the Node.js front-end by navigating to the `/frontend` folder running the Node.js framework:
+3. Simultaneously, in the **second terminal**, run the Node.js front-end by navigating to the `/frontend` folder running the Node.js framework:
    ```bash
    cd frontend
    npm start

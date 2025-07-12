@@ -34,19 +34,9 @@ function LandingPage() {
                         </div>
                     </div>
                 </header>
-                <main className="selection-container">
-                    <div className="button-container">
-                        <Link to="/text" className="action-button primary">
-                            Text Analysis
-                        </Link>
-                        <Link to="/voice" className="action-button secondary">
-                            Voice Analysis
-                        </Link>
-                        <Link to="/image" className="action-button secondary">
-                            Image Analysis
-                        </Link>
-                    </div>
-                </main>
+                <Link to="/vision" className="cta-button">
+                        Check out our mission →
+                </Link>
             </div>
         </>
     );

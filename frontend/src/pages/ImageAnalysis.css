@@ -163,3 +163,38 @@
 .result-container p strong {
     color: var(--text-color);
 }
+
+.tooltip-trigger {
+  display: inline-block;
+  position: relative;
+  margin-left: 0.5rem;
+  cursor: help;
+  border-bottom: 1px dotted var(--subtle-text-color);
+}
+
+.tooltip-trigger::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 150%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+
+.tooltip-trigger:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
